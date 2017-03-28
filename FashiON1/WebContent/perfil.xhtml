@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+	
+	<h2>#{usuarioBean.usuario.nombreCompleto}</h2><br/>
+	<h3>#{usuarioBean.usuario.userName}</h3><br/>
+	<h:dataTable alignment="left">
+		<h:column>
+			#{usuarioBean.NPosts}
+		</h:column>
+		<h:column>
+			#{usuarioBean.NSeguidores}
+		</h:column>
+		<h:column>
+			#{usuarioBean.NSeguidos}
+		</h:column>
+	</h:dataTable>
+	
+	<h:form>
+		<h:outputLink value="subirpublicacion.xhtml">+ Subir Publicacion</h:outputLink>
+	</h:form>
+	
+	</ui:define>
+	</ui:composition>
+</html>

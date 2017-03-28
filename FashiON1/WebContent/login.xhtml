@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+
+
+		<h1>LOG IN</h1>
+		<br />
+
+		<h:form>
+	Usuario: 
+	<h:inputText value="#{usuarioBean.usuario.userName}" />
+			<br />
+	Contraseña:
+	<h:inputText value="#{usuarioBean.usuario.password}" />
+			<br />
+			<h:commandButton actionListener="#{usuarioBean.comprobarUsuario()}"
+				value="Log in" type="submit"/>
+			<br />
+			<h:outputText value="#{usuarioBean.okText}"
+				rendered="#{usuarioBean.passwordOk!=3}" />
+			<br />
+			<h:outputLink value="subirpublicacion.xhtml"
+				rendered="#{usuarioBean.passwordOk==0}">Subir publicacion</h:outputLink>
+				<br/>
+				<h:outputLink value="registro.xhtml">No tengo una cuenta. Registrarse</h:outputLink><br/>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

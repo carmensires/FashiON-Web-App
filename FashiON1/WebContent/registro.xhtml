@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+
+		<h1>Registro</h1>
+		<br />
+
+		<h:form>
+	Nombre de usuario: 
+	<h:inputText id="idUserName" value="#{usuarioBean.usuario.userName}"
+				required="true"
+				requiredMessage="Es obligatorio introducir el nombre de usuario" />
+	<h:outputText value="#{usuarioBean.libreText}"
+		rendered="#{usuarioBean.added and usuarioBean.libre==1}" />
+	<br />
+			<h:message for="idUserName" />
+			<br />
+	Nombre completo:
+	<h:inputText id="idNombreCompleto" value="#{usuarioBean.usuario.nombreCompleto}" required="true"
+				requiredMessage="Es obligatorio introducir el nombre completo" />
+			<br />
+			<h:message for="idNombreCompleto" />
+			<br />
+	email:
+	<h:inputText id="idEmail" value="#{usuarioBean.usuario.email}" required="true"
+				requiredMessage="Es obligatorio introducir el email" />
+			<br />
+			<h:message for="idEmail" />
+			<br />
+	Contraseña:
+	<h:inputText id="idPassword" value="#{usuarioBean.usuario.password}" required="true"
+				requiredMessage="Es obligatorio introducir contraseña" />
+			<br />
+			<h:message for="idPassword" />
+			<br />
+	Tipo de perfil:
+	<h:selectOneMenu value="#{usuarioBean.usuario.tipoPerfil}">
+				<f:selectItem itemLabel="Público" itemValue="0" />
+				<f:selectItem itemLabel="Privado" itemValue="1" />
+			</h:selectOneMenu>
+			<br />
+
+
+			<h:commandButton action="#{usuarioBean.addUsuario()}"
+				value="Registrarse" type="submit" />
+			<br />
+			<h:outputText value="#{usuarioBean.libreText}"
+				rendered="#{usuarioBean.added and usuarioBean.libre!=1}" />
+			<br />
+			<h:outputLink value="login.xhtml">Ya tengo una cuenta. Iniciar sesión</h:outputLink>
+			<br />
+		</h:form>
+
+
+
+	</ui:define>
+</ui:composition>
+</html>
