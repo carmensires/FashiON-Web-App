@@ -24,7 +24,7 @@ public class Valoracion implements Serializable {
 	private Comentario comentarioBean;
 
 	//uni-directional many-to-one association to Usuario
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="usuarioValora")
 	private Usuario usuario;
 

@@ -10,12 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="Amigos")
-@NamedQueries({
-	@NamedQuery(name="Amigo.findAll", query="SELECT a FROM Amigo a"),
-	@NamedQuery(name="Amigo.findSeguidores", query="SELECT a FROM Amigo a WHERE a.usuario2.idUser=:usuarioSeguido"),
-	@NamedQuery(name="Amigo.findSeguidos", query="SELECT a FROM Amigo a WHERE a.usuario1.idUser=:usuarioSigue")
-})
-
+@NamedQuery(name="Amigo.findAll", query="SELECT a FROM Amigo a")
 public class Amigo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +18,7 @@ public class Amigo implements Serializable {
 	private int idAmigos;
 
 	//uni-directional many-to-one association to Usuario
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="usuarioSigue")
 	private Usuario usuario1;
 
