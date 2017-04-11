@@ -22,10 +22,29 @@ public class ListadoBean {
 		return listaPublicaciones;
 	}
 	
+	public List<Publicacion> getListaPublicacionesUsuario(int idUsuario)
+	{
+		List<Publicacion> listaPublicaciones=ejb.getPublicacionesUsuario(idUsuario);
+		return listaPublicaciones;
+	}
+	
+	
 	public List<Usuario> getListaUsuarios()
 	{
 		List<Usuario> listaUsuarios=ejb.getListaUsuarios();
 		return listaUsuarios;
 	}
+	public List<Notificacion> getListaNotificaciones()
+	{
+		List<Notificacion> listaNotificaciones=ejb.getListaNotificaciones();
+		return listaNotificaciones;
+	}
+	
+	public List<Comentario> getListaComentariosPublicacion(int idPublicacion)
+	{
+		List<Comentario> listaComentarios = ejb.getListaComentariosPublicacion(idPublicacion);
+		return listaComentarios;
+	}
+	
 
 }

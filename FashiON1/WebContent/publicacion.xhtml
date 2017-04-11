@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+
+		<br />
+		<br />
+
+		<ui:repeat var="publicacion" value="#{publicacionBean.publicacion}">
+
+			<div class="publicacion1">
+				<div class="parteizq">
+					<h2>#{publicacion.usuario.nombreCompleto}</h2>
+
+					<!--  <p:graphicImage value="#{publicacion.multimedia}" style="width: 500px;" align="left">
+				 </p:graphicImage>
+				 <p:graphicImage url="fotos/smile.png" style="width: 20px; height: 20px;" align="left">
+				 </p:graphicImage>
+				 <p:graphicImage url="/fotos/eye.png" style="width: 20px; height: 20px;" align="right">
+				 </p:graphicImage>
+				 #{publicacion.NVisualizaciones} -->
+					<div class="fotoCarac">
+						<div>
+
+							<img src="data:image/jpg;base64, #{publicacion.multimedia}"
+								style="width: 275px; height: 275px" align="left" />
+						</div>
+						<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+						<br /> <br /> <br /> <br /> <br />
+						<div>
+							<div class="nlikes" align="left">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
+							<div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
+							<img src="fotos/eye.png" style="width: 20px; height: 18px;"
+								align="right" />
+								<div><h:form>
+							<h:commandButton
+								action="#{likeBean.darLike(publicacion.idPublicacion)}"
+								image="fotos/smile.png" style="width: 20px; height: 18px;"
+								align="left" /></h:form></div>
+						</div>
+					</div>
+					<div class="tag">
+						<img src="fotos/tag.png" style="width: 20px; height: 18px;"
+							align="left" /> #{publicacion.etColor} #{publicacion.etMarca}
+						#{publicacion.etEstilo} #{publicacion.etGenero}
+						#{publicacion.etTipo} #{publicacion.etMaterial}
+					</div>
+
+				</div>
+				<div class="partedcha">
+					<br /> <br /> <br />
+					<h3>#{publicacion.titulo}</h3>
+					<p>#{publicacion.descripcion}</p>
+
+					<ui:repeat var="comentario"
+						value="#{listadoBean.getListaComentariosPublicacion(publicacion.idPublicacion)}">
+						<div class="comentario">
+							<b>#{comentario.usuarioComenta}</b><br />
+							#{comentario.textoComentario}
+							<h:form>
+								
+								<h:commandButton
+									action="#{comentarioBean.removeComentario(comentario.idComentario)}"
+									value="Eliminar Comentario" type="submit"
+									rendered="#{usuarioBean.usuario.userName eq comentario.usuarioComenta}" />
+							</h:form>
+							<br />
+
+						</div>
+					</ui:repeat>
+
+				</div>
+			</div>
+			<br />
+			<br />
+
+		</ui:repeat>
+		<h:form>
+			<h:inputText value="#{comentarioBean.comentario.textoComentario}" />
+
+			<br />
+			<h:commandButton
+				action="#{comentarioBean.addComentario(publicacionBean.publicacion.idPublicacion)}"
+				value="Comentar" type="submit" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

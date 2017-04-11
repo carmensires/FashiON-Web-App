@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:on="http://omnifaces.org/ui">
 
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
@@ -10,7 +11,7 @@
 		<h1>Registro</h1>
 		<br />
 
-		<h:form>
+		<h:form enctype="multipart/form-data">
 	Nombre de usuario: 
 	<h:inputText id="idUserName" value="#{usuarioBean.usuario.userName}"
 				required="true"
@@ -45,6 +46,9 @@
 			</h:selectOneMenu>
 			<br />
 
+	Subir foto de perfil:<br/>
+	<h:inputFile value="#{usuarioBean.usuario.foto}"></h:inputFile><br/>
+	
 
 			<h:commandButton action="#{usuarioBean.addUsuario()}"
 				value="Registrarse" type="submit" />

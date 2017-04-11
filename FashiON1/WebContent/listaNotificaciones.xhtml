@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:on="http://omnifaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+
+
+		<h1>Notificaciones</h1>
+		<h:dataTable value="#{listadoBean.listaNotificaciones}"
+			var="notificacion">
+			<h:column>
+				<f:facet name="header">Usuario que ha publicado</f:facet>
+				#{notificacion.usuario2.nombreCompleto}
+		
+	</h:column>
+			<h:column>
+				<f:facet name="header">Tipo</f:facet>
+		#{notificacion.accion}
+	</h:column>
+			
+			
+		</h:dataTable>
+
+	<br/>
+	<br/>
+	
+	
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

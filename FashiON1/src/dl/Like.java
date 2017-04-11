@@ -10,7 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="Likes")
-@NamedQuery(name="Like.findAll", query="SELECT l FROM Like l")
+@NamedQueries({
+	@NamedQuery(name="Like.findAll", query="SELECT l FROM Like l"),
+	@NamedQuery(name="Like.findPublicacion", query="SELECT l FROM Like l WHERE l.publicacionBean.idPublicacion=:idPublicacion"),
+	@NamedQuery(name="Like.findUsuario", query="SELECT l FROM Like l WHERE l.publicacionBean.idPublicacion=:idPublicacion AND l.usuario.idUser=:idUser") 
+})
+
 public class Like implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -13,7 +13,6 @@ import javax.persistence.*;
 	@NamedQuery(name="Publicacion.findAll", query="SELECT p FROM Publicacion p"),
 	@NamedQuery(name="Publicacion.findUsuario", query="SELECT p FROM Publicacion p WHERE p.usuario.idUser=:idUsuario")
 })
-
 public class Publicacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 

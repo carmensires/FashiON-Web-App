@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:on="http://omnifaces.org/ui">
+
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+
+
+		<h1>Editar Publicación</h1>
+		<br />
+		<h:form>
+		
+		Titulo: 
+		<h:inputText value="#{publicacionBean.publicacion.titulo}" />
+			<br />
+		
+		Descripcion: 
+		<h:inputText value="#{publicacionBean.publicacion.descripcion}" />
+			<br />
+		
+		Archivos multimedia: <br />
+		
+		Añadir etiqueta: <br />
+		Marca:
+		<h:selectOneMenu value="#{publicacionBean.publicacion.etMarca}">
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItem itemValue="zara" itemLabel="Zara" />
+				<f:selectItem itemValue="brandyMelville" itemLabel="Brandy Melville" />
+				<f:selectItem itemValue="hm" itemLabel="HM" />
+				<f:selectItem itemValue="bershka" itemLabel="Bershka" />
+				<f:selectItem itemValue="klasiks" itemLabel="Klasiks" />
+				<f:selectItem itemValue="levis" itemLabel="Levi's" />
+			</h:selectOneMenu>
+			<br />
+		Color:
+		<h:selectOneMenu value="#{publicacionBean.publicacion.etColor}">
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItem itemValue="rojo" itemLabel="Rojo" />
+				<f:selectItem itemValue="azul" itemLabel="Azul" />
+				<f:selectItem itemValue="amarillo" itemLabel="Amarillo" />
+				<f:selectItem itemValue="blanco" itemLabel="Blanco" />
+				<f:selectItem itemValue="negro" itemLabel="Negro" />
+				<f:selectItem itemValue="beige" itemLabel="Beige" />
+				<f:selectItem itemValue="naranja" itemLabel="Naranja" />
+			</h:selectOneMenu>
+			<br />
+		Genero:
+		<h:selectOneMenu value="#{publicacionBean.publicacion.etGenero}">
+				<f:selectItem itemLabel="" itemValue=""/>
+				<f:selectItem itemValue="masculino" itemLabel="Masculino" />
+				<f:selectItem itemValue="femenino" itemLabel="Femenino" />
+				<f:selectItem itemValue="unisex" itemLabel="Unisex" />
+				<f:selectItem itemValue="nino" itemLabel="Niño" />
+				<f:selectItem itemValue="nina" itemLabel="Niña" />
+			</h:selectOneMenu>
+			<br />
+		Descripcion de la etiqueta:
+		<h:inputText value="#{publicacionBean.publicacion.etDescripcion}" />
+			<br />
+
+			<h:commandButton action="#{publicacionBean.editPublicacion()}"
+				value="Editar" />
+			<br />
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

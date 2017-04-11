@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:on="http://omnifaces.org/ui">
 
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
@@ -18,7 +19,7 @@
 	Contraseña:
 	<h:inputText value="#{usuarioBean.usuario.password}" />
 			<br />
-			<h:commandButton actionListener="#{usuarioBean.comprobarUsuario()}"
+			<h:commandButton action="#{usuarioBean.comprobarUsuario()}"
 				value="Log in" type="submit"/>
 			<br />
 			<h:outputText value="#{usuarioBean.okText}"

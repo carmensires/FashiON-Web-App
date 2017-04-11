@@ -9,24 +9,21 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Comentario.findAll", query="SELECT c FROM Comentario c")
+@NamedQueries({
+	@NamedQuery(name="Comentario.findAll", query="SELECT c FROM Comentario c"),
+	@NamedQuery(name="Comentario.findPublicaciones",query="SELECT c FROM Comentario c WHERE c.publicacion=:idPublicacion")
+})
 public class Comentario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int idComentario;
 
+	private int publicacion;
+
 	private String textoComentario;
 
-	//uni-directional many-to-one association to Publicacion
-	@ManyToOne
-	@JoinColumn(name="publicacion")
-	private Publicacion publicacionBean;
-
-	//uni-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="usuarioComenta")
-	private Usuario usuario;
+	private String usuarioComenta;
 
 	public Comentario() {
 	}
@@ -39,6 +36,14 @@ public class Comentario implements Serializable {
 		this.idComentario = idComentario;
 	}
 
+	public int getPublicacion() {
+		return this.publicacion;
+	}
+
+	public void setPublicacion(int publicacion) {
+		this.publicacion = publicacion;
+	}
+
 	public String getTextoComentario() {
 		return this.textoComentario;
 	}
@@ -47,20 +52,12 @@ public class Comentario implements Serializable {
 		this.textoComentario = textoComentario;
 	}
 
-	public Publicacion getPublicacionBean() {
-		return this.publicacionBean;
+	public String getUsuarioComenta() {
+		return this.usuarioComenta;
 	}
 
-	public void setPublicacionBean(Publicacion publicacionBean) {
-		this.publicacionBean = publicacionBean;
-	}
-
-	public Usuario getUsuario() {
-		return this.usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioComenta(String usuarioComenta) {
+		this.usuarioComenta = usuarioComenta;
 	}
 
 }

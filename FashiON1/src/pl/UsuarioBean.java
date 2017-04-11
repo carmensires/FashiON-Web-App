@@ -19,6 +19,7 @@ public class UsuarioBean {
 	Ejb ejb=new Ejb();
 	
 	private Usuario usuario = new Usuario();
+	private Usuario editado = new Usuario();
 	private int passwordOk=3;
 	private boolean passOk;
 	private boolean comprobado;
@@ -73,9 +74,12 @@ public class UsuarioBean {
 		this.usuario = usuario;
 	}
 	
-	public void comprobarUsuario()
+	public String comprobarUsuario()
 	{
 		passwordOk=ejb.comprobarUsuario(usuario.getUserName(), usuario.getPassword());
+		if (passwordOk==0)
+			usuario=ejb.getUsuario();
+		return "listaPublicaciones.xhtml";
 	}
 	
 	public String getOkText()
@@ -126,7 +130,7 @@ public class UsuarioBean {
 	{
 		String nSeguidores;
 		int tam=this.getSeguidores().size();
-		nSeguidores=tam+" seguidores";
+		nSeguidores=tam + " seguidores";
 		return nSeguidores;
 	}
 	
@@ -142,7 +146,7 @@ public class UsuarioBean {
 	{
 		String nPosts;
 		int tam=this.getPublicacionesUsuario().size();
-		nPosts=tam+"posts";
+		nPosts=tam+" posts";
 		return nPosts;
 	}
 	
@@ -163,8 +167,23 @@ public class UsuarioBean {
 		List<Publicacion> publicacionesUsuario=ejb.getPublicacionesUsuario(usuario.getIdUser());
 		return publicacionesUsuario;
 	}
-	
 
-	
+	public Usuario getEditado() {
+		return editado;
+	}
 
+	public void setEditado(Usuario editado) {
+		this.editado = editado;
+	}
+	
+	public String editPerfil(){
+		editado=usuario;
+		return "editarPerfil.xhtml";
+	}
+	public String  editarPerfil(){
+		ejb.editarPerfil(editado);
+		return "perfil.xhtml";
+	}
+	
+	
 }

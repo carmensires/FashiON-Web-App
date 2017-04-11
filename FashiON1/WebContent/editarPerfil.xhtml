@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:on="http://omnifaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+
+		<h1>Editar Perfil</h1>
+		<br />
+
+		<h:form>
+	
+	Nombre completo:
+	<h:inputText id="idNombreCompleto" value="#{usuarioBean.editado.nombreCompleto}"/>
+			
+			<br />
+	
+			
+			<br />
+	Contraseña:
+	<h:inputText id="idPassword" value="#{usuarioBean.editado.password}"  />
+			
+			<br />
+	Tipo de perfil:
+	<h:selectOneMenu value="#{usuarioBean.editado.tipoPerfil}">
+				<f:selectItem itemLabel="Público" itemValue="0" />
+				<f:selectItem itemLabel="Privado" itemValue="1" />
+			</h:selectOneMenu>
+			<br />
+	Foto de perfil:<br/>
+	<h:inputFile value="#{usuarioBean.editado.foto}"></h:inputFile><br/>
+	
+
+			<h:commandButton action="#{usuarioBean.editarPerfil()}"
+				value="Guardar cambios" type="submit" />
+			<br />
+			
+		</h:form>
+
+
+
+	</ui:define>
+</ui:composition>
+</html>

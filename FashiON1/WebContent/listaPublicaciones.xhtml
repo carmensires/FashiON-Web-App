@@ -2,32 +2,75 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:on="http://omnifaces.org/ui">
 
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
 
 
-		<h1>LISTA PUBLICACIONES</h1>
-		<h:dataTable value="#{listadoBean.listaPublicaciones}"
-			var="publicacion">
-			<h:column>
-				<f:facet name="header">Usuario que ha publicado</f:facet>
-		#{publicacion.usuario.nombreCompleto}
-	</h:column>
-			<h:column>
-				<f:facet name="header">Titulo</f:facet>
-		#{publicacion.titulo}
-	</h:column>
-			<h:column>
-				<f:facet name="header">Descripcion</f:facet>
-		#{publicacion.descripcion}
-	</h:column>
-			<h:column>
-				<f:facet name="header">Marca</f:facet>
-		#{publicacion.etMarca}
-	</h:column>
-		</h:dataTable>
+
+		<br />
+		<br />
+		<ui:repeat var="publicacion" value="#{listadoBean.listaPublicaciones}">
+			<div class="publicacion1">
+				<div class="parteizq">
+					<h2>
+						<a href="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+							class="h2">#{publicacion.usuario.nombreCompleto}</a>
+					</h2>
+
+					<div class="fotoCarac">
+						<div>
+							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" height="275" width="275">
+							</on:graphicImage>
+							
+						</div>
+						
+						<div>
+
+							<div class="nlikes" align="left">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
+							<div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
+							<img src="fotos/eye.png" style="width: 20px; height: 18px;"
+								align="right" />
+							<div>
+								<h:form>
+									<h:commandButton
+										action="#{likeBean.darLike(publicacion.idPublicacion)}"
+										image="fotos/smile.png" style="width: 20px; height: 18px;"
+										align="left" />
+								</h:form>
+							</div>
+
+						</div>
+					</div>
+					<div class="tag">
+						<img src="fotos/tag.png" style="width: 20px; height: 18px;"
+							align="left" /> #{publicacion.etColor} #{publicacion.etMarca}
+						#{publicacion.etEstilo} #{publicacion.etGenero}
+						#{publicacion.etTipo} #{publicacion.etMaterial}
+					</div>
+
+				</div>
+				<div class="partedcha">
+					<div class="linkverpublicacion">
+						<h:form>
+							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
+							 value="Ver Publicación" />
+						</h:form>
+					</div>
+					<br /> <br /> <br />
+					<h3>#{publicacion.titulo}</h3>
+					<p>#{publicacion.descripcion}</p>
+				</div>
+			</div>
+			<br />
+			<br />
+		</ui:repeat>
+
+
+
 
 	</ui:define>
 </ui:composition>
