@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Publicacion.findAll", query="SELECT p FROM Publicacion p"),
-	@NamedQuery(name="Publicacion.findUsuario", query="SELECT p FROM Publicacion p WHERE p.usuario.idUser=:idUsuario")
+	@NamedQuery(name="Publicacion.findUsuario", query="SELECT p FROM Publicacion p WHERE p.usuario.idUser=:idUsuario"),
+	@NamedQuery(name="Publicacion.findFiltro", query="SELECT p FROM Publicacion p WHERE p.etMarca=:etMarca AND p.etColor=:etColor AND p.etGenero=:etGenero AND p.etTipo=:etTipo AND p.etMaterial=:etMaterial AND p.etEstilo=:etEstilo AND p.etDescripcion=:etDescripcion"),
 })
 public class Publicacion implements Serializable {
 	private static final long serialVersionUID = 1L;

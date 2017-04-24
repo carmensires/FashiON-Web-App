@@ -53,39 +53,56 @@
 	<br /><br/>
 	<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesUsuario(usuarioBean.usuario.idUser)}">
 		<div class="publicacion1">
-			<div class="parteizq">
-				 <h2>#{publicacion.usuario.nombreCompleto}</h2>
-				<!--  <p:graphicImage value="#{publicacion.multimedia}" style="width: 500px;" align="left">
-				 </p:graphicImage>
-				 <p:graphicImage url="fotos/smile.png" style="width: 20px; height: 20px;" align="left">
-				 </p:graphicImage>
-				 <p:graphicImage url="/fotos/eye.png" style="width: 20px; height: 20px;" align="right">
-				 </p:graphicImage>
-				 #{publicacion.NVisualizaciones} -->
-				 <div class="fotoCarac">
-					 <div>
-					 	<img src="data:image/jpg;base64, #{publicacion.multimedia}" 
-					 	style="width: 275px; height: 275px" align="left" />
-					 </div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-					 <div >
-						 <img src="fotos/smile.png" style="width: 20px; height: 18px;" align="left"/>
-						 <img src="fotos/eye.png" style="width: 20px; height: 18px;" align="right"/>
-						 <div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
-					 </div>
-				 </div>
-				 <div class="tag">
-				 	<img src="fotos/tag.png" style="width: 20px; height: 18px;" align="left"/>
-				 	#{publicacion.etColor} #{publicacion.etMarca} #{publicacion.etEstilo} #{publicacion.etGenero}
-				 	 #{publicacion.etTipo} #{publicacion.etMaterial} 
-				 </div>
-				
+				<div class="parteizq">
+					<h2>
+						<a href="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+							class="h2">#{publicacion.usuario.nombreCompleto}</a>
+					</h2>
+
+					<div class="fotoCarac">
+						<div>
+							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" height="275" width="275">
+							</on:graphicImage>
+							
+						</div>
+						
+						<div>
+
+							<div class="nlikes" align="left">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
+							<div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
+							<img src="fotos/eye.png" style="width: 20px; height: 18px;"
+								align="right" />
+							<div>
+								<h:form>
+									<h:commandButton
+										action="#{likeBean.darLike(publicacion.idPublicacion)}"
+										image="fotos/smile.png" style="width: 20px; height: 18px;"
+										align="left" />
+								</h:form>
+							</div>
+
+						</div>
+					</div>
+					<div class="tag">
+						<img src="fotos/tag.png" style="width: 20px; height: 18px;"
+							align="left" /> #{publicacion.etColor} #{publicacion.etMarca}
+						#{publicacion.etEstilo} #{publicacion.etGenero}
+						#{publicacion.etTipo} #{publicacion.etMaterial}
+					</div>
+
+				</div>
+				<div class="partedcha">
+					<div class="linkverpublicacion">
+						<h:form>
+							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
+							 value="Ver Publicación" />
+						</h:form>
+					</div>
+					<br /> <br /> <br />
+					<h3>#{publicacion.titulo}</h3>
+					<p>#{publicacion.descripcion}</p>
+				</div>
 			</div>
-			<div class="partedcha" >
-				<br/><br/><br/>
-				<h3>#{publicacion.titulo}</h3>
-				<p>#{publicacion.descripcion}</p>
-			</div>
-		</div>
 		<br/><br/>
 	</ui:repeat>
 	

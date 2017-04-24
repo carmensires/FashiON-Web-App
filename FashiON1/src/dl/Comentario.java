@@ -23,7 +23,7 @@ public class Comentario implements Serializable {
 
 	private String textoComentario;
 
-	private String usuarioComenta;
+	private int usuarioComenta;
 
 	public Comentario() {
 	}
@@ -52,11 +52,11 @@ public class Comentario implements Serializable {
 		this.textoComentario = textoComentario;
 	}
 
-	public String getUsuarioComenta() {
+	public int getUsuarioComenta() {
 		return this.usuarioComenta;
 	}
 
-	public void setUsuarioComenta(String usuarioComenta) {
+	public void setUsuarioComenta(int usuarioComenta) {
 		this.usuarioComenta = usuarioComenta;
 	}
 

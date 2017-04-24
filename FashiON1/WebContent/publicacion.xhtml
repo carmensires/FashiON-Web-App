@@ -3,7 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:on="http://omnifaces.org/ui">
 
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
@@ -15,33 +15,35 @@
 
 			<div class="publicacion1">
 				<div class="parteizq">
-					<h2>#{publicacion.usuario.nombreCompleto}</h2>
+					<h2>
+						<a href="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+							class="h2">#{publicacion.usuario.nombreCompleto}</a>
+					</h2>
 
-					<!--  <p:graphicImage value="#{publicacion.multimedia}" style="width: 500px;" align="left">
-				 </p:graphicImage>
-				 <p:graphicImage url="fotos/smile.png" style="width: 20px; height: 20px;" align="left">
-				 </p:graphicImage>
-				 <p:graphicImage url="/fotos/eye.png" style="width: 20px; height: 20px;" align="right">
-				 </p:graphicImage>
-				 #{publicacion.NVisualizaciones} -->
 					<div class="fotoCarac">
 						<div>
+							<on:graphicImage
+								value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}"
+								height="275" width="275">
+							</on:graphicImage>
 
-							<img src="data:image/jpg;base64, #{publicacion.multimedia}"
-								style="width: 275px; height: 275px" align="left" />
 						</div>
-						<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-						<br /> <br /> <br /> <br /> <br />
+
 						<div>
+
 							<div class="nlikes" align="left">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
 							<div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
 							<img src="fotos/eye.png" style="width: 20px; height: 18px;"
 								align="right" />
-								<div><h:form>
-							<h:commandButton
-								action="#{likeBean.darLike(publicacion.idPublicacion)}"
-								image="fotos/smile.png" style="width: 20px; height: 18px;"
-								align="left" /></h:form></div>
+							<div>
+								<h:form>
+									<h:commandButton
+										action="#{likeBean.darLike(publicacion.idPublicacion)}"
+										image="fotos/smile.png" style="width: 20px; height: 18px;"
+										align="left" />
+								</h:form>
+							</div>
+
 						</div>
 					</div>
 					<div class="tag">
@@ -63,7 +65,7 @@
 							<b>#{comentario.usuarioComenta}</b><br />
 							#{comentario.textoComentario}
 							<h:form>
-								
+
 								<h:commandButton
 									action="#{comentarioBean.removeComentario(comentario.idComentario)}"
 									value="Eliminar Comentario" type="submit"
@@ -73,21 +75,22 @@
 
 						</div>
 					</ui:repeat>
-
+					
 				</div>
 			</div>
 			<br />
 			<br />
 
 		</ui:repeat>
-		<h:form>
-			<h:inputText value="#{comentarioBean.comentario.textoComentario}" />
 
-			<br />
-			<h:commandButton
-				action="#{comentarioBean.addComentario(publicacionBean.publicacion.idPublicacion)}"
-				value="Comentar" type="submit" />
-		</h:form>
+					<h:form>
+						<h:inputText value="#{comentarioBean.comentario.textoComentario}" />
+
+						<br />
+						<h:commandButton
+							action="#{comentarioBean.addComentario(publicacionBean.publicacion.idPublicacion)}"
+							value="Comentar" type="submit" />
+					</h:form>
 
 	</ui:define>
 </ui:composition>

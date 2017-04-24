@@ -3,12 +3,12 @@
 	<persistence-unit name="FashiON1" transaction-type="JTA">
 		<jta-data-source>java:jboss/datasources/FashiON1</jta-data-source>
 		<class>dl.Amigo</class>
-		<class>dl.Comentario</class>
 		<class>dl.Like</class>
 		<class>dl.Notificacion</class>
 		<class>dl.Publicacion</class>
 		<class>dl.Usuario</class>
 		<class>dl.Valoracion</class>
+		<class>dl.Comentario</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>

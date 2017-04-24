@@ -28,7 +28,7 @@ public class ComentarioBean {
 	
 		ejb.addComentario(comentario,idPublicacion);
 		//ejb.addNotificacionComentario();
-		comentario=new Comentario();
+		//comentario=new Comentario();
 
 	}
 	

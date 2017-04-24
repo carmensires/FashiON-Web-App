@@ -18,6 +18,7 @@ public class ImageBean {
 	@EJB
 	Ejb ejb=new Ejb();
 	
+
 	public byte[] getProfileImage(int idUser)
 	{
 		return ejb.getProfileImage(idUser);
@@ -27,5 +28,6 @@ public class ImageBean {
 	{
 		return ejb.getPublicacionImage(idPublicacion);
 	}
+	
 
 }

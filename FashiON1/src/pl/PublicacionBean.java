@@ -12,19 +12,17 @@ import javax.servlet.http.Part;
 import dl.Publicacion;
 import bl.Ejb;
 
-
 @ManagedBean
 @SessionScoped
 public class PublicacionBean {
-	
+
 	@EJB
-	Ejb ejb=new Ejb();
-	
-	private Publicacion publicacion=new Publicacion();
+	Ejb ejb = new Ejb();
+
+	private Publicacion publicacion = new Publicacion();
 	private Part image;
 	boolean added;
 	boolean mm;
-	
 
 	public Publicacion getPublicacion() {
 		return publicacion;
@@ -33,9 +31,7 @@ public class PublicacionBean {
 	public void setPublicacion(Publicacion publicacion) {
 		this.publicacion = publicacion;
 	}
-	
-	
-	
+
 	public boolean isMm() {
 		return mm;
 	}
@@ -44,36 +40,34 @@ public class PublicacionBean {
 		this.mm = mm;
 	}
 
-	public String addPublicacion()
-	{
-		if(mm)
-		{
-			try{
-				InputStream in=image.getInputStream();
-				OutputStream out=new OutputStream() {
-	
+	public String addPublicacion() {
+		if (mm) {
+			byte[] buffer = new byte[4096000];
+			try {
+				InputStream in = image.getInputStream();
+				OutputStream out = new OutputStream() {
+
 					@Override
 					public void write(int b) throws IOException {
-					// TODO Auto-generated method stub
+						// TODO Auto-generated method stub
 					}
 				};
-				byte[] buffer= new byte[4096];
+				
 				int lenght;
-				while((lenght=in.read(buffer))>0)
-				{
+				while ((lenght = in.read(buffer)) > 0) {
 					out.write(buffer, 0, lenght);
 				}
 				publicacion.setMultimedia(buffer);
 				in.close();
 				out.close();
 			} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-		added=false;
-		added=ejb.addPublicacion(publicacion);
-		publicacion=new Publicacion();
+		added = false;
+		added = ejb.addPublicacion(publicacion);
+		publicacion = new Publicacion();
 		return "listaPublicaciones.xhtml";
 	}
 
@@ -85,9 +79,6 @@ public class PublicacionBean {
 		this.image = image;
 	}
 
-	
-
-
 	public boolean isAdded() {
 		return added;
 	}
@@ -96,30 +87,20 @@ public class PublicacionBean {
 		this.added = added;
 	}
 
-	
-	
-		
-		
-		public String editarPublicacion(Publicacion publicacion){
-			this.publicacion=publicacion;
-			return "editarPublicacion.xhtml";
-		}
-		
-		public String editPublicacion(){
-			
-		 ejb.editarPublicacion(publicacion);
-		 return "listaPublicaciones.xhtml";
-		}
-		
-		public String entrarPublicacion(int idPublicacion){
-			this.publicacion = ejb.getPublicacion(idPublicacion);
-			return "publicacion.xhtml";
-		}
-		
-		
-
+	public String editarPublicacion(Publicacion publicacion) {
+		this.publicacion = publicacion;
+		return "editarPublicacion.xhtml";
 	}
 
-	
+	public String editPublicacion() {
 
+		ejb.editarPublicacion(publicacion);
+		return "listaPublicaciones.xhtml";
+	}
 
+	public String entrarPublicacion(int idPublicacion) {
+		this.publicacion = ejb.getPublicacion(idPublicacion);
+		return "publicacion.xhtml";
+	}
+
+}
