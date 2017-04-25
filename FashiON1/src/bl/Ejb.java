@@ -368,7 +368,7 @@ public class Ejb {
 	public void addComentario(Comentario comentario, int idPublicacion) {
 
 		comentario.setPublicacion(idPublicacion);
-		comentario.setUsuarioComenta(usuario.getIdUser());
+		comentario.setUsuarioComenta(usuario.getNombreCompleto());
 		em.persist(comentario);
 
 	}
