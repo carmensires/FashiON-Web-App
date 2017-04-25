@@ -47,29 +47,32 @@ public class ListadoBean {
 		return listaComentarios;
 	}
 	
-	public List<Publicacion> getListaPublicacionesFiltros(String des, String marca, String color, String genero, String tipo, String material, String estilo)
+	public List<Publicacion> getListaPublicacionesFiltros()
 	{
 		List<Publicacion> lista=ejb.getListaPublicaciones();
-		lista=filtrar(lista,des,marca,color,genero,tipo,material,estilo);
+		Busqueda busqueda=ejb.getBusqueda();
+		ejb.setBusqueda(new Busqueda());
+		if(ejb.isPrueba())
+			lista=filtrar(lista,busqueda);
 		return lista;
 	}
 	
-	public List<Publicacion> filtrar(List<Publicacion> lista, String des, String marca, String color, String genero, String tipo, String material, String estilo)
+	public List<Publicacion> filtrar(List<Publicacion> lista, Busqueda busqueda)
 	{
-		if(marca!="")
-			lista=eliminar(lista,marca,1);
-		if(color!="")
-			lista=eliminar(lista,color,2);
-		if(genero!="")
-			lista=eliminar(lista,genero,3);
-		if(tipo!="")
-			lista=eliminar(lista,tipo,4);
-		if(material!="")
-			lista=eliminar(lista,material,5);
-		if(estilo!="")
-			lista=eliminar(lista,estilo,6);
-		if(des!="")
-			lista=eliminar(lista,des,7);
+		if(busqueda.getMarca()!=null)
+			lista=eliminar(lista,busqueda.getMarca(),1);
+		if(busqueda.getColor()!=null)
+			lista=eliminar(lista,busqueda.getColor(),2);
+		if(busqueda.getGenero()!=null)
+			lista=eliminar(lista,busqueda.getGenero(),3);
+		if(busqueda.getTipo()!=null)
+			lista=eliminar(lista,busqueda.getTipo(),4);
+		if(busqueda.getMaterial()!=null)
+			lista=eliminar(lista,busqueda.getMaterial(),5);
+		if(busqueda.getEstilo()!=null)
+			lista=eliminar(lista,busqueda.getEstilo(),6);
+		if(busqueda.getDes()!="")
+			lista=eliminar(lista,busqueda.getDes(),7);
 		return lista;
 	}
 	
@@ -80,26 +83,33 @@ public class ListadoBean {
 		{
 			switch(n)
 			{
-				case 1: if(lista.get(i).getEtMarca()==filtro)
-							listaFiltrada.add(lista.get(i));
+				case 1: if(lista.get(i).getEtMarca()!=null)
+							if(lista.get(i).getEtMarca().equalsIgnoreCase(filtro))
+								listaFiltrada.add(lista.get(i));
 						break;
-				case 2: if(lista.get(i).getEtColor()==filtro)
-							listaFiltrada.add(lista.get(i));
+				case 2: if(lista.get(i).getEtColor()!=null)
+							if(lista.get(i).getEtColor().equalsIgnoreCase(filtro))
+								listaFiltrada.add(lista.get(i));
 						break;
-				case 3: if(lista.get(i).getEtGenero()==filtro)
-							listaFiltrada.add(lista.get(i));
+				case 3: if(lista.get(i).getEtGenero()!=null)
+							if(lista.get(i).getEtGenero().equalsIgnoreCase(filtro))
+								listaFiltrada.add(lista.get(i));
 						break;
-				case 4: if(lista.get(i).getEtTipo()==filtro)
-							listaFiltrada.add(lista.get(i));
+				case 4: if(lista.get(i).getEtTipo()!=null)
+							if(lista.get(i).getEtTipo().equalsIgnoreCase(filtro))
+								listaFiltrada.add(lista.get(i));
 						break;
-				case 5: if(lista.get(i).getEtMaterial()==filtro)
-							listaFiltrada.add(lista.get(i));
+				case 5: if(lista.get(i).getEtMaterial()!=null)
+							if(lista.get(i).getEtMaterial().equalsIgnoreCase(filtro))
+								listaFiltrada.add(lista.get(i));
 						break;
-				case 6: if(lista.get(i).getEtEstilo()==filtro)
-							listaFiltrada.add(lista.get(i));
+				case 6: if(lista.get(i).getEtEstilo()!=null)
+							if(lista.get(i).getEtEstilo().equalsIgnoreCase(filtro))
+								listaFiltrada.add(lista.get(i));
 						break;
-				case 7: if(lista.get(i).getEtDescripcion().contains(filtro))
-							listaFiltrada.add(lista.get(i));
+				case 7: if(lista.get(i).getEtMarca()!="")
+							if(lista.get(i).getEtDescripcion().contains(filtro))
+								listaFiltrada.add(lista.get(i));
 						break;
 				default: break;
 			}

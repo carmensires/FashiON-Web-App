@@ -20,6 +20,10 @@ public class Ejb {
 	EntityManager em;
 
 	private Usuario usuario = new Usuario();
+	
+	private Busqueda busqueda=new Busqueda();
+	
+	boolean prueba=false;
 
 	// USUARIO HACE LOG IN
 	public Usuario getUsuario() {
@@ -440,5 +444,29 @@ public class Ejb {
 		Publicacion publicacion = em.find(Publicacion.class, idPublicacion);
 		return publicacion.getMultimedia();
 	}
+	
+	
+	//ESTABLECER LOS DATOS DE LA BÚSQUEDA
+	public void setBusqueda(Busqueda busqueda)
+	{
+		this.busqueda=busqueda;
+	}
+	
+	public Busqueda getBusqueda()
+	{
+		return this.busqueda;
+	}
+
+	public boolean isPrueba() {
+		return prueba;
+	}
+
+	public void setPrueba(boolean prueba) {
+		this.prueba = prueba;
+	}
+	
+	
+	
+	
 
 }

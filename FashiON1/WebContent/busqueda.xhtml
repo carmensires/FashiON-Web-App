@@ -10,11 +10,11 @@
 	
 	<h:form>
 	Buscar: 
-	<h:inputText value="#{busquedaBean.des}" />
+	<h:inputText value="#{busquedaBean.busqueda.des}" />
 			<br />
 	Filtros:<br/>
 	Marca:
-		<h:selectOneMenu value="#{busquedaBean.marca}">
+		<h:selectOneMenu value="#{busquedaBean.busqueda.marca}">
 				<f:selectItem itemValue="" itemLabel=""/>
 				<f:selectItem itemValue="zara" itemLabel="Zara" />
 				<f:selectItem itemValue="pullandbear" itemLabel="Pull and Bear"/>
@@ -31,7 +31,7 @@
 			</h:selectOneMenu>
 			<br />
 		Color:
-		<h:selectOneMenu value="#{busquedaBean.color}">
+		<h:selectOneMenu value="#{busquedaBean.busqueda.color}">
 				<f:selectItem itemValue="" itemLabel=""/>
 				<f:selectItem itemValue="blanco" itemLabel="Blanco" />
 				<f:selectItem itemValue="negro" itemLabel="Negro" />
@@ -50,7 +50,7 @@
 			</h:selectOneMenu>
 			<br />
 		Genero:
-		<h:selectOneMenu value="#{busquedaBean.genero}">
+		<h:selectOneMenu value="#{busquedaBean.busqueda.genero}">
 				<f:selectItem itemValue="" itemLabel=""/>
 				<f:selectItem itemValue="masculino" itemLabel="Masculino" />
 				<f:selectItem itemValue="femenino" itemLabel="Femenino" />
@@ -61,7 +61,7 @@
 			</h:selectOneMenu>
 			<br />
 		Tipo:
-		<h:selectOneMenu value="#{busquedaBean.tipo}">
+		<h:selectOneMenu value="#{busquedaBean.busqueda.tipo}">
 				<f:selectItem itemValue="" itemLabel=""/>
 				<f:selectItem itemValue="camisa" itemLabel="Camisa" />
 				<f:selectItem itemValue="camiseta" itemLabel="Camiseta" />
@@ -83,7 +83,7 @@
 			</h:selectOneMenu>
 			<br />	
 		Material:
-		<h:selectOneMenu value="#{busquedaBean.material}">
+		<h:selectOneMenu value="#{busquedaBean.busqueda.material}">
 				<f:selectItem itemValue="" itemLabel=""/>
 				<f:selectItem itemValue="lana" itemLabel="Lana" />
 				<f:selectItem itemValue="lino" itemLabel="Lino" />
@@ -99,7 +99,7 @@
 			</h:selectOneMenu>
 			<br />
 		Estilo:
-		<h:selectOneMenu value="#{busquedaBean.estilo}">
+		<h:selectOneMenu value="#{busquedaBean.busqueda.estilo}">
 				<f:selectItem itemValue="" itemLabel=""/>
 				<f:selectItem itemValue="corto" itemLabel="Corto" />
 				<f:selectItem itemValue="largo" itemLabel="Largo" />
@@ -113,9 +113,15 @@
 				<f:selectItem itemValue="pegado" itemLabel="Pegado"/>
 			</h:selectOneMenu>
 			<br />
+			
+			<h:commandButton actionListener="#{busquedaBean.setBusquedaEjb()}"
+				value="Buscar">
+			</h:commandButton>
+			
 	</h:form>
+	<br/><br/>
 	
-	<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesFiltros(busquedaBean.des,busquedaBean.marca,busquedaBean.color,busquedaBean.genero,busquedaBean.tipo,busquedaBean.material,busquedaBean.estilo)}">
+	<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesFiltros()}">
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
