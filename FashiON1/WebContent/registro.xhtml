@@ -46,8 +46,14 @@
 			</h:selectOneMenu>
 			<br />
 
+	Deseas poner una foto de perfil?: <br />
+			<h:selectOneMenu value="#{usuarioBean.hayFoto}">
+				<f:selectItem itemValue="false" itemLabel="No" />
+				<f:selectItem itemValue="true" itemLabel="Si" />
+			</h:selectOneMenu><br/>
+			
 	Subir foto de perfil:<br/>
-	<h:inputFile value="#{usuarioBean.usuario.foto}"></h:inputFile><br/>
+	<h:inputFile value="#{usuarioBean.image}"></h:inputFile><br/>
 	
 
 			<h:commandButton action="#{usuarioBean.addUsuario()}"

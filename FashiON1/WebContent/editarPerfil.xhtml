@@ -11,7 +11,7 @@
 		<h1>Editar Perfil</h1>
 		<br />
 
-		<h:form>
+		<h:form enctype="multipart/form-data">
 	
 	Nombre completo:
 	<h:inputText id="idNombreCompleto" value="#{usuarioBean.editado.nombreCompleto}"/>
@@ -30,8 +30,13 @@
 				<f:selectItem itemLabel="Privado" itemValue="1" />
 			</h:selectOneMenu>
 			<br />
+	Deseas cambiar la foto de perfil?: <br />
+			<h:selectOneMenu value="#{usuarioBean.hayFoto}">
+				<f:selectItem itemValue="false" itemLabel="No" />
+				<f:selectItem itemValue="true" itemLabel="Si" />
+			</h:selectOneMenu><br/>
 	Foto de perfil:<br/>
-	<h:inputFile value="#{usuarioBean.editado.foto}"></h:inputFile><br/>
+	<h:inputFile value="#{usuarioBean.image}"></h:inputFile><br/>
 	
 
 			<h:commandButton action="#{usuarioBean.editarPerfil()}"

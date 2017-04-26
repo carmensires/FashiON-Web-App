@@ -98,6 +98,7 @@ public class Ejb {
 		return added;
 
 	}
+	
 
 	// OBTENER LISTA DE PUBLICACIONES
 
@@ -254,6 +255,7 @@ public class Ejb {
 		usuario.setNombreCompleto(user.getNombreCompleto());
 		usuario.setPassword(user.getPassword());
 		usuario.setTipoPerfil(user.getTipoPerfil());
+		usuario.setFoto(user.getFoto());
 		em.persist(usuario);
 
 	}

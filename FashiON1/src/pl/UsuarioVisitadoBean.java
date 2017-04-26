@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import dl.Publicacion;
@@ -13,7 +12,7 @@ import bl.Ejb;
 
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class UsuarioVisitadoBean {
 	
 	@EJB

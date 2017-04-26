@@ -10,9 +10,9 @@
 	
 	<h:form>
 	Buscar: 
-	<h:inputText value="#{busquedaBean.busqueda.des}" />
-			<br />
-	Filtros:<br/>
+	<h:inputText value="#{busquedaBean.busqueda.des}" size="20"/>
+			
+	 <br/>
 	Marca:
 		<h:selectOneMenu value="#{busquedaBean.busqueda.marca}">
 				<f:selectItem itemValue="" itemLabel=""/>
@@ -29,7 +29,7 @@
 				<f:selectItem itemValue="roxy" itemLabel="Roxy"/>
 				<f:selectItem itemValue="hollister" itemLabel="Hollister"/>
 			</h:selectOneMenu>
-			<br />
+			
 		Color:
 		<h:selectOneMenu value="#{busquedaBean.busqueda.color}">
 				<f:selectItem itemValue="" itemLabel=""/>
@@ -48,7 +48,7 @@
 				<f:selectItem itemValue="verde" itemLabel="Verde"/>
 				<f:selectItem itemValue="" itemLabel=""/>
 			</h:selectOneMenu>
-			<br />
+			
 		Genero:
 		<h:selectOneMenu value="#{busquedaBean.busqueda.genero}">
 				<f:selectItem itemValue="" itemLabel=""/>
@@ -59,7 +59,7 @@
 				<f:selectItem itemValue="nina" itemLabel="Niña" />
 				<f:selectItem itemValue="joven" itemLabel="Joven"/>
 			</h:selectOneMenu>
-			<br />
+			
 		Tipo:
 		<h:selectOneMenu value="#{busquedaBean.busqueda.tipo}">
 				<f:selectItem itemValue="" itemLabel=""/>
@@ -81,7 +81,7 @@
 				<f:selectItem itemValue="bolso" itemLabel="Bolso"/>
 				<f:selectItem itemValue="accesorio" itemLabel="Accesorio"/>
 			</h:selectOneMenu>
-			<br />	
+				
 		Material:
 		<h:selectOneMenu value="#{busquedaBean.busqueda.material}">
 				<f:selectItem itemValue="" itemLabel=""/>
@@ -97,7 +97,7 @@
 				<f:selectItem itemValue="licra" itemLabel="Licra"/>
 				<f:selectItem itemValue="poliester" itemLabel="Poliester"/>
 			</h:selectOneMenu>
-			<br />
+			
 		Estilo:
 		<h:selectOneMenu value="#{busquedaBean.busqueda.estilo}">
 				<f:selectItem itemValue="" itemLabel=""/>

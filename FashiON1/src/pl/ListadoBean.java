@@ -1,6 +1,7 @@
 package pl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -20,12 +21,14 @@ public class ListadoBean {
 	public List<Publicacion> getListaPublicaciones()
 	{
 		List<Publicacion> listaPublicaciones=ejb.getListaPublicaciones();
+		Collections.reverse(listaPublicaciones);
 		return listaPublicaciones;
 	}
 	
 	public List<Publicacion> getListaPublicacionesUsuario(int idUsuario)
 	{
 		List<Publicacion> listaPublicaciones=ejb.getPublicacionesUsuario(idUsuario);
+		Collections.reverse(listaPublicaciones);
 		return listaPublicaciones;
 	}
 	
@@ -38,12 +41,14 @@ public class ListadoBean {
 	public List<Notificacion> getListaNotificaciones()
 	{
 		List<Notificacion> listaNotificaciones=ejb.getListaNotificaciones();
+		Collections.reverse(listaNotificaciones);
 		return listaNotificaciones;
 	}
 	
 	public List<Comentario> getListaComentariosPublicacion(int idPublicacion)
 	{
 		List<Comentario> listaComentarios = ejb.getListaComentariosPublicacion(idPublicacion);
+		Collections.reverse(listaComentarios);
 		return listaComentarios;
 	}
 	
@@ -54,6 +59,7 @@ public class ListadoBean {
 		ejb.setBusqueda(new Busqueda());
 		if(ejb.isPrueba())
 			lista=filtrar(lista,busqueda);
+		Collections.reverse(lista);
 		return lista;
 	}
 	

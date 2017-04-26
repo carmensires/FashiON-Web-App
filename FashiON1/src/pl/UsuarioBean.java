@@ -1,10 +1,14 @@
 package pl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.Part;
 
 import dl.Publicacion;
 import dl.Usuario;
@@ -25,6 +29,8 @@ public class UsuarioBean {
 	private boolean comprobado;
 	private int libre=2;
 	private boolean added;
+	private Part image;
+	private boolean hayFoto;
 
 	public boolean isAdded() {
 		return added;
@@ -99,6 +105,30 @@ public class UsuarioBean {
 	public String addUsuario()
 	{
 		added=false;
+		if (hayFoto) {
+			byte[] buffer = new byte[4096000];
+			try {
+				InputStream in = image.getInputStream();
+				OutputStream out = new OutputStream() {
+
+					@Override
+					public void write(int b) throws IOException {
+						// TODO Auto-generated method stub
+					}
+				};
+				
+				int lenght;
+				while ((lenght = in.read(buffer)) > 0) {
+					out.write(buffer, 0, lenght);
+				}
+				editado.setFoto(buffer);
+				in.close();
+				out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		libre=ejb.addUsuario(usuario);
 		added=true;
 		return getRegistradoText();
@@ -181,9 +211,51 @@ public class UsuarioBean {
 		return "editarPerfil.xhtml";
 	}
 	public String  editarPerfil(){
+		if (hayFoto) {
+			byte[] buffer = new byte[4096000];
+			try {
+				InputStream in = image.getInputStream();
+				OutputStream out = new OutputStream() {
+
+					@Override
+					public void write(int b) throws IOException {
+						// TODO Auto-generated method stub
+					}
+				};
+				
+				int lenght;
+				while ((lenght = in.read(buffer)) > 0) {
+					out.write(buffer, 0, lenght);
+				}
+				editado.setFoto(buffer);
+				in.close();
+				out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		ejb.editarPerfil(editado);
 		return "perfil.xhtml";
 	}
+
+	public Part getImage() {
+		return image;
+	}
+
+	public void setImage(Part image) {
+		this.image = image;
+	}
+
+	public boolean isHayFoto() {
+		return hayFoto;
+	}
+
+	public void setHayFoto(boolean hayFoto) {
+		this.hayFoto = hayFoto;
+	}
+	
+	
 	
 	
 }
