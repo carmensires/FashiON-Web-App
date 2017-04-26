@@ -23,7 +23,6 @@ public class Ejb {
 	
 	private Busqueda busqueda=new Busqueda();
 	
-	boolean prueba=false;
 
 	// USUARIO HACE LOG IN
 	public Usuario getUsuario() {
@@ -250,14 +249,14 @@ public class Ejb {
 
 	// EDITAR PERFIL
 
-	public void editarPerfil(Usuario user) {
+	public boolean editarPerfil(Usuario user) {
 		usuario = em.find(Usuario.class, usuario.getIdUser());
 		usuario.setNombreCompleto(user.getNombreCompleto());
 		usuario.setPassword(user.getPassword());
 		usuario.setTipoPerfil(user.getTipoPerfil());
 		usuario.setFoto(user.getFoto());
 		em.persist(usuario);
-
+		return true;
 	}
 
 	// EDITAR PUBLICACION
@@ -459,15 +458,16 @@ public class Ejb {
 		return this.busqueda;
 	}
 
-	public boolean isPrueba() {
-		return prueba;
-	}
-
-	public void setPrueba(boolean prueba) {
-		this.prueba = prueba;
-	}
 	
-	
+	//AUMENTAR NUMERO DE VISUALIZACIONES
+	public void incrementarVisualizacion(int idPublicacion)
+	{
+		Publicacion publicacion=em.find(Publicacion.class, idPublicacion);
+		int n=publicacion.getNVisualizaciones();
+		n++;
+		publicacion.setNVisualizaciones(n);
+		em.persist(publicacion);
+	}
 	
 	
 

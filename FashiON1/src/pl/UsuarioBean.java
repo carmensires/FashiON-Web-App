@@ -31,6 +31,7 @@ public class UsuarioBean {
 	private boolean added;
 	private Part image;
 	private boolean hayFoto;
+	private boolean edited;
 
 	public boolean isAdded() {
 		return added;
@@ -235,7 +236,8 @@ public class UsuarioBean {
 				e.printStackTrace();
 			}
 		}
-		ejb.editarPerfil(editado);
+		edited=false;
+		edited=ejb.editarPerfil(editado);
 		return "perfil.xhtml";
 	}
 
@@ -254,7 +256,22 @@ public class UsuarioBean {
 	public void setHayFoto(boolean hayFoto) {
 		this.hayFoto = hayFoto;
 	}
+
+	public boolean isEdited() {
+		return edited;
+	}
+
+	public void setEdited(boolean edited) {
+		this.edited = edited;
+	}
 	
+	public String cerrarSesion()
+	{
+		this.usuario=new Usuario();
+		this.editado=new Usuario();
+		ejb.setUsuario(new Usuario());
+		return "login.xhtml";
+	}
 	
 	
 	

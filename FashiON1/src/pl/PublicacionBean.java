@@ -100,6 +100,7 @@ public class PublicacionBean {
 
 	public String entrarPublicacion(int idPublicacion) {
 		this.publicacion = ejb.getPublicacion(idPublicacion);
+		ejb.incrementarVisualizacion(idPublicacion);
 		return "publicacion.xhtml";
 	}
 

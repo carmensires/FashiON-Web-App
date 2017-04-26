@@ -27,7 +27,6 @@ public class BusquedaBean {
 	
 	public void setBusquedaEjb()
 	{
-		ejb.setPrueba(true);
 		ejb.setBusqueda(this.busqueda);
 	}
 	

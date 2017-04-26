@@ -57,8 +57,7 @@ public class ListadoBean {
 		List<Publicacion> lista=ejb.getListaPublicaciones();
 		Busqueda busqueda=ejb.getBusqueda();
 		ejb.setBusqueda(new Busqueda());
-		if(ejb.isPrueba())
-			lista=filtrar(lista,busqueda);
+		lista=filtrar(lista,busqueda);
 		Collections.reverse(lista);
 		return lista;
 	}
