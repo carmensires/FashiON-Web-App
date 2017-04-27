@@ -122,7 +122,7 @@ public class UsuarioBean {
 				while ((lenght = in.read(buffer)) > 0) {
 					out.write(buffer, 0, lenght);
 				}
-				editado.setFoto(buffer);
+				usuario.setFoto(buffer);
 				in.close();
 				out.close();
 			} catch (IOException e) {

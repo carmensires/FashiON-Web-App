@@ -14,15 +14,16 @@
 		<h:form enctype="multipart/form-data">
 	
 	Nombre completo:
-	<h:inputText id="idNombreCompleto" value="#{usuarioBean.editado.nombreCompleto}"/>
-			
+	<h:inputText id="idNombreCompleto"
+				value="#{usuarioBean.editado.nombreCompleto}" />
+
 			<br />
-	
-			
+
+
 			<br />
 	Contraseña:
-	<h:inputText id="idPassword" value="#{usuarioBean.editado.password}"  />
-			
+	<h:inputText id="idPassword" value="#{usuarioBean.editado.password}" />
+
 			<br />
 	Tipo de perfil:
 	<h:selectOneMenu value="#{usuarioBean.editado.tipoPerfil}">
@@ -34,15 +35,17 @@
 			<h:selectOneMenu value="#{usuarioBean.hayFoto}">
 				<f:selectItem itemValue="false" itemLabel="No" />
 				<f:selectItem itemValue="true" itemLabel="Si" />
-			</h:selectOneMenu><br/>
-	Foto de perfil:<br/>
-	<h:inputFile value="#{usuarioBean.image}"></h:inputFile><br/>
-	
+			</h:selectOneMenu>
+			<br />
+	Foto de perfil:<br />
+			<h:inputFile value="#{usuarioBean.image}"></h:inputFile>
+			<br />
+
 
 			<h:commandButton action="#{usuarioBean.editarPerfil()}"
 				value="Guardar cambios" type="submit" />
 			<br />
-			
+
 		</h:form>
 
 

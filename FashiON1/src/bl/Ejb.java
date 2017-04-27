@@ -254,7 +254,9 @@ public class Ejb {
 		usuario.setNombreCompleto(user.getNombreCompleto());
 		usuario.setPassword(user.getPassword());
 		usuario.setTipoPerfil(user.getTipoPerfil());
-		usuario.setFoto(user.getFoto());
+		byte[]aux=user.getFoto();
+		//usuario.setFoto(aux);
+		usuario.setFoto(null);
 		em.persist(usuario);
 		return true;
 	}
