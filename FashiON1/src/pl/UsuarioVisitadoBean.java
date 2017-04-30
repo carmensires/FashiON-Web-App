@@ -88,6 +88,12 @@ public class UsuarioVisitadoBean {
 		
 	}
 	
+	/*public String entrarPerfil(String username)
+	{
+		Usuario user=ejb.getUserByName(username);
+		return this.entrarPerfil(user);
+	}*/
+	
 	public void seguirUsuario(int idUser){
 		
 		ejb.addAmigo(idUser);

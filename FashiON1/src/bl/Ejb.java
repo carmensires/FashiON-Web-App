@@ -20,7 +20,6 @@ public class Ejb {
 	EntityManager em;
 
 	private Usuario usuario = new Usuario();
-	
 	private Busqueda busqueda=new Busqueda();
 	
 
@@ -372,6 +371,7 @@ public class Ejb {
 
 		comentario.setPublicacion(idPublicacion);
 		comentario.setUsuarioComenta(usuario.getNombreCompleto());
+		//comentario.setUsuarioComenta(usuario.getUserName());
 		em.persist(comentario);
 
 	}
@@ -379,6 +379,11 @@ public class Ejb {
 	// ELIMINAR COMENTARIO
 
 	public void removeComentario(int idComentario) {
+		Notificacion notificacion = (Notificacion) em
+				.createNamedQuery("Notificacion.findComentario")
+				.setParameter("idComentario", idComentario)
+				.setParameter("accion", "comentario").getSingleResult();
+		em.remove(notificacion);
 		em.remove(em.find(Comentario.class, idComentario));
 
 	}
@@ -390,7 +395,7 @@ public class Ejb {
 		List<Comentario> listaCom = (List<Comentario>) em.createNamedQuery(
 				"Comentario.findAll").getResultList();
 
-		int idComentario = listaCom.get(listaCom.size()).getIdComentario();
+		int idComentario = listaCom.get(listaCom.size()-1).getIdComentario();
 
 		Notificacion notificacion = new Notificacion();
 
@@ -402,35 +407,11 @@ public class Ejb {
 		notificacion.setUsuario2(em.find(Usuario.class, usuario.getIdUser()));
 		notificacion.setUsuario1(em.find(Usuario.class, idUser));
 		notificacion.setComentarioBean(comentario);
-		List<Notificacion> listaNot = em.createNamedQuery(
-				"Notificacion.findAll").getResultList();
-		int tam = listaNot.size();
-		if (tam > 0)
-			notificacion.setIdNotificacion(listaNot.get(tam - 1)
-					.getIdNotificacion() + 1);
-		else
-			notificacion.setIdNotificacion(0);
+		
 
 		em.persist(notificacion);
 
 	}
-
-	// ELIMINAR NOTIFICACION COMENTARIO ---SIN HACER!!
-
-	public void removeNotificacionComentario(int idUser) {
-		Notificacion notificacion = (Notificacion) em
-				.createNamedQuery("Notificacion.findSeguir")
-				.setParameter("idUser1", idUser)
-				.setParameter("idUser2", usuario.getIdUser())
-				.setParameter("accion", "seguir").getSingleResult();
-		em.remove(notificacion);
-	}
-
-	/*
-	 * public String getNombreCompleto(int idUser) { String n; Usuario
-	 * usuario=em.find(Usuario.class, idUser); n=usuario.getNombreCompleto();
-	 * return n; }
-	 */
 
 	public Publicacion getPublicacion(int idPublicacion) {
 		return em.find(Publicacion.class, idPublicacion);
@@ -471,6 +452,18 @@ public class Ejb {
 		em.persist(publicacion);
 	}
 	
+	//INICIALIZAR PUBLICACION
+	public Publicacion inicializarPublicacion()
+	{
+		return new Publicacion();
+	}
+	
+	/*//OBTENER USUARIO POR EL NOMBRE DE USUARIO
+	public Usuario getUserByName(String username)
+	{
+		Usuario user=(Usuario) em.createNamedQuery("Usuario.find").setParameter("username", username).getSingleResult();
+		return user;
+	}*/
 	
 
 }

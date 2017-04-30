@@ -25,9 +25,17 @@ public class ListadoBean {
 		return listaPublicaciones;
 	}
 	
-	public List<Publicacion> getListaPublicacionesUsuario(int idUsuario)
+	public List<Publicacion> getListaPublicacionesUsuario(Usuario user)
 	{
-		List<Publicacion> listaPublicaciones=ejb.getPublicacionesUsuario(idUsuario);
+		
+		List<Publicacion> listaPublicaciones = ejb.getPublicacionesUsuario(user.getIdUser());
+		if(user.getTipoPerfil()==1){
+			if(ejb.comprobarSeguido(user.getIdUser())){
+				listaPublicaciones.clear();
+			}
+				
+		}
+
 		Collections.reverse(listaPublicaciones);
 		return listaPublicaciones;
 	}
@@ -38,9 +46,20 @@ public class ListadoBean {
 		List<Usuario> listaUsuarios=ejb.getListaUsuarios();
 		return listaUsuarios;
 	}
-	public List<Notificacion> getListaNotificaciones()
+	public List<NotificacionCompleta> getListaNotificaciones()
 	{
-		List<Notificacion> listaNotificaciones=ejb.getListaNotificaciones();
+		List<NotificacionCompleta> listaNotificaciones=new ArrayList<NotificacionCompleta>();
+		List<Notificacion> lista=ejb.getListaNotificaciones();
+		for(int i=0;i<lista.size();i++)
+		{
+			Notificacion n=lista.get(i);
+			NotificacionCompleta nC=new NotificacionCompleta();
+			nC.setNotificacion(n);
+			nC.setFraseAnterior();
+			nC.setFrasePosterior();
+			nC.setPub();
+			listaNotificaciones.add(nC);
+		}
 		Collections.reverse(listaNotificaciones);
 		return listaNotificaciones;
 	}

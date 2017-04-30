@@ -14,20 +14,21 @@
 		<img src="fotos/settings.png" alt="idSettings"
 			style="width: 40px; height: 40px;" align="right" /></a>
 	<h:form>
+	<div class="arribadcha">
 		<h:commandButton
 		action="#{usuarioBean.cerrarSesion()}" actionListener="login.xhtml"
-		image="fotos/logout.png" style="width: 40px; height: 40px;"
-		align="right" /></h:form>
+		image="fotos/logout.png" style="width: 40px; height: 40px;" />
+	</div>
+	</h:form>
 	
 	
 	<div class="perfil" >
-	
 		<div class="fotoperfil" >
-			<on:graphicImage value="#{imageBean.getProfileImage(usuarioBean.usuario.idUser)}" height="210" width="230">
+			<on:graphicImage value="#{imageBean.getProfileImage(usuarioBean.usuario.idUser)}" height="230" width="230" style="border-color: white; border-radius: 50%;">
 			</on:graphicImage>
 		</div>
-		<div class="infoperfil">
-			<div class="nombresperfil">
+		<div>
+			<div>
 				<h2>#{usuarioBean.usuario.nombreCompleto}</h2>
 				<h3>#{usuarioBean.usuario.userName}</h3>
 			</div>
@@ -45,12 +46,6 @@
 					#{usuarioBean.NSeguidos}
 				</div>
 			</div>
-			<div style="{width: 420px; height: 50px;}">
-				<br/>
-				<h:form>
-					<h:commandButton action="subirpublicacion.xhtml" value="+ Subir Publicacion" type="submit"/>
-				</h:form>
-			</div>
 		</div>
 		<div class="valoracionesperfil" >
 			
@@ -59,25 +54,25 @@
 	
 	
 	<br /><br/>
-	<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesUsuario(usuarioBean.usuario.idUser)}">
-		<div class="publicacion1">
+	<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesUsuario(usuarioBean.usuario)}">
+			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
 						<a href="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
 							class="h2">#{publicacion.usuario.nombreCompleto}</a>
 					</h2>
 
-					<div class="fotoCarac">
+					<div>
 						<div>
-							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" height="275" width="275">
+							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
 							</on:graphicImage>
 							
 						</div>
 						
 						<div>
 
-							<div class="nlikes" align="left">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
-							<div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
+							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
+							<div class="nvis">#{publicacion.NVisualizaciones}</div>
 							<img src="fotos/eye.png" style="width: 20px; height: 18px;"
 								align="right" />
 							<div>
@@ -111,8 +106,9 @@
 					<p>#{publicacion.descripcion}</p>
 				</div>
 			</div>
-		<br/><br/>
-	</ui:repeat>
+			<br />
+			<br />
+		</ui:repeat>
 	
 	</ui:define>
 	</ui:composition>

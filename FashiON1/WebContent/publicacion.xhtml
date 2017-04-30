@@ -10,9 +10,8 @@
 
 		<br />
 		<br />
-
-		<ui:repeat var="publicacion" value="#{publicacionBean.publicacion}">
-
+		
+		<ui:repeat var="publicacion" value="#{publicacionBean.publicacion}" >
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
@@ -20,19 +19,17 @@
 							class="h2">#{publicacion.usuario.nombreCompleto}</a>
 					</h2>
 
-					<div class="fotoCarac">
+					<div>
 						<div>
-							<on:graphicImage
-								value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}"
-								height="275" width="275">
+							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
 							</on:graphicImage>
-
+							
 						</div>
-
+						
 						<div>
 
-							<div class="nlikes" align="left">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
-							<div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
+							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
+							<div class="nvis">#{publicacion.NVisualizaciones}</div>
 							<img src="fotos/eye.png" style="width: 20px; height: 18px;"
 								align="right" />
 							<div>
@@ -55,32 +52,35 @@
 
 				</div>
 				<div class="partedcha">
+					<div class="linkverpublicacion">
+						<h:form>
+							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
+							 value="Ver Publicación" />
+						</h:form>
+					</div>
 					<br /> <br /> <br />
 					<h3>#{publicacion.titulo}</h3>
 					<p>#{publicacion.descripcion}</p>
-
 					<ui:repeat var="comentario"
 						value="#{listadoBean.getListaComentariosPublicacion(publicacion.idPublicacion)}">
 						<div class="comentario">
-							<b>#{comentario.usuarioComenta}</b><br />
+							<b>#{comentario.usuarioComenta}</b>
+							<br />
 							#{comentario.textoComentario}
 							<h:form>
-
 								<h:commandButton
 									action="#{comentarioBean.removeComentario(comentario.idComentario)}"
 									value="Eliminar Comentario" type="submit"
-									rendered="#{usuarioBean.usuario.userName eq comentario.usuarioComenta}" />
+									rendered="#{usuarioBean.usuario.nombreCompleto eq comentario.usuarioComenta}" />
 							</h:form>
-							<br />
+							
 
 						</div>
 					</ui:repeat>
-					
 				</div>
 			</div>
 			<br />
 			<br />
-
 		</ui:repeat>
 
 					<h:form>

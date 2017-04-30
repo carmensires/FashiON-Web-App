@@ -11,11 +11,11 @@
 	<div class="perfil" >
 	
 		<div class="fotoperfil" >
-			<on:graphicImage value="#{imageBean.getProfileImage(usuarioVisitadoBean.usuario.idUser)}" height="210" width="230">
+			<on:graphicImage value="#{imageBean.getProfileImage(usuarioVisitadoBean.usuario.idUser)}" height="230" width="230" style="border-color: white; border-radius: 50%;">
 			</on:graphicImage>
 		</div>
-		<div class="infoperfil">
-			<div class="nombresperfil">
+		<div>
+			<div>
 				<h2>#{usuarioVisitadoBean.usuario.nombreCompleto}</h2>
 				<h3>#{usuarioVisitadoBean.usuario.userName}</h3>
 			</div>
@@ -58,25 +58,25 @@
 	<br/>	
 	
 	<br /> <br/>
-		<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesUsuario(usuarioVisitadoBean.usuario.idUser)}">
-		<div class="publicacion1">
+		<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesUsuario(usuarioVisitadoBean.usuario)}">
+			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
 						<a href="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
 							class="h2">#{publicacion.usuario.nombreCompleto}</a>
 					</h2>
 
-					<div class="fotoCarac">
+					<div>
 						<div>
-							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" height="275" width="275">
+							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
 							</on:graphicImage>
 							
 						</div>
 						
 						<div>
 
-							<div class="nlikes" align="left">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
-							<div class="nvis" align="right">#{publicacion.NVisualizaciones}</div>
+							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
+							<div class="nvis">#{publicacion.NVisualizaciones}</div>
 							<img src="fotos/eye.png" style="width: 20px; height: 18px;"
 								align="right" />
 							<div>
@@ -110,8 +110,9 @@
 					<p>#{publicacion.descripcion}</p>
 				</div>
 			</div>
-		<br/><br/>
-	</ui:repeat>
+			<br />
+			<br />
+		</ui:repeat>
 	</ui:define>
 	</ui:composition>
 </html>

@@ -103,5 +103,11 @@ public class PublicacionBean {
 		ejb.incrementarVisualizacion(idPublicacion);
 		return "publicacion.xhtml";
 	}
+	
+	public String subirPublicacion(){
+		//this.publicacion=ejb.inicializarPublicacion();
+		return "subirpublicacion.xhtml";
+	}
+
 
 }

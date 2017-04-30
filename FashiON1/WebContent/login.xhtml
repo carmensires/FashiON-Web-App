@@ -21,13 +21,7 @@
 			<br />
 			<h:commandButton action="#{usuarioBean.comprobarUsuario()}"
 				value="Log in" type="submit"/>
-			<br />
-			<h:outputText value="#{usuarioBean.okText}"
-				rendered="#{usuarioBean.passwordOk!=3}" />
-			<br />
-			<h:outputLink value="subirpublicacion.xhtml"
-				rendered="#{usuarioBean.passwordOk==0}">Subir publicacion</h:outputLink>
-				<br/>
+			<br /><br/>
 				<h:outputLink value="registro.xhtml">No tengo una cuenta. Registrarse</h:outputLink><br/>
 		</h:form>
 

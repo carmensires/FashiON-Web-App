@@ -27,8 +27,8 @@ public class ComentarioBean {
 	public void addComentario(int idPublicacion){
 	
 		ejb.addComentario(comentario,idPublicacion);
-		//ejb.addNotificacionComentario();
-		//comentario=new Comentario();
+		ejb.addNotificacionComentario();
+		comentario=new Comentario();
 
 	}
 	

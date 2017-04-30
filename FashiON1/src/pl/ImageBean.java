@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.omnifaces.cdi.GraphicImageBean;
 
+import dl.NotificacionCompleta;
 import bl.Ejb;
 
 
@@ -26,7 +27,22 @@ public class ImageBean {
 	
 	public byte[] getPublicacionImage(int idPublicacion)
 	{
-		return ejb.getPublicacionImage(idPublicacion);
+		byte[] image=ejb.getPublicacionImage(idPublicacion);
+		return image;
+	}
+	
+	public byte[] getNotificacionImage(NotificacionCompleta notificacion)
+	{
+		byte[]image;
+		if(notificacion.isPub())
+		{
+			image=ejb.getPublicacionImage(notificacion.getNotificacion().getPublicacionBean().getIdPublicacion());
+		}
+		else
+		{
+			image=null;
+		}
+		return image;
 	}
 	
 
