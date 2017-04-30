@@ -45,7 +45,20 @@
 			</div>
 		</div>
 		<div class="valoracionesperfil" >
-			
+			<br/>
+		<div class="estrellasvaloraciones">
+			<img src="#{usuarioVisitadoBean.estrella(1)}" style="width: 20px; height: 20px;"/>
+			<img src="#{usuarioVisitadoBean.estrella(2)}" style="width: 20px; height: 20px;"/>
+			<img src="#{usuarioVisitadoBean.estrella(3)}" style="width: 20px; height: 20px;"/>
+			<img src="#{usuarioVisitadoBean.estrella(4)}" style="width: 20px; height: 20px;"/>
+			<img src="#{usuarioVisitadoBean.estrella(5)}" style="width: 20px; height: 20px;"/> 
+			<div class="nval">#{usuarioVisitadoBean.NValoraciones}</div></div>
+			<br/>
+			5 estrellas: #{usuarioVisitadoBean.getNValEspecifica(5)} <br/>
+			4 estrellas: #{usuarioVisitadoBean.getNValEspecifica(4)} <br/>
+			3 estrellas: #{usuarioVisitadoBean.getNValEspecifica(3)} <br/>
+			2 estrellas: #{usuarioVisitadoBean.getNValEspecifica(2)} <br/>
+			1 estrellas: #{usuarioVisitadoBean.getNValEspecifica(1)} <br/>
 		</div>
 	</div>
 	

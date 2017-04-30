@@ -24,6 +24,17 @@
 				<a href="#{usuarioVisitadoBean.entrarPerfil(notificacion.notificacion.usuario2)}"
 								class="h3">#{notificacion.notificacion.usuario2.nombreCompleto}</a>
 				#{notificacion.frasePosterior}
+				
+				<div class="linkverpublicacion">
+						<h:form>
+							<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
+							 value="Ver Publicación" rendered="#{notificacion.pub}" align="right"/>
+						</h:form>
+						<h:form>
+							<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
+							 value="#{valoracionBean.getStringValoracion(notificacion.notificacion.comentarioBean.idComentario,notificacion.notificacion.usuario2.idUser)}" rendered="#{notificacion.com}" align="right"/>
+						</h:form>
+				</div>
 			</div>
 			
 		</div>

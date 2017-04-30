@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 import dl.Publicacion;
 import dl.Usuario;
+import dl.Valoracion;
 import bl.Ejb;
 
 
@@ -88,11 +89,11 @@ public class UsuarioVisitadoBean {
 		
 	}
 	
-	/*public String entrarPerfil(String username)
+	public String entrarPerfil(String username)
 	{
 		Usuario user=ejb.getUserByName(username);
 		return this.entrarPerfil(user);
-	}*/
+	}
 	
 	public void seguirUsuario(int idUser){
 		
@@ -115,6 +116,55 @@ public class UsuarioVisitadoBean {
 			comprobar=false;
 		return comprobar;
 		
+	}
+	
+	public int getNValoraciones()
+	{
+		this.usuario.setNValoraciones(ejb.getNValoracionesUsuario(this.usuario));
+		return this.usuario.getNValoraciones();
+	}
+	
+	public float getValoracionMedia()
+	{
+		List<Valoracion> listaValoraciones=ejb.getValoracionesUsuario(this.usuario);
+		int nVal=listaValoraciones.size();
+		int tot=0;
+		this.usuario.setValoracionMedia(0);
+		if(nVal!=0)
+		{
+			for(int i=0;i<nVal;i++)
+			{
+				tot+=listaValoraciones.get(i).getPuntuacion();
+			}
+			this.usuario.setValoracionMedia(tot/nVal);
+		}
+		return this.usuario.getValoracionMedia();
+	}
+	
+	public String estrella(int n)
+	{
+		String foto;
+		this.usuario.setValoracionMedia(this.getValoracionMedia());
+		if(this.usuario.getValoracionMedia()<n)
+		{
+			foto="fotos/starempty.png";
+		}
+		else
+			foto="fotos/star.png";
+		return foto;
+	}
+	
+	public int getNValEspecifica(int n)
+	{
+		List<Valoracion> listaValoraciones=ejb.getValoracionesUsuario(this.usuario);
+		int nVal=listaValoraciones.size();
+		int tot=0;
+		for(int i=0;i<nVal;i++)
+		{
+			if(listaValoraciones.get(i).getPuntuacion()==n)
+				tot++;
+		}
+		return tot;
 	}
 	
 }

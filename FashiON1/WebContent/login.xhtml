@@ -14,11 +14,18 @@
 
 		<h:form>
 	Usuario: 
-	<h:inputText value="#{usuarioBean.usuario.userName}" />
+	<h:inputText id="idUserName" value="#{usuarioBean.usuario.userName}" required="true" 
+	requiredMessage="Debe introducir el nombre de usuario"/>
+	<h:message for="idUserName"/> 
 			<br />
 	Contraseña:
-	<h:inputSecret value="#{usuarioBean.usuario.password}" />
+	<h:inputSecret id="idPass" value="#{usuarioBean.usuario.password}" required="true"
+	requiredMessage="Debe introducir la contraseña"/>
+	<h:message for="idPass"/>
+	
 			<br />
+			<h:outputText value="#{usuarioBean.okText}" rendered="#{usuarioBean.passwordOk!=3}" />
+			<br/>
 			<h:commandButton action="#{usuarioBean.comprobarUsuario()}"
 				value="Log in" type="submit"/>
 			<br /><br/>

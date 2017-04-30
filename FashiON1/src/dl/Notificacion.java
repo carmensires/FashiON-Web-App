@@ -14,8 +14,9 @@ import javax.persistence.*;
 	@NamedQuery(name="Notificacion.findAll", query="SELECT n FROM Notificacion n"),
 	@NamedQuery(name="Notificacion.findUsuario", query="SELECT n FROM Notificacion n WHERE n.usuario1.idUser=:idUser"),
 	@NamedQuery(name="Notificacion.findLike", query="SELECT n FROM Notificacion n WHERE n.publicacionBean.idPublicacion=:idPublicacion AND n.usuario2.idUser=:idUser AND n.accion=:accion "),
-	@NamedQuery(name="Notificacion.findSeguir", query="SELECT n FROM Notificacion n WHERE n.usuario1.idUser=:idUser1 AND n.usuario2.idUser=:idUser2 AND n.accion=:accion ")
-})
+	@NamedQuery(name="Notificacion.findSeguir", query="SELECT n FROM Notificacion n WHERE n.usuario1.idUser=:idUser1 AND n.usuario2.idUser=:idUser2 AND n.accion=:accion "),
+	@NamedQuery(name="Notificacion.findComentario", query="SELECT n FROM Notificacion n WHERE n.comentarioBean.idComentario=:idComentario AND n.accion=:accion ")
+	})
 public class Notificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 

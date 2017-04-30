@@ -64,14 +64,45 @@
 					<ui:repeat var="comentario"
 						value="#{listadoBean.getListaComentariosPublicacion(publicacion.idPublicacion)}">
 						<div class="comentario">
-							<b>#{comentario.usuarioComenta}</b>
+							<!-- <b>#{comentario.usuarioComenta}</b>-->
+							<a href="#{usuarioVisitadoBean.entrarPerfil(comentario.usuarioComenta)}"
+								class="h3">#{comentario.usuarioComenta}</a>
 							<br />
 							#{comentario.textoComentario}
 							<h:form>
 								<h:commandButton
 									action="#{comentarioBean.removeComentario(comentario.idComentario)}"
 									value="Eliminar Comentario" type="submit"
-									rendered="#{usuarioBean.usuario.nombreCompleto eq comentario.usuarioComenta}" />
+									rendered="#{usuarioBean.usuario.userName eq comentario.usuarioComenta}" />
+							</h:form>
+							<h:form>
+							<div class="valoracion">
+								<h:commandButton
+										action="#{valoracionBean.valorar(1,comentario)}"
+										image="#{valoracionBean.estrella(1,comentario)}" style="width: 20px; height: 20px;" 
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
+										/>
+								<h:commandButton
+										action="#{valoracionBean.valorar(2,comentario)}"
+										image="#{valoracionBean.estrella(2,comentario)}" style="width: 20px; height: 20px;" 
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
+										/>
+								<h:commandButton
+										action="#{valoracionBean.valorar(3,comentario)}"
+										image="#{valoracionBean.estrella(3,comentario)}" style="width: 20px; height: 20px;" 
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
+										/>
+								<h:commandButton
+										action="#{valoracionBean.valorar(4,comentario)}"
+										image="#{valoracionBean.estrella(4,comentario)}" style="width: 20px; height: 20px;" 
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
+										/>
+								<h:commandButton 
+										action="#{valoracionBean.valorar(5,comentario)}"
+										image="#{valoracionBean.estrella(5,comentario)}" style="width: 20px; height: 20px;" 
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
+										/>
+							</div>
 							</h:form>
 							
 

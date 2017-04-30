@@ -9,7 +9,12 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Valoracion.findAll", query="SELECT v FROM Valoracion v")
+@NamedQueries({
+	@NamedQuery(name="Valoracion.findAll", query="SELECT v FROM Valoracion v"),
+	@NamedQuery(name="Valoracion.findUsuarioComentario", query="SELECT v FROM Valoracion v WHERE v.comentarioBean.idComentario=:idComentario AND v.usuario.idUser=:idUser"),
+	@NamedQuery(name="Valoracion.findUsuario", query="SELECT v FROM Valoracion v WHERE v.comentarioBean.usuarioComenta=:user")
+})
+
 public class Valoracion implements Serializable {
 	private static final long serialVersionUID = 1L;
 

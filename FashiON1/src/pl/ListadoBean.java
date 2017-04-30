@@ -30,7 +30,7 @@ public class ListadoBean {
 		
 		List<Publicacion> listaPublicaciones = ejb.getPublicacionesUsuario(user.getIdUser());
 		if(user.getTipoPerfil()==1){
-			if(ejb.comprobarSeguido(user.getIdUser())){
+			if(ejb.comprobarSeguido(user.getIdUser()) && user.getIdUser()!=ejb.getUsuario().getIdUser()){
 				listaPublicaciones.clear();
 			}
 				

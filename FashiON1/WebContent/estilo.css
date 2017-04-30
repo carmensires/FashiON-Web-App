@@ -50,6 +50,17 @@ th, td {
 tr:hover {background-color: #f5f5f5}
 tr:nth-child(even) {background-color: #f2f2f2} */
 
+/* .barra{
+	position: fixed;
+	left:5;
+	top:5;
+	right: 5;
+	width: 100%;
+	background-color: white;
+	overflow: visible;
+	visibility: visible;
+} */
+
 input[type=text], select {
     padding: 4px 15px;
     margin: 8px 0;
@@ -160,9 +171,16 @@ select {
 }
 
 .valoracionesperfil {
-	width:200px;
-    height: 210px;
-    border: 1px;
+	padding: 20px;
+    color: #011F57;
+}
+
+.nval {
+	float: right;
+}
+
+.estrellasvaloraciones {
+	display: flex;
 }
 
 .notificacion {
@@ -183,6 +201,14 @@ select {
 
 .textonotificacion {
 	padding: 20px;
+}
+
+.valoracion {
+	display: flex;
+}
+
+.botonvalorar {
+	cursor:url(fotos/star.png);
 }
 
 

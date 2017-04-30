@@ -254,8 +254,7 @@ public class Ejb {
 		usuario.setPassword(user.getPassword());
 		usuario.setTipoPerfil(user.getTipoPerfil());
 		byte[]aux=user.getFoto();
-		//usuario.setFoto(aux);
-		usuario.setFoto(null);
+		usuario.setFoto(aux);
 		em.persist(usuario);
 		return true;
 	}
@@ -370,14 +369,13 @@ public class Ejb {
 	public void addComentario(Comentario comentario, int idPublicacion) {
 
 		comentario.setPublicacion(idPublicacion);
-		comentario.setUsuarioComenta(usuario.getNombreCompleto());
-		//comentario.setUsuarioComenta(usuario.getUserName());
+		//comentario.setUsuarioComenta(usuario.getNombreCompleto());
+		comentario.setUsuarioComenta(usuario.getUserName());
 		em.persist(comentario);
 
 	}
 
 	// ELIMINAR COMENTARIO
-
 	public void removeComentario(int idComentario) {
 		Notificacion notificacion = (Notificacion) em
 				.createNamedQuery("Notificacion.findComentario")
@@ -385,7 +383,6 @@ public class Ejb {
 				.setParameter("accion", "comentario").getSingleResult();
 		em.remove(notificacion);
 		em.remove(em.find(Comentario.class, idComentario));
-
 	}
 
 	// AÑADIR NOTIFICACION COMENTARIO
@@ -407,8 +404,6 @@ public class Ejb {
 		notificacion.setUsuario2(em.find(Usuario.class, usuario.getIdUser()));
 		notificacion.setUsuario1(em.find(Usuario.class, idUser));
 		notificacion.setComentarioBean(comentario);
-		
-
 		em.persist(notificacion);
 
 	}
@@ -458,12 +453,81 @@ public class Ejb {
 		return new Publicacion();
 	}
 	
-	/*//OBTENER USUARIO POR EL NOMBRE DE USUARIO
+	//OBTENER USUARIO POR EL NOMBRE DE USUARIO
 	public Usuario getUserByName(String username)
 	{
-		Usuario user=(Usuario) em.createNamedQuery("Usuario.find").setParameter("username", username).getSingleResult();
+		Usuario user=(Usuario) em.createNamedQuery("Usuario.find").setParameter("userName", username).getSingleResult();
 		return user;
-	}*/
+	}
+	
+	//VALORAR
+	public void valorar(Valoracion valoracion)
+	{
+		Valoracion valoracionAntigua=new Valoracion();
+		valoracion.setUsuario(this.usuario);
+		if(this.getValoracion(valoracion.getComentarioBean())!=0)
+		{
+			valoracionAntigua=(Valoracion) em.createNamedQuery("Valoracion.findUsuarioComentario").setParameter("idUser",valoracion.getUsuario().getIdUser()).setParameter("idComentario", valoracion.getComentarioBean().getIdComentario()).getSingleResult();
+			valoracionAntigua.setPuntuacion(valoracion.getPuntuacion());
+		}else
+		{
+			valoracionAntigua.setComentarioBean(valoracion.getComentarioBean());
+			valoracionAntigua.setPuntuacion(valoracion.getPuntuacion());
+			valoracionAntigua.setUsuario(this.usuario);
+		}
+		em.persist(valoracionAntigua);
+	}
+	
+	//COMPROBAR SI UN USUARIO HA VALORADO
+	public int getValoracion(Comentario comentario)
+	{
+		int puntuacion;
+		Valoracion valoracion;
+		try{
+			valoracion=(Valoracion) em.createNamedQuery("Valoracion.findUsuarioComentario").setParameter("idUser", this.usuario.getIdUser()).setParameter("idComentario", comentario.getIdComentario()).getSingleResult();
+			puntuacion=valoracion.getPuntuacion();
+		}catch(NoResultException e)
+		{
+			puntuacion=0;
+		}
+		return puntuacion;
+	}
+	
+	//AÑADIR NOTIFICACION VALORACION
+	public void addNotificacionValoracion(Valoracion valoracion)
+	{
+		Notificacion notificacion =new Notificacion();
+		notificacion.setAccion("valoracion");
+		notificacion.setComentarioBean(valoracion.getComentarioBean());
+		Publicacion publicacion=em.find(Publicacion.class, valoracion.getComentarioBean().getPublicacion());
+		notificacion.setPublicacionBean(publicacion);
+		Usuario user1=(Usuario) em.createNamedQuery("Usuario.find").setParameter("userName", valoracion.getComentarioBean().getUsuarioComenta()).getSingleResult();
+		notificacion.setUsuario1(user1);
+		notificacion.setUsuario2(this.usuario);
+		em.persist(notificacion);
+	}
+	
+	//OBTENER PUNTUACION
+	public int getPuntuacion(int idComentario, int idUser)
+	{
+		Valoracion valoracion=(Valoracion) em.createNamedQuery("Valoracion.findUsuarioComentario").setParameter("idUser", idUser).setParameter("idComentario", idComentario).getSingleResult();
+		return valoracion.getPuntuacion();
+	}
+	
+	//OBTENER VALORACIONES DE UN USUARIO
+	@SuppressWarnings("unchecked")
+	public List<Valoracion> getValoracionesUsuario(Usuario user)
+	{
+		List<Valoracion> lista=em.createNamedQuery("Valoracion.findUsuario").setParameter("user", user.getUserName()).getResultList();
+		return lista;
+	}
+	
+	public int getNValoracionesUsuario(Usuario user)
+	{
+		return this.getValoracionesUsuario(user).size();
+	}
+	
+	
 	
 
 }
