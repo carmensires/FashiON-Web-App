@@ -20,21 +20,30 @@
 				</on:graphicImage>
 			</div>
 			<div class="textonotificacion">
-				#{notificacion.fraseAnterior}
-				<a href="#{usuarioVisitadoBean.entrarPerfil(notificacion.notificacion.usuario2)}"
-								class="h3">#{notificacion.notificacion.usuario2.nombreCompleto}</a>
-				#{notificacion.frasePosterior}
-				
-				<div class="linkverpublicacion">
-						<h:form>
-							<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
-							 value="Ver Publicación" rendered="#{notificacion.pub}" align="right"/>
-						</h:form>
-						<h:form>
-							<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
-							 value="#{valoracionBean.getStringValoracion(notificacion.notificacion.comentarioBean.idComentario,notificacion.notificacion.usuario2.idUser)}" rendered="#{notificacion.com}" align="right"/>
-						</h:form>
+				<div class="textoespecificonotificacion">#{notificacion.fraseAnterior}</div>
+				<div>
+				<h3>
+					<h:form>
+						<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(notificacion.notificacion.usuario2)}"
+						 value="#{notificacion.notificacion.usuario2.nombreCompleto}" styleClass="h3"/>
+					</h:form>
+				</h3>
 				</div>
+				<div class="textoespecificonotificacion">#{notificacion.frasePosterior}</div>
+				
+			</div>
+			<div class="linknotificacion">
+					<h:form>
+						<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
+						 value="Ver Publicación" rendered="#{notificacion.pub}" 
+						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
+					</h:form>
+					<h:form>
+						<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
+						 value="#{valoracionBean.getStringValoracion(notificacion.notificacion.comentarioBean.idComentario,notificacion.notificacion.usuario2.idUser)}" 
+						 rendered="#{notificacion.com}" 
+						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
+					</h:form>
 			</div>
 			
 		</div>

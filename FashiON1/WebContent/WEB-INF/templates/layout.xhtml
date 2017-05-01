@@ -10,25 +10,43 @@
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
 </h:head>
 <h:body>
+		
 <a href="listaPublicaciones.xhtml">
 <img src="fotos/fashionlogo.png" alt="idFashion"
 			style="width: 200px; height: 40px;" align="left" /></a>
-
-<a href="perfil.xhtml">
-<img src="fotos/user.png" alt="idUser"
-			style="width: 40px; height: 40px;" align="right" /></a>
-
-<a href="listaNotificaciones.xhtml">		
-<img src="fotos/bell.png" alt="idBell"
-			style="width: 40px; height: 40px;" align="right" /></a>
 	
-<a href="busqueda.xhtml">			
-<img src="fotos/lupa.png" alt="idLupa"
-			style="width: 40px; height: 40px;" align="right" /></a>
-			
-<a href="#{publicacionBean.subirPublicacion()}">		
-<img src="fotos/add.png" alt="idAdd"
-			style="width: 40px; height: 40px;" align="right" /></a>
+
+<h:form>
+	<div class="arribadcha">
+		<h:commandButton
+		action="perfil.xhtml"
+		image="fotos/user.png" style="width: 40px; height: 40px;" />
+	</div>
+</h:form>
+
+<h:form>
+	<div class="arribadcha">
+		<h:commandButton
+		action="listaNotificaciones.xhtml"
+		image="fotos/bell.png" style="width: 40px; height: 40px;" />
+	</div>
+</h:form>
+
+<h:form>
+	<div class="arribadcha">
+		<h:commandButton
+		action="busqueda.xhtml"
+		image="fotos/lupa.png" style="width: 40px; height: 40px;" />
+	</div>
+</h:form>
+
+<h:form>
+	<div class="arribadcha">
+		<h:commandButton
+		action="#{publicacionBean.subirPublicacion()}"
+		image="fotos/add.png" style="width: 40px; height: 40px;" />
+	</div>
+</h:form>
 
 <br/><br/>
 <hr align="center" width="100%"/>

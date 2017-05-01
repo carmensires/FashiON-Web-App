@@ -16,6 +16,7 @@ public class BusquedaBean {
 	Ejb ejb=new Ejb();
 	
 	Busqueda busqueda=new Busqueda();
+	String busquedaUsuario;
 
 	public Busqueda getBusqueda() {
 		return busqueda;
@@ -25,9 +26,23 @@ public class BusquedaBean {
 		this.busqueda = busqueda;
 	}
 	
+	
+	public String getBusquedaUsuario() {
+		return busquedaUsuario;
+	}
+
+	public void setBusquedaUsuario(String busquedaUsuario) {
+		this.busquedaUsuario = busquedaUsuario;
+	}
+
 	public void setBusquedaEjb()
 	{
 		ejb.setBusqueda(this.busqueda);
+	}
+	
+	public void setBusquedaUsuariosEjb()
+	{
+		ejb.setBusquedaUsuario(busquedaUsuario);
 	}
 	
 

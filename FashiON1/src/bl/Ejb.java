@@ -21,7 +21,7 @@ public class Ejb {
 
 	private Usuario usuario = new Usuario();
 	private Busqueda busqueda=new Busqueda();
-	
+	private String busquedaUsuario="";
 
 	// USUARIO HACE LOG IN
 	public Usuario getUsuario() {
@@ -33,19 +33,24 @@ public class Ejb {
 	}
 
 	public int comprobarUsuario(String userName, String password) {
-		int ok = 2;
+		int ok = 2; //contraseña incorrecta
+		Usuario user=new Usuario();
 		try {
-			usuario = (Usuario) em.createNamedQuery("Usuario.find")
+			user = (Usuario) em.createNamedQuery("Usuario.find")
 					.setParameter("userName", userName).getSingleResult();
 		} catch (NoResultException e) {
-			ok = 1;
+			ok = 1; //no existe usuario
 		}
-		if (usuario == null)
-			ok = 1;
-		if (password.equals(usuario.getPassword()))
-			ok = 0;
-		else
-			usuario = null;
+		if (ok!=1)
+		{
+			if (password.equals(user.getPassword()))
+			{
+				ok = 0; //contraseña ok
+				this.usuario=user;
+			}
+			else
+				ok=2;
+		}	
 		return ok;
 	}
 
@@ -528,6 +533,35 @@ public class Ejb {
 	}
 	
 	
+	public String getBusquedaUsuario() {
+		return busquedaUsuario;
+	}
+
+	public void setBusquedaUsuario(String busquedaUsuario) {
+		this.busquedaUsuario = busquedaUsuario;
+	}
+
+	/*@SuppressWarnings("unchecked")
+	public List<Usuario> getListaUsuariosBusquedaByUserName()
+	{
+		List<Usuario> listaUserName=new ArrayList<Usuario>();
+		if(busquedaUsuario!=null)
+			listaUserName=em.createNamedQuery("Usuario.findUserNameBusqueda").setParameter("busqueda", this.busquedaUsuario).getResultList();
+		else
+			listaUserName=null;
+		return listaUserName;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> getListaUsuariosBusquedaByNombreCompleto()
+	{
+		List<Usuario> listaNombreCompleto;
+		if(busquedaUsuario!=null)
+			listaNombreCompleto=em.createNamedQuery("Usuario.findNombreBusqueda").setParameter("busqueda", this.busquedaUsuario).getResultList();
+		else
+			listaNombreCompleto=null;
+		return listaNombreCompleto;
+	}*/
 	
 
 }

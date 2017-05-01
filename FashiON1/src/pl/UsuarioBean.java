@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
 
-import dl.Comentario;
 import dl.Publicacion;
 import dl.Usuario;
 import dl.Valoracion;
@@ -27,8 +26,6 @@ public class UsuarioBean {
 	private Usuario usuario = new Usuario();
 	private Usuario editado = new Usuario();
 	private int passwordOk=3;
-	private boolean passOk;
-	private boolean comprobado;
 	private int libre=2;
 	private boolean added;
 	private Part image;
@@ -51,21 +48,8 @@ public class UsuarioBean {
 		this.passwordOk = passwordOk;
 	}
 
-	public boolean isPassOk() {
-		return passOk;
-	}
 
-	public void setPassOk(boolean passOk) {
-		this.passOk = passOk;
-	}
-
-	public boolean isComprobado() {
-		return comprobado;
-	}
-
-	public void setComprobado(boolean comprobado) {
-		this.comprobado = comprobado;
-	}
+	
 
 	public int getLibre() {
 		return libre;
@@ -85,10 +69,16 @@ public class UsuarioBean {
 	
 	public String comprobarUsuario()
 	{
+		String url="";
 		passwordOk=ejb.comprobarUsuario(usuario.getUserName(), usuario.getPassword());
 		if (passwordOk==0)
+		{
 			usuario=ejb.getUsuario();
-		return "listaPublicaciones.xhtml";
+			url="listaPublicaciones.xhtml";
+		}else
+			url="login.xhtml";
+			
+		return url;
 	}
 	
 	public String getOkText()
@@ -272,6 +262,11 @@ public class UsuarioBean {
 		this.usuario=new Usuario();
 		this.editado=new Usuario();
 		ejb.setUsuario(new Usuario());
+		this.added=false;
+		this.edited=false;
+		this.hayFoto=false;
+		this.libre=2;
+		this.passwordOk=3;
 		return "login.xhtml";
 	}
 	
@@ -323,6 +318,8 @@ public class UsuarioBean {
 		}
 		return tot;
 	}
+	
+	
 	
 	
 }

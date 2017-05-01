@@ -13,7 +13,16 @@ import javax.persistence.*;
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
 @NamedQuery(name="Usuario.find",query="SELECT u FROM Usuario u WHERE u.userName=:userName"),
 @NamedQuery(name="Usuario.findEmail", query="SELECT u FROM Usuario u WHERE u.email=:email"),
+@NamedQuery(name="Usuario.findNombreBusqueda", query="SELECT u FROM Usuario u WHERE u.nombreCompleto=:busqueda"),
+@NamedQuery(name="Usuario.findUserNameBusqueda", query="SELECT u FROM Usuario u WHERE u.userName=:busqueda")
 })
+
+/*
+ * @NamedQuery(name="Usuario.findNombreBusqueda", query="SELECT u FROM Usuario u WHERE u.nombreCompleto LIKE '%:busqueda%'"),
+ * @NamedQuery(name="Usuario.findUserNameBusqueda", query="SELECT u FROM Usuario u WHERE u.userName LIKE '%:busqueda%'")
+ * 
+ * */
+
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 

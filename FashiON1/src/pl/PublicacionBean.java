@@ -105,7 +105,7 @@ public class PublicacionBean {
 	}
 	
 	public String subirPublicacion(){
-		//this.publicacion=ejb.inicializarPublicacion();
+		this.publicacion=ejb.inicializarPublicacion();
 		return "subirpublicacion.xhtml";
 	}
 

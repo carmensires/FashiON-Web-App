@@ -17,10 +17,11 @@
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
-						<a href="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
-							class="h2">#{publicacion.usuario.nombreCompleto}</a>
+						<h:form>
+							<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+							 value="#{publicacion.usuario.nombreCompleto}" styleClass="h2"/>
+						</h:form>
 					</h2>
-
 					<div>
 						<div>
 							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">

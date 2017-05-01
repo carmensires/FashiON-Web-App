@@ -8,8 +8,6 @@
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
 
-		<br />
-		<br />
 		
 		<ui:repeat var="publicacion" value="#{publicacionBean.publicacion}" >
 			<div class="publicacion1">
@@ -52,12 +50,6 @@
 
 				</div>
 				<div class="partedcha">
-					<div class="linkverpublicacion">
-						<h:form>
-							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
-							 value="Ver Publicación" />
-						</h:form>
-					</div>
 					<br /> <br /> <br />
 					<h3>#{publicacion.titulo}</h3>
 					<p>#{publicacion.descripcion}</p>
@@ -110,8 +102,7 @@
 					</ui:repeat>
 				</div>
 			</div>
-			<br />
-			<br />
+			
 		</ui:repeat>
 
 					<h:form>

@@ -2,6 +2,7 @@ package pl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -17,7 +18,25 @@ public class ListadoBean {
 	
 	@EJB
 	Ejb ejb=new Ejb();
+	private boolean usuariosVacio;
+	private boolean publicacionesVacia;
 	
+	public boolean isUsuariosVacio() {
+		return usuariosVacio;
+	}
+
+	public void setUsuariosVacio(boolean usuariosVacio) {
+		this.usuariosVacio = usuariosVacio;
+	}
+
+	public boolean isPublicacionesVacia() {
+		return publicacionesVacia;
+	}
+
+	public void setPublicacionesVacia(boolean publicacionesVacia) {
+		this.publicacionesVacia = publicacionesVacia;
+	}
+
 	public List<Publicacion> getListaPublicaciones()
 	{
 		List<Publicacion> listaPublicaciones=ejb.getListaPublicaciones();
@@ -77,6 +96,10 @@ public class ListadoBean {
 		Busqueda busqueda=ejb.getBusqueda();
 		ejb.setBusqueda(new Busqueda());
 		lista=filtrar(lista,busqueda);
+		if(lista.size()==0)
+			publicacionesVacia=true;
+		else
+			publicacionesVacia=false;
 		Collections.reverse(lista);
 		return lista;
 	}
@@ -141,7 +164,53 @@ public class ListadoBean {
 		return listaFiltrada;
 	}
 	
+	public List<Usuario> getListaUsuariosBusqueda()
+	{
+		List<Usuario> listaTotal=ejb.getListaUsuarios();
+		String busqueda=ejb.getBusquedaUsuario();
+		ejb.setBusquedaUsuario("");
+		List<Usuario> lista=new ArrayList<Usuario>();
+		List<Usuario> listaNombreCompleto=new ArrayList<Usuario>();
+		
+		for(int i=0;i<listaTotal.size();i++)
+		{
+			Usuario user=listaTotal.get(i);
+			if(user.getUserName().contains(busqueda))
+				lista.add(user);
+			else if(user.getNombreCompleto().contains(busqueda))
+				listaNombreCompleto.add(user);
+		}
+		
+		if(lista.size()!=0)
+		{
+			Collections.sort(lista, new Comparator<Usuario>() {
+			      @Override
+			      public int compare(final Usuario usuario1, final Usuario usuario2) {
+			          return usuario1.getUserName().compareTo(usuario2.getUserName());
+			      }
+			  });
+		}
+		
+		if(listaNombreCompleto.size()!=0)
+		{
+			Collections.sort(listaNombreCompleto, new Comparator<Usuario>() {
+			      @Override
+			      public int compare(final Usuario usuario1, final Usuario usuario2) {
+			          return usuario1.getNombreCompleto().compareTo(usuario2.getNombreCompleto());
+			      }
+			  });
+			for(int i=0;i<listaNombreCompleto.size();i++)
+			{
+				Usuario user1=listaNombreCompleto.get(i);
+				lista.add(user1);
+			}
+		}
+		
+		if(lista.size()==0)
+			this.usuariosVacio=true;
+		else
+			this.usuariosVacio=false;
+		return lista;
+	}
 	
-	
-
 }

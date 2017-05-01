@@ -21,9 +21,6 @@ public class UsuarioVisitadoBean {
 	
 	private Usuario usuario = new Usuario();
 
-
-	
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -31,7 +28,6 @@ public class UsuarioVisitadoBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
 	
 	
 	public String getNSeguidores()

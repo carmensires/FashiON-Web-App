@@ -7,6 +7,22 @@
 
 	<ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
+	
+	<div class="tablaperfil">	
+		<div class="cuadrobusqueda">
+		<br/>
+		<h:form>
+			<h:commandLink action="busqueda.xhtml" value="Buscar publicaciones" styleClass="textoCuadroBusqueda"/>
+		</h:form>
+		</div>
+		<div class="cuadrobusqueda">
+		<br/>
+		<h:form>
+			<h:commandLink action="busquedaUsuarios.xhtml" value="Buscar usuarios" styleClass="textoCuadroBusqueda"/>
+		</h:form>
+		</div>
+	</div>
+	<br/>
 	<h1>Buscar publicaciones</h1><br/>
 	<h:form>
 	Buscar: 
@@ -127,8 +143,10 @@
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
-						<a href="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
-							class="h2">#{publicacion.usuario.nombreCompleto}</a>
+						<h:form>
+							<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+							 value="#{publicacion.usuario.nombreCompleto}" styleClass="h2"/>
+						</h:form>
 					</h2>
 
 					<div>

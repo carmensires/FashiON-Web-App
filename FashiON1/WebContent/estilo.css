@@ -97,6 +97,13 @@ select {
 	font-size: 12px;
 }
 
+.linknotificacion {
+	padding: 20px;
+	text-align: right;
+	position: right;
+	float: right;
+}
+
 
 .publicacion1 {
     width:800px;
@@ -144,6 +151,10 @@ select {
 
 .arribadcha{
 	float: right;
+}
+
+.arribaizq {
+	float: left;
 }
 
 .perfil {
@@ -200,7 +211,13 @@ select {
 }
 
 .textonotificacion {
-	padding: 20px;
+	display: flex;
+}
+
+.textoespecificonotificacion {
+	padding-top: 20px;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 
 .valoracion {
@@ -209,6 +226,43 @@ select {
 
 .botonvalorar {
 	cursor:url(fotos/star.png);
+}
+
+.usuariosBusqueda {
+	width:100%;
+    height: 120px;
+    display: flex;
+    border: 1px solid #ddd;
+   	border-collapse: collapse;
+	border-color: #BFBFBF;
+	position: center;
+}
+
+.fotoUsuarioBusqueda {
+	width:120px;
+    height: 100%;
+    padding: 10px;
+}
+
+.textoUsuarioBusqueda {
+	padding: 20px;
+}
+
+.cuadrobusqueda {
+	width:50%;
+    height: 60px;
+    border: 1px solid #011F57;	
+	color:  #011F57;
+	text-align: center;
+	background-color: #e5e5e5;	
+	text-decoration: none;
+}
+
+.textoCuadroBusqueda{
+	text-decoration: none;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	color: #011F57;
+    font-weight: bold;
 }
 
 

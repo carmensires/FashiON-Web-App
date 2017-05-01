@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:on="http://omnifaces.org/ui">
+
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="Contenido">
+	<div class="tablaperfil">	
+		<div class="cuadrobusqueda">
+		<br/>
+		<h:form>
+			<h:commandLink action="busqueda.xhtml" value="Buscar publicaciones" styleClass="textoCuadroBusqueda"/>
+		</h:form>
+		</div>
+		<div class="cuadrobusqueda">
+		<br/>
+		<h:form>
+			<h:commandLink action="busquedaUsuarios.xhtml" value="Buscar usuarios" styleClass="textoCuadroBusqueda"/>
+		</h:form>
+		</div>
+	</div>
+	<br/>
+	<h1>Buscar usuarios</h1><br/>
+	<h:form>
+	Buscar: 
+	<h:inputText value="#{busquedaBean.busquedaUsuario}" size="20"/>
+	
+	<h:commandButton actionListener="#{busquedaBean.setBusquedaUsuariosEjb()}"
+		value="Buscar">
+	</h:commandButton>
+	
+	</h:form>
+	
+	<br/><br/>
+	
+	<ui:repeat var="usuario" value="#{listadoBean.listaUsuariosBusqueda}" >
+		<div class="usuariosBusqueda">
+			<div class="fotoUsuarioBusqueda">
+				<on:graphicImage value="#{imageBean.getProfileImage(usuario.idUser)}" 
+					height="100" width="100" style="border-color: white; border-radius: 50%;">
+				</on:graphicImage>
+			</div>
+			<div class="textoUsuarioBusqueda">
+				<h:form>
+					<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(usuario)}"
+					 value="#{usuario.nombreCompleto}" styleClass="h2"/>
+				</h:form>
+				<h3>#{usuario.userName}</h3>
+			</div>
+		</div>
+		</ui:repeat>
+	
+		
+	</ui:define>
+	</ui:composition>
+</html>
