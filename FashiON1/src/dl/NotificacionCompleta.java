@@ -7,6 +7,7 @@ public class NotificacionCompleta {
 	private String frasePosterior=new String();
 	private boolean pub;
 	private boolean com;
+	private boolean pet;
 	
 	public Notificacion getNotificacion() {
 		return notificacion;
@@ -26,6 +27,8 @@ public class NotificacionCompleta {
 			this.fraseAnterior=" A  ";
 		else if(this.notificacion.getAccion().equalsIgnoreCase("valoracion"))
 			this.frasePosterior=" ";
+		else if(this.notificacion.getAccion().equalsIgnoreCase("peticion"))
+			this.frasePosterior=" ";
 	}
 	public String getFrasePosterior() {
 		return frasePosterior;
@@ -39,6 +42,8 @@ public class NotificacionCompleta {
 			this.frasePosterior="  le ha gustado tu publicación.";
 		else if(this.notificacion.getAccion().equalsIgnoreCase("valoracion"))
 			this.frasePosterior="  ha valorado tu comentario.";
+		else if(this.notificacion.getAccion().equalsIgnoreCase("peticion"))
+			this.frasePosterior="  ha solicitado seguirte.";
 	}
 	public boolean isPub() {
 		setPub();
@@ -53,6 +58,18 @@ public class NotificacionCompleta {
 	public boolean isCom() {
 		setCom();
 		return com;
+	}
+	
+	public boolean isPet(){
+		setPet();
+		return pet;
+	}
+	
+	public void setPet() {
+		if(this.notificacion.getAccion().equalsIgnoreCase("peticion"))
+			this.pet=true;
+		else
+			this.pet=false;
 	}
 	public void setCom() {
 		if(this.notificacion.getAccion().equalsIgnoreCase("valoracion"))

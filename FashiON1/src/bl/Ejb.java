@@ -107,10 +107,57 @@ public class Ejb {
 
 	@SuppressWarnings("unchecked")
 	public List<Publicacion> getListaPublicaciones() {
+		
 		List<Publicacion> listaPublicaciones = (List<Publicacion>) em
 				.createNamedQuery("Publicacion.findAll").getResultList();
 		return listaPublicaciones;
 	}
+	
+	// OBTENER LISTA PUBLICACIONES DE LOS USUARIOS SEGUIDOS
+	
+	/*@SuppressWarnings({"unchecked"})
+	public List<Publicacion> getListaPublicacionesSeguidos() {
+		List<Publicacion> listaPublicaciones = (List<Publicacion>) em
+				.createNamedQuery("Publicacion.findAll").getResultList();
+		listaPublicaciones.clear();
+		List<Usuario> listaUsuarios= getSeguidos(usuario.getIdUser());
+		for(Usuario u:listaUsuarios){
+			System.out.println(u.getIdUser());
+			List<Publicacion> listaPublicacionesCadaUsuario=getPublicacionesUsuario(u.getIdUser());
+			listaPublicaciones.addAll(listaPublicacionesCadaUsuario);
+		}
+		if (listaUsuarios.size()==0)
+			listaPublicaciones.clear();
+		return listaPublicaciones;
+	}*/
+	
+	@SuppressWarnings("unchecked")
+	public List<Publicacion> getListaPublicacionesSeguidos() {
+		List<Publicacion> listaPublicacionesTotal = (List<Publicacion>) em
+				.createNamedQuery("Publicacion.findAll").getResultList();
+		List<Publicacion> listaPublicaciones=new ArrayList<Publicacion>();
+		for(int i=0;i<listaPublicacionesTotal.size();i++)
+		{
+			Publicacion publicacion=listaPublicacionesTotal.get(i);
+			if(this.getSeguido(this.usuario.getIdUser(), publicacion.getUsuario().getIdUser()) || publicacion.getUsuario().getIdUser()==this.usuario.getIdUser())
+				listaPublicaciones.add(publicacion);
+		}
+		return listaPublicaciones;
+	}
+	
+	@SuppressWarnings("unused")
+	public boolean getSeguido(int seguidor, int seguido)
+	{
+		boolean sigue=true;
+		try{
+			Amigo a=(Amigo) em.createNamedQuery("Amigo.findSeguidor").setParameter("usuarioSigue", seguidor).setParameter("usuarioSeguido", seguido).getSingleResult();
+		}catch(NoResultException e)
+		{
+			sigue=false;
+		}
+		return sigue;
+	}
+	
 
 	// OBTENER LISTA DE USUARIOS
 
@@ -218,9 +265,36 @@ public class Ejb {
 
 	public void addAmigo(int idUser) {
 		Amigo a = new Amigo();
+		Usuario usuarioSeguido=em.find(Usuario.class, idUser);
 		a.setUsuario1(em.find(Usuario.class, usuario.getIdUser()));
-		a.setUsuario2(em.find(Usuario.class, idUser));
+		a.setUsuario2(usuarioSeguido);
+		if(usuarioSeguido.getTipoPerfil()=='0'){
+			em.persist(a);
+			addNotificacionSeguir(idUser);
+		}
+		else{
+			Notificacion notificacion=new Notificacion();
+			notificacion.setAccion("peticion");
+			notificacion.setUsuario1(usuarioSeguido);
+			notificacion.setUsuario2(em.find(Usuario.class, usuario.getIdUser()));
+			em.persist(notificacion);
+		}
+	}
+	
+	public void addAmigoNotificacion(int idNotificacion){
+		
+		Notificacion not=em.find(Notificacion.class, idNotificacion);
+		Amigo a = new Amigo();
+		Usuario usuarioSeguido=em.find(Usuario.class, usuario.getIdUser());
+		a.setUsuario1(em.find(Usuario.class, not.getUsuario2().getIdUser()));
+		a.setUsuario2(usuarioSeguido);
 		em.persist(a);
+		Notificacion notificacion=new Notificacion();
+		notificacion.setAccion("seguir");
+		notificacion.setUsuario1(usuarioSeguido);
+		notificacion.setUsuario2(em.find(Usuario.class, not.getUsuario2().getIdUser()));
+		em.persist(notificacion);
+		em.remove(not);
 	}
 
 	// COMPROBAR SI SE SIGUE AL USUARIO
@@ -356,10 +430,30 @@ public class Ejb {
 
 	@SuppressWarnings("unchecked")
 	public List<Notificacion> getListaNotificaciones() {
-		return (List<Notificacion>) em
+		List<Notificacion> listaNotificaciones=(List<Notificacion>) em
+		.createNamedQuery("Notificacion.findUsuario")
+		.setParameter("idUser", getUsuario().getIdUser())
+		.getResultList();
+		 for(Notificacion n:listaNotificaciones){
+			 Notificacion not=em.find(Notificacion.class, n.getIdNotificacion());
+			 not.setLeido(1);
+			 em.persist(not);
+		 }
+		return listaNotificaciones;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int getNotificacionesNuevas(){
+		int notificacionesNuevas=0;
+		List<Notificacion> listaNotificaciones=(List<Notificacion>) em
 				.createNamedQuery("Notificacion.findUsuario")
 				.setParameter("idUser", getUsuario().getIdUser())
 				.getResultList();
+		for(Notificacion n:listaNotificaciones){
+			if(n.getLeido()==0)
+				notificacionesNuevas++;
+		}
+		return notificacionesNuevas;
 	}
 
 	// BUSCAR COMENTARIOS DE UNA PUBLICACION
@@ -564,4 +658,6 @@ public class Ejb {
 	}*/
 	
 
+	
+	
 }

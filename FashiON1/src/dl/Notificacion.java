@@ -22,7 +22,7 @@ public class Notificacion implements Serializable {
 
 	@Id
 	private int idNotificacion;
-
+	private int leido;
 	private String accion;
 
 	//uni-directional many-to-one association to Comentario
@@ -46,6 +46,7 @@ public class Notificacion implements Serializable {
 	private Usuario usuario2;
 
 	public Notificacion() {
+		this.leido = 0;
 	}
 
 	public int getIdNotificacion() {
@@ -94,6 +95,14 @@ public class Notificacion implements Serializable {
 
 	public void setUsuario2(Usuario usuario2) {
 		this.usuario2 = usuario2;
+	}
+
+	public int getLeido() {
+		return leido;
+	}
+
+	public void setLeido(int leido) {
+		this.leido = leido;
 	}
 
 }

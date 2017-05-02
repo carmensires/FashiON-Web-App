@@ -35,6 +35,8 @@ public class Usuario implements Serializable {
 	private byte[] foto;
 
 	private String nombreCompleto;
+	
+	private String descripcion;
 
 	private int nPost;
 
@@ -129,6 +131,14 @@ public class Usuario implements Serializable {
 
 	public void setValoracionMedia(float valoracionMedia) {
 		this.valoracionMedia = valoracionMedia;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 }

@@ -27,6 +27,8 @@ public class AmigoBean {
 		this.amigo = amigo;
 	}
 	
-	
+	public void addAmigo(int idNotificacion){
+		ejb.addAmigoNotificacion(idNotificacion);
+	}
 
 }

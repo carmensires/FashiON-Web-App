@@ -108,6 +108,14 @@ public class PublicacionBean {
 		this.publicacion=ejb.inicializarPublicacion();
 		return "subirpublicacion.xhtml";
 	}
+	
+	public String getFotoLike(int idPublicacion)
+	{
+		String fotoLike="fotos/like1.png";
+		if(ejb.getLiked(idPublicacion))
+			fotoLike="fotos/like.png";
+		return fotoLike;
+	}
 
 
 }

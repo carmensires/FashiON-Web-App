@@ -31,6 +31,7 @@
 			<div>
 				<h2>#{usuarioBean.usuario.nombreCompleto}</h2>
 				<h3>#{usuarioBean.usuario.userName}</h3>
+				<h5>#{usuarioBean.usuario.descripcion}</h5>
 			</div>
 			<div class="tablaperfil">	
 				<div class="cuadroperfil">
@@ -94,7 +95,7 @@
 								<h:form>
 									<h:commandButton
 										action="#{likeBean.darLike(publicacion.idPublicacion)}"
-										image="fotos/smile.png" style="width: 20px; height: 18px;"
+										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}" style="width: 20px; height: 18px;"
 										align="left" />
 								</h:form>
 							</div>

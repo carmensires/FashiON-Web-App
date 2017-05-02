@@ -27,6 +27,12 @@
 			<br />
 			<h:message for="idNombreCompleto" />
 			<br />
+	Descripción:
+	<h:inputText id="idDescripcion" value="#{usuarioBean.usuario.descripcion}" required="true"
+				requiredMessage="Es obligatorio introducir una descripcion" />
+			<br />
+			<h:message for="idDescripcion" />
+			<br />
 	email:
 	<h:inputText id="idEmail" value="#{usuarioBean.usuario.email}" required="true"
 				requiredMessage="Es obligatorio introducir el email" />

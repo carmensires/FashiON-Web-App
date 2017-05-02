@@ -94,7 +94,7 @@ public class UsuarioVisitadoBean {
 	public void seguirUsuario(int idUser){
 		
 		ejb.addAmigo(idUser);
-		ejb.addNotificacionSeguir(idUser);
+		//ejb.addNotificacionSeguir(idUser);
 	}
 	
 	public void dejarDeSeguirUsuario(int idUser){

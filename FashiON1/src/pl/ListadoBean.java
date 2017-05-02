@@ -18,6 +18,7 @@ public class ListadoBean {
 	
 	@EJB
 	Ejb ejb=new Ejb();
+	
 	private boolean usuariosVacio;
 	private boolean publicacionesVacia;
 	
@@ -39,7 +40,7 @@ public class ListadoBean {
 
 	public List<Publicacion> getListaPublicaciones()
 	{
-		List<Publicacion> listaPublicaciones=ejb.getListaPublicaciones();
+		List<Publicacion> listaPublicaciones=ejb.getListaPublicacionesSeguidos();
 		Collections.reverse(listaPublicaciones);
 		return listaPublicaciones;
 	}
@@ -81,6 +82,14 @@ public class ListadoBean {
 		}
 		Collections.reverse(listaNotificaciones);
 		return listaNotificaciones;
+	}
+	
+	public boolean getNotificacionesNuevas(){
+		boolean nuevas=false;
+		int numNotificaciones=ejb.getNotificacionesNuevas();
+		if(numNotificaciones>0)
+			nuevas=true;
+		return nuevas;
 	}
 	
 	public List<Comentario> getListaComentariosPublicacion(int idPublicacion)

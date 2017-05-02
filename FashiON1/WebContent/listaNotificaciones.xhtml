@@ -44,6 +44,12 @@
 						 rendered="#{notificacion.com}" 
 						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
 					</h:form>
+					<h:form>
+						<h:commandButton  action="#{amigoBean.addAmigo(notificacion.notificacion.idNotificacion)}"
+						 value="Aceptar peticion" 
+						 rendered="#{notificacion.pet}"  type="submit"
+						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
+					</h:form>
 			</div>
 			
 		</div>
