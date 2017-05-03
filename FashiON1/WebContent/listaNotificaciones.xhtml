@@ -39,9 +39,14 @@
 						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
 					</h:form>
 					<h:form>
+						<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.comentarioBean.publicacion)}"
+						 value="Ver Comentario" rendered="#{notificacion.com}" 
+						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
+					</h:form>
+					<h:form>
 						<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
 						 value="#{valoracionBean.getStringValoracion(notificacion.notificacion.comentarioBean.idComentario,notificacion.notificacion.usuario2.idUser)}" 
-						 rendered="#{notificacion.com}" 
+						 rendered="#{notificacion.val}" 
 						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
 					</h:form>
 					<h:form>

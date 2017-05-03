@@ -50,6 +50,13 @@
 
 				</div>
 				<div class="partedcha">
+					<div class="arribadcha">
+					<h:form>
+						<h:commandButton
+							action="#{publicacionBean.editarPublicacion(publicacion)}"
+							image="fotos/edit.png" style="width: 35px; height: 35px;" rendered="#{publicacionBean.miPublicacion}" />
+					</h:form>
+					</div>
 					<br /> <br /> <br />
 					<h3>#{publicacion.titulo}</h3>
 					<p>#{publicacion.descripcion}</p>

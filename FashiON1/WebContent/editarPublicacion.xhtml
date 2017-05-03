@@ -12,7 +12,7 @@
 
 		<h1>Editar Publicación</h1>
 		<br />
-		<h:form>
+		<h:form enctype="multipart/form-data">
 		
 		Titulo: 
 		<h:inputText value="#{publicacionBean.publicacion.titulo}" />
@@ -22,40 +22,156 @@
 		<h:inputText value="#{publicacionBean.publicacion.descripcion}" />
 			<br />
 		
-		Archivos multimedia: <br />
+		Deseas adjuntar archivos multimedia?: <br />
+			<h:selectOneMenu value="#{publicacionBean.mm}">
+				<f:selectItem itemValue="false" itemLabel="No" />
+				<f:selectItem itemValue="true" itemLabel="Si" />
+			</h:selectOneMenu>
+			<br />
+			<h:inputFile value="#{publicacionBean.image}"></h:inputFile>
+			<br />
 		
 		Añadir etiqueta: <br />
 		Marca:
 		<h:selectOneMenu value="#{publicacionBean.publicacion.etMarca}">
-				<f:selectItem itemLabel="" itemValue=""/>
-				<f:selectItem itemValue="zara" itemLabel="Zara" />
-				<f:selectItem itemValue="brandyMelville" itemLabel="Brandy Melville" />
-				<f:selectItem itemValue="hm" itemLabel="HM" />
+				<f:selectItem itemValue="" itemLabel="" />
+				<f:selectItem itemValue="abercrombieAndFitch" itemLabel="Abercrombie and Fitch" />
+				<f:selectItem itemValue="adidas" itemLabel="Adidas" />
+				<f:selectItem itemValue="amichi" itemLabel="Amichi" />
+				<f:selectItem itemValue="armani" itemLabel="Armani" />
+				<f:selectItem itemValue="beneton" itemLabel="Beneton" />
 				<f:selectItem itemValue="bershka" itemLabel="Bershka" />
+				<f:selectItem itemValue="billabong" itemLabel="Billabong" />
+				<f:selectItem itemValue="brandyMelville" itemLabel="Brandy Melville" />
+				<f:selectItem itemValue="bimbaylola" itemLabel="Bimba y Lola" />
+				<f:selectItem itemValue="calcedonia" itemLabel="Calcedonia" />
+				<f:selectItem itemValue="calvinKlein" itemLabel="Calvin Klein" />
+				<f:selectItem itemValue="camper" itemLabel="Camper" />
+				<f:selectItem itemValue="converse" itemLabel="Converse" />
+				<f:selectItem itemValue="desigual" itemLabel="Desigual" />
+				<f:selectItem itemValue="dior" itemLabel="Dior" />
+				<f:selectItem itemValue="etam" itemLabel="Etam" />
+				<f:selectItem itemValue="gap" itemLabel="GAP" />
+				<f:selectItem itemValue="hm" itemLabel="HM" />
+				<f:selectItem itemValue="hugoboss" itemLabel="Hugo Boss" />
+				<f:selectItem itemValue="hollister" itemLabel="Hollister" />
+				<f:selectItem itemValue="hunter" itemLabel="Hunter" />
 				<f:selectItem itemValue="klasiks" itemLabel="Klasiks" />
+				<f:selectItem itemValue="lacoste" itemLabel="Lacoste" />
 				<f:selectItem itemValue="levis" itemLabel="Levi's" />
+				<f:selectItem itemValue="loewe" itemLabel="Loewe" />
+				<f:selectItem itemValue="loreal" itemLabel="L'Oreal" />
+				<f:selectItem itemValue="mac" itemLabel="Mac" />
+				<f:selectItem itemValue="mango" itemLabel="Mango" />
+				<f:selectItem itemValue="michaelKors" itemLabel="Michael Kors" />
+				<f:selectItem itemValue="newBalance" itemLabel="New Balance" />
+				<f:selectItem itemValue="nike" itemLabel="Nike" />
+				<f:selectItem itemValue="nyx" itemLabel="NYX" />
+				<f:selectItem itemValue="pepejeans" itemLabel="Pepe Jeans" />
+				<f:selectItem itemValue="pullandbear" itemLabel="Pull and Bear" />
+				<f:selectItem itemValue="rayban" itemLabel="Ray-Ban" />
+				<f:selectItem itemValue="roxy" itemLabel="Roxy" />
+				<f:selectItem itemValue="sephora" itemLabel="Sephora" />
+				<f:selectItem itemValue="springfield" itemLabel="Springfield" />
+				<f:selectItem itemValue="stradivarius" itemLabel="Stradivarius" />
+				<f:selectItem itemValue="superga" itemLabel="Superga" />
+				<f:selectItem itemValue="tommyHilfiger" itemLabel="Tommy Hilfiger" />
+				<f:selectItem itemValue="tous" itemLabel="Tous" />
+				<f:selectItem itemValue="vans" itemLabel="Vans" />
+				<f:selectItem itemValue="womensecret" itemLabel="Women Secret" />
+				<f:selectItem itemValue="zara" itemLabel="Zara" />
 			</h:selectOneMenu>
 			<br />
 		Color:
 		<h:selectOneMenu value="#{publicacionBean.publicacion.etColor}">
-				<f:selectItem itemLabel="" itemValue=""/>
-				<f:selectItem itemValue="rojo" itemLabel="Rojo" />
-				<f:selectItem itemValue="azul" itemLabel="Azul" />
+				<f:selectItem itemValue="" itemLabel="" />
 				<f:selectItem itemValue="amarillo" itemLabel="Amarillo" />
-				<f:selectItem itemValue="blanco" itemLabel="Blanco" />
-				<f:selectItem itemValue="negro" itemLabel="Negro" />
+				<f:selectItem itemValue="azul" itemLabel="Azul" />
 				<f:selectItem itemValue="beige" itemLabel="Beige" />
+				<f:selectItem itemValue="blanco" itemLabel="Blanco" />
+				<f:selectItem itemValue="dorado" itemLabel="Dorado" />
+				<f:selectItem itemValue="gris" itemLabel="Gris" />
+				<f:selectItem itemValue="marron" itemLabel="Marron" />
 				<f:selectItem itemValue="naranja" itemLabel="Naranja" />
+				<f:selectItem itemValue="negro" itemLabel="Negro" />
+				<f:selectItem itemValue="plateado" itemLabel="Plateado" />
+				<f:selectItem itemValue="rojo" itemLabel="Rojo" />
+				<f:selectItem itemValue="rosa" itemLabel="Rosa" />
+				<f:selectItem itemValue="verde" itemLabel="Verde" />
 			</h:selectOneMenu>
 			<br />
 		Genero:
 		<h:selectOneMenu value="#{publicacionBean.publicacion.etGenero}">
-				<f:selectItem itemLabel="" itemValue=""/>
-				<f:selectItem itemValue="masculino" itemLabel="Masculino" />
+				<f:selectItem itemValue="" itemLabel="" />
 				<f:selectItem itemValue="femenino" itemLabel="Femenino" />
-				<f:selectItem itemValue="unisex" itemLabel="Unisex" />
+				<f:selectItem itemValue="joven" itemLabel="Joven" />
+				<f:selectItem itemValue="masculino" itemLabel="Masculino" />
 				<f:selectItem itemValue="nino" itemLabel="Niño" />
 				<f:selectItem itemValue="nina" itemLabel="Niña" />
+				<f:selectItem itemValue="unisex" itemLabel="Unisex" />
+			</h:selectOneMenu>
+			<br />
+		Tipo:
+		<h:selectOneMenu value="#{publicacionBean.publicacion.etTipo}">
+				<f:selectItem itemValue="" itemLabel="" />
+				<f:selectItem itemValue="accesorio" itemLabel="Accesorio" />
+				<f:selectItem itemValue="bolso" itemLabel="Bolso" />
+				<f:selectItem itemValue="botas" itemLabel="Botas" />
+				<f:selectItem itemValue="bufanda" itemLabel="Bufanda" />
+				<f:selectItem itemValue="calcetines" itemLabel="Calcetines" />
+				<f:selectItem itemValue="camisa" itemLabel="Camisa" />
+				<f:selectItem itemValue="camiseta" itemLabel="Camiseta" />
+				<f:selectItem itemValue="chaqueta" itemLabel="Chaqueta" />
+				<f:selectItem itemValue="deportivas" itemLabel="Deportivas" />
+				<f:selectItem itemValue="gorro" itemLabel="Gorro" />
+				<f:selectItem itemValue="guantes" itemLabel="Guantes" />
+				<f:selectItem itemValue="falda" itemLabel="Falda" />
+				<f:selectItem itemValue="jersey" itemLabel="Jersey" />
+				<f:selectItem itemValue="maquillaje" itemLabel="Maquillaje" />
+				<f:selectItem itemValue="mono" itemLabel="Mono" />
+				<f:selectItem itemValue="pantalon" itemLabel="Pantalón" />
+				<f:selectItem itemValue="sandalias" itemLabel="Sandalias" />
+				<f:selectItem itemValue="shorts" itemLabel="Shorts" />
+				<f:selectItem itemValue="sudadera" itemLabel="Sudadera" />
+				<f:selectItem itemValue="sujetador" itemLabel="Sujetador" />
+				<f:selectItem itemValue="tacones" itemLabel="Tacones" />
+				<f:selectItem itemValue="top" itemLabel="Top" />
+				<f:selectItem itemValue="underwear" itemLabel="Underwear" />
+				<f:selectItem itemValue="vestido" itemLabel="Vestido" />
+				<f:selectItem itemValue="zapatos" itemLabel="Zapatos" />
+			</h:selectOneMenu>
+			<br />	
+		Material:
+		<h:selectOneMenu value="#{publicacionBean.publicacion.etMaterial}">
+				<f:selectItem itemValue="" itemLabel="" />
+				<f:selectItem itemValue="algodon" itemLabel="Algodón" />
+				<f:selectItem itemValue="ante" itemLabel="Ante" />
+				<f:selectItem itemValue="cuero" itemLabel="Cuero" />
+				<f:selectItem itemValue="lana" itemLabel="Lana" />
+				<f:selectItem itemValue="lentejuelas" itemLabel="Lentejuelas" />
+				<f:selectItem itemValue="licra" itemLabel="Licra" />
+				<f:selectItem itemValue="lino" itemLabel="Lino" />
+				<f:selectItem itemValue="neopreno" itemLabel="Neopreno" />
+				<f:selectItem itemValue="poliester" itemLabel="Poliester" />
+				<f:selectItem itemValue="seda" itemLabel="Seda" />
+				<f:selectItem itemValue="terciopelo" itemLabel="Terciopelo" />
+				<f:selectItem itemValue="vaquero" itemLabel="Vaquero" />
+			</h:selectOneMenu>
+			<br />
+		Estilo:
+		<h:selectOneMenu value="#{publicacionBean.publicacion.etEstilo}">
+				<f:selectItem itemValue="" itemLabel="" />
+				<f:selectItem itemValue="casual" itemLabel="Casual" />
+				<f:selectItem itemValue="corto" itemLabel="Corto" />
+				<f:selectItem itemValue="elegante" itemLabel="Elegante" />
+				<f:selectItem itemValue="hombroDescubierto"
+					itemLabel="Hombro Descubierto" />
+				<f:selectItem itemValue="invierno" itemLabel="Invierno" />
+				<f:selectItem itemValue="largo" itemLabel="Largo" />
+				<f:selectItem itemValue="oversized" itemLabel="Oversized" />
+				<f:selectItem itemValue="pegado" itemLabel="Pegado" />
+				<f:selectItem itemValue="sinMangas" itemLabel="Sin Mangas" />
+				<f:selectItem itemValue="verano" itemLabel="Verano" />
 			</h:selectOneMenu>
 			<br />
 		Descripcion de la etiqueta:
@@ -65,7 +181,6 @@
 			<h:commandButton action="#{publicacionBean.editPublicacion()}"
 				value="Editar" />
 			<br />
-			
 		</h:form>
 
 	</ui:define>

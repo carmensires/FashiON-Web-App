@@ -113,24 +113,7 @@ public class Ejb {
 		return listaPublicaciones;
 	}
 	
-	// OBTENER LISTA PUBLICACIONES DE LOS USUARIOS SEGUIDOS
-	
-	/*@SuppressWarnings({"unchecked"})
-	public List<Publicacion> getListaPublicacionesSeguidos() {
-		List<Publicacion> listaPublicaciones = (List<Publicacion>) em
-				.createNamedQuery("Publicacion.findAll").getResultList();
-		listaPublicaciones.clear();
-		List<Usuario> listaUsuarios= getSeguidos(usuario.getIdUser());
-		for(Usuario u:listaUsuarios){
-			System.out.println(u.getIdUser());
-			List<Publicacion> listaPublicacionesCadaUsuario=getPublicacionesUsuario(u.getIdUser());
-			listaPublicaciones.addAll(listaPublicacionesCadaUsuario);
-		}
-		if (listaUsuarios.size()==0)
-			listaPublicaciones.clear();
-		return listaPublicaciones;
-	}*/
-	
+	//OBTENER LAS PUBLICACIONES DE LOS USUARIOS SEGUIDOS
 	@SuppressWarnings("unchecked")
 	public List<Publicacion> getListaPublicacionesSeguidos() {
 		List<Publicacion> listaPublicacionesTotal = (List<Publicacion>) em
@@ -268,7 +251,7 @@ public class Ejb {
 		Usuario usuarioSeguido=em.find(Usuario.class, idUser);
 		a.setUsuario1(em.find(Usuario.class, usuario.getIdUser()));
 		a.setUsuario2(usuarioSeguido);
-		if(usuarioSeguido.getTipoPerfil()=='0'){
+		if(usuarioSeguido.getTipoPerfil()==0){
 			em.persist(a);
 			addNotificacionSeguir(idUser);
 		}
@@ -361,7 +344,6 @@ public class Ejb {
 
 	// AÑADIR NOTIFICACION LIKE
 
-	@SuppressWarnings("unchecked")
 	public void addNotificacionLike(int idPublicacion) {
 		Notificacion notificacion = new Notificacion();
 		Publicacion publicacion = em.find(Publicacion.class, idPublicacion);
@@ -370,15 +352,6 @@ public class Ejb {
 		notificacion.setUsuario2(em.find(Usuario.class, usuario.getIdUser()));
 		notificacion.setUsuario1(em.find(Usuario.class, publicacion
 				.getUsuario().getIdUser()));
-		List<Notificacion> listaNot = em.createNamedQuery(
-				"Notificacion.findAll").getResultList();
-		int tam = listaNot.size();
-		if (tam > 0)
-			notificacion.setIdNotificacion(listaNot.get(tam - 1)
-					.getIdNotificacion() + 1);
-		else
-			notificacion.setIdNotificacion(0);
-
 		em.persist(notificacion);
 
 	}
@@ -396,21 +369,11 @@ public class Ejb {
 
 	// AÑADIR NOTIFICACION SEGUIMIENTO
 
-	@SuppressWarnings("unchecked")
 	public void addNotificacionSeguir(int idUser) {
 		Notificacion notificacion = new Notificacion();
 		notificacion.setAccion("seguir");
 		notificacion.setUsuario2(em.find(Usuario.class, usuario.getIdUser()));
 		notificacion.setUsuario1(em.find(Usuario.class, idUser));
-		List<Notificacion> listaNot = em.createNamedQuery(
-				"Notificacion.findAll").getResultList();
-		int tam = listaNot.size();
-		if (tam > 0)
-			notificacion.setIdNotificacion(listaNot.get(tam - 1)
-					.getIdNotificacion() + 1);
-		else
-			notificacion.setIdNotificacion(0);
-
 		em.persist(notificacion);
 
 	}

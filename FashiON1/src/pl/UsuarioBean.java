@@ -31,6 +31,25 @@ public class UsuarioBean {
 	private Part image;
 	private boolean hayFoto;
 	private boolean edited;
+	private String pass2;
+	private boolean passCoinciden;
+	
+
+	public boolean isPassCoinciden() {
+		return passCoinciden;
+	}
+
+	public void setPassCoinciden(boolean passCoinciden) {
+		this.passCoinciden = passCoinciden;
+	}
+
+	public String getPass2() {
+		return pass2;
+	}
+
+	public void setPass2(String pass2) {
+		this.pass2 = pass2;
+	}
 
 	public boolean isAdded() {
 		return added;
@@ -47,9 +66,6 @@ public class UsuarioBean {
 	public void setPasswordOk(int passwordOk) {
 		this.passwordOk = passwordOk;
 	}
-
-
-	
 
 	public int getLibre() {
 		return libre;
@@ -98,32 +114,39 @@ public class UsuarioBean {
 	public String addUsuario()
 	{
 		added=false;
-		if (hayFoto) {
-			byte[] buffer = new byte[4096000];
-			try {
-				InputStream in = image.getInputStream();
-				OutputStream out = new OutputStream() {
+		if(this.usuario.getPassword().equals(this.pass2))
+		{
+			this.passCoinciden=true;
+			if (hayFoto) {
+				byte[] buffer = new byte[4096000];
+				try {
+					InputStream in = image.getInputStream();
+					OutputStream out = new OutputStream() {
 
-					@Override
-					public void write(int b) throws IOException {
-						// TODO Auto-generated method stub
+						@Override
+						public void write(int b) throws IOException {
+							// TODO Auto-generated method stub
+						}
+					};
+					
+					int lenght;
+					while ((lenght = in.read(buffer)) > 0) {
+						out.write(buffer, 0, lenght);
 					}
-				};
-				
-				int lenght;
-				while ((lenght = in.read(buffer)) > 0) {
-					out.write(buffer, 0, lenght);
+					usuario.setFoto(buffer);
+					in.close();
+					out.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				usuario.setFoto(buffer);
-				in.close();
-				out.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			libre=ejb.addUsuario(usuario);
+			added=true;
 		}
-		libre=ejb.addUsuario(usuario);
-		added=true;
+		else
+			passCoinciden=false;
+		
 		return getRegistradoText();
 	}
 	
@@ -143,7 +166,7 @@ public class UsuarioBean {
 	{
 		String registradoText;
 		if(added && libre==0)
-			registradoText="login.xhtml";
+			registradoText="listaPublicaciones.xhtml";
 		else 
 			registradoText="";
 		return registradoText;

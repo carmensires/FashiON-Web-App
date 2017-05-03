@@ -27,7 +27,7 @@
 			<br />
 			<h:message for="idNombreCompleto" />
 			<br />
-	Descripción:
+	Breve biografía:
 	<h:inputText id="idDescripcion" value="#{usuarioBean.usuario.descripcion}" required="true"
 				requiredMessage="Es obligatorio introducir una descripcion" />
 			<br />
@@ -44,6 +44,14 @@
 				requiredMessage="Es obligatorio introducir contraseña" />
 			<br />
 			<h:message for="idPassword" />
+			<br />
+	Repetir contraseña:
+	<h:inputSecret id="idPassword2" value="#{usuarioBean.pass2}" required="true"
+				requiredMessage="Es obligatorio repetir la contraseña contraseña" />
+			<br />
+			<h:message for="idPassword2" />
+			<br/>
+				<h:outputText value="Las contraseñas no coinciden" rendered="#{!usuarioBean.passCoinciden}" style="color: red;"/>
 			<br />
 	Tipo de perfil:
 	<h:selectOneMenu value="#{usuarioBean.usuario.tipoPerfil}">

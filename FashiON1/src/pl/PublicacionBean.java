@@ -23,6 +23,20 @@ public class PublicacionBean {
 	private Part image;
 	boolean added;
 	boolean mm;
+	private boolean miPublicacion;
+
+	public boolean isMiPublicacion() {
+		this.setMiPublicacion();
+		return miPublicacion;
+	}
+
+	public void setMiPublicacion() {
+		if(this.publicacion.getUsuario().getIdUser()==ejb.getUsuario().getIdUser())
+			this.miPublicacion=true;
+		else {
+			this.miPublicacion=false;
+		}
+	}
 
 	public Publicacion getPublicacion() {
 		return publicacion;
@@ -95,7 +109,7 @@ public class PublicacionBean {
 	public String editPublicacion() {
 
 		ejb.editarPublicacion(publicacion);
-		return "listaPublicaciones.xhtml";
+		return "publicacion.xhtml";
 	}
 
 	public String entrarPublicacion(int idPublicacion) {
