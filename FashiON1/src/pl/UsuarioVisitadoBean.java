@@ -98,8 +98,8 @@ public class UsuarioVisitadoBean {
 	}
 	
 	public void dejarDeSeguirUsuario(int idUser){
-		ejb.removeAmigo(idUser);
 		ejb.removeNotificacionSeguir(idUser);
+		ejb.removeAmigo(idUser);
 	}
 	
 	public boolean usuarioNoSeguido(){
