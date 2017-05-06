@@ -11,14 +11,13 @@ import dl.Usuario;
 import dl.Valoracion;
 import bl.Ejb;
 
-
 @ManagedBean
 @SessionScoped
 public class UsuarioVisitadoBean {
-	
+
 	@EJB
-	Ejb ejb=new Ejb();
-	
+	Ejb ejb = new Ejb();
+
 	private Usuario usuario = new Usuario();
 
 	public Usuario getUsuario() {
@@ -28,139 +27,125 @@ public class UsuarioVisitadoBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	public String getNSeguidores()
-	{
+
+	public String getNSeguidores() {
 		String nSeguidores;
-		int tam=this.getSeguidores().size();
-		nSeguidores=tam+" seguidores";
+		int tam = this.getSeguidores().size();
+		nSeguidores = tam + " seguidores";
 		return nSeguidores;
 	}
-	
-	public String getNSeguidos()
-	{
+
+	public String getNSeguidos() {
 		String nSeguidos;
-		int tam=this.getSeguidos().size();
-		nSeguidos=tam+" seguidos";
+		int tam = this.getSeguidos().size();
+		nSeguidos = tam + " seguidos";
 		return nSeguidos;
 	}
-	
-	public String getNPosts()
-	{
+
+	public String getNPosts() {
 		String nPosts;
-		int tam=this.getPublicacionesUsuario().size();
-		nPosts=tam+"posts";
+		int tam = this.getPublicacionesUsuario().size();
+		nPosts = tam + "posts";
 		return nPosts;
 	}
-	
-	public List<Usuario> getSeguidores()
-	{
-		List<Usuario> seguidores=ejb.getSeguidores(usuario.getIdUser());
+
+	public List<Usuario> getSeguidores() {
+		List<Usuario> seguidores = ejb.getSeguidores(usuario.getIdUser());
 		return seguidores;
 	}
-	
-	public List<Usuario> getSeguidos()
-	{
-		List<Usuario> seguidos=ejb.getSeguidos(usuario.getIdUser());
+
+	public List<Usuario> getSeguidos() {
+		List<Usuario> seguidos = ejb.getSeguidos(usuario.getIdUser());
 		return seguidos;
 	}
-	
-	public List<Publicacion> getPublicacionesUsuario()
-	{
-		List<Publicacion> publicacionesUsuario=ejb.getPublicacionesUsuario(usuario.getIdUser());
+
+	public List<Publicacion> getPublicacionesUsuario() {
+		List<Publicacion> publicacionesUsuario = ejb
+				.getPublicacionesUsuario(usuario.getIdUser());
 		return publicacionesUsuario;
 	}
-	
-	public String entrarPerfil(Usuario user){
+
+	public String entrarPerfil(Usuario user) {
 		String link;
-		if(user.getIdUser()==ejb.getUsuario().getIdUser())
-			link="perfil.xhtml";
-		else
-		{
-			usuario=user;
-			link="perfilVisitado.xhtml";
+		if (user.getIdUser() == ejb.getUsuario().getIdUser())
+			link = "perfil.xhtml";
+		else {
+			usuario = user;
+			link = "perfilVisitado.xhtml";
 		}
 		return link;
-		
+
 	}
-	
-	public String entrarPerfil(String username)
-	{
-		Usuario user=ejb.getUserByName(username);
+
+	public String entrarPerfil(String username) {
+		Usuario user = ejb.getUserByName(username);
 		return this.entrarPerfil(user);
 	}
-	
-	public void seguirUsuario(int idUser){
-		
+
+	public void seguirUsuario(int idUser) {
+
 		ejb.addAmigo(idUser);
-		//ejb.addNotificacionSeguir(idUser);
+		// ejb.addNotificacionSeguir(idUser);
 	}
-	
-	public void dejarDeSeguirUsuario(int idUser){
-		ejb.removeNotificacionSeguir(idUser);
-		ejb.removeAmigo(idUser);
+
+	public void dejarDeSeguirUsuario(int idUser) {
+		// ejb.removeNotificacionSeguir(idUser);
+		// ejb.removeAmigo(idUser);
 	}
-	
-	public boolean usuarioNoSeguido(){
+
+	public boolean usuarioNoSeguido() {
 		return ejb.comprobarSeguido(usuario.getIdUser());
 	}
-	
-	public boolean usuarioSeguido(){
-		boolean comprobar=true;
-		if(ejb.comprobarSeguido(usuario.getIdUser())==true)
-			comprobar=false;
+
+	public boolean usuarioSeguido() {
+		boolean comprobar = true;
+		if (ejb.comprobarSeguido(usuario.getIdUser()) == true)
+			comprobar = false;
 		return comprobar;
-		
+
 	}
-	
-	public int getNValoraciones()
-	{
-		this.usuario.setNValoraciones(ejb.getNValoracionesUsuario(this.usuario));
+
+	public int getNValoraciones() {
+		this.usuario
+				.setNValoraciones(ejb.getNValoracionesUsuario(this.usuario));
 		return this.usuario.getNValoraciones();
 	}
-	
-	public float getValoracionMedia()
-	{
-		List<Valoracion> listaValoraciones=ejb.getValoracionesUsuario(this.usuario);
-		int nVal=listaValoraciones.size();
-		int tot=0;
+
+	public float getValoracionMedia() {
+		List<Valoracion> listaValoraciones = ejb
+				.getValoracionesUsuario(this.usuario);
+		int nVal = listaValoraciones.size();
+		int tot = 0;
 		this.usuario.setValoracionMedia(0);
-		if(nVal!=0)
-		{
-			for(int i=0;i<nVal;i++)
-			{
-				tot+=listaValoraciones.get(i).getPuntuacion();
+		if (nVal != 0) {
+			for (int i = 0; i < nVal; i++) {
+				tot += listaValoraciones.get(i).getPuntuacion();
 			}
-			this.usuario.setValoracionMedia(tot/nVal);
+			this.usuario.setValoracionMedia(tot / nVal);
 		}
 		return this.usuario.getValoracionMedia();
 	}
-	
-	public String estrella(int n)
-	{
+
+	public String estrella(int n) {
 		String foto;
 		this.usuario.setValoracionMedia(this.getValoracionMedia());
-		if(this.usuario.getValoracionMedia()<n)
-		{
-			foto="fotos/starempty.png";
-		}
-		else
-			foto="fotos/star.png";
+		if (this.usuario.getValoracionMedia() < n) {
+			foto = "fotos/starempty.png";
+		} else
+			foto = "fotos/star.png";
 		return foto;
 	}
-	
-	public int getNValEspecifica(int n)
-	{
-		List<Valoracion> listaValoraciones=ejb.getValoracionesUsuario(this.usuario);
-		int nVal=listaValoraciones.size();
-		int tot=0;
-		for(int i=0;i<nVal;i++)
-		{
-			if(listaValoraciones.get(i).getPuntuacion()==n)
+
+	public int getNValEspecifica(int n) {
+		List<Valoracion> listaValoraciones = ejb
+				.getValoracionesUsuario(this.usuario);
+		int nVal = listaValoraciones.size();
+		int tot = 0;
+		for (int i = 0; i < nVal; i++) {
+			if (listaValoraciones.get(i).getPuntuacion() == n)
 				tot++;
 		}
 		return tot;
 	}
-	
+
 }

@@ -1,90 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:on="http://omnifaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:on="http://omnifaces.org/ui">
 
-	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
-	
-	
-	
-	<a href="#{usuarioBean.editPerfil()}">
-		<img src="fotos/settings.png" alt="idSettings"
+
+
+
+		<a href="#{usuarioBean.editPerfil()}"> <img
+			src="fotos/settings.png" alt="idSettings"
 			style="width: 40px; height: 40px;" align="right" /></a>
-	<h:form>
-	<div class="arribadcha">
-		<h:commandButton
-		action="#{usuarioBean.cerrarSesion()}" actionListener="login.xhtml"
-		image="fotos/logout.png" style="width: 40px; height: 40px;" />
-	</div>
-	</h:form>
-	
-	
-	<div class="perfil" >
-		<div class="fotoperfil" >
-			<on:graphicImage value="#{imageBean.getProfileImage(usuarioBean.usuario.idUser)}" height="230" width="230" style="border-color: white; border-radius: 50%;">
-			</on:graphicImage>
-		</div>
-		<div>
+		<h:form>
+			<div class="arribadcha">
+				<h:commandButton action="#{usuarioBean.cerrarSesion()}"
+					actionListener="login.xhtml" image="fotos/logout.png"
+					style="width: 40px; height: 40px;" />
+			</div>
+		</h:form>
+
+
+		<div class="perfil">
+			<div class="fotoperfil">
+				<on:graphicImage
+					value="#{imageBean.getProfileImage(usuarioBean.usuario.idUser)}"
+					height="230" width="230"
+					style="border-color: white; border-radius: 50%;">
+				</on:graphicImage>
+			</div>
 			<div>
-				<h2>#{usuarioBean.usuario.nombreCompleto}</h2>
-				<h3>#{usuarioBean.usuario.userName}</h3>
-				<h5>#{usuarioBean.usuario.descripcion}</h5>
+				<div>
+					<h2>#{usuarioBean.usuario.nombreCompleto}</h2>
+					<h3>#{usuarioBean.usuario.userName}</h3>
+					<h5>#{usuarioBean.usuario.descripcion}</h5>
+				</div>
+				<div class="tablaperfil">
+					<div class="cuadroperfil">
+						<br /> #{usuarioBean.NPosts}
+					</div>
+					<div class="cuadroperfil">
+						<br /> #{usuarioBean.NSeguidores}
+					</div>
+					<div class="cuadroperfil">
+						<br /> #{usuarioBean.NSeguidos}
+					</div>
+				</div>
 			</div>
-			<div class="tablaperfil">	
-				<div class="cuadroperfil">
-				<br/>
-					#{usuarioBean.NPosts}
+			<div class="valoracionesperfil">
+				<br />
+				<div class="estrellasvaloraciones">
+					<img src="#{usuarioBean.estrella(1)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioBean.estrella(2)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioBean.estrella(3)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioBean.estrella(4)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioBean.estrella(5)}"
+						style="width: 20px; height: 20px;" />
+					<div class="nval">#{usuarioBean.NValoraciones}</div>
 				</div>
-				<div class="cuadroperfil">
-				<br/>
-					#{usuarioBean.NSeguidores}
-				</div>
-				<div class="cuadroperfil">
-				<br/>
-					#{usuarioBean.NSeguidos}
-				</div>
+				<br /> 5 estrellas: #{usuarioBean.getNValEspecifica(5)} <br /> 4
+				estrellas: #{usuarioBean.getNValEspecifica(4)} <br /> 3 estrellas:
+				#{usuarioBean.getNValEspecifica(3)} <br /> 2 estrellas:
+				#{usuarioBean.getNValEspecifica(2)} <br /> 1 estrellas:
+				#{usuarioBean.getNValEspecifica(1)} <br />
 			</div>
 		</div>
-		<div class="valoracionesperfil" >
-		<br/>
-		<div class="estrellasvaloraciones">
-			<img src="#{usuarioBean.estrella(1)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioBean.estrella(2)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioBean.estrella(3)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioBean.estrella(4)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioBean.estrella(5)}" style="width: 20px; height: 20px;"/> 
-			<div class="nval">#{usuarioBean.NValoraciones}</div></div>
-			<br/>
-			5 estrellas: #{usuarioBean.getNValEspecifica(5)} <br/>
-			4 estrellas: #{usuarioBean.getNValEspecifica(4)} <br/>
-			3 estrellas: #{usuarioBean.getNValEspecifica(3)} <br/>
-			2 estrellas: #{usuarioBean.getNValEspecifica(2)} <br/>
-			1 estrellas: #{usuarioBean.getNValEspecifica(1)} <br/>
-		</div>
-	</div>
-	
-	
-	<br /><br/>
-	<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesUsuario(usuarioBean.usuario)}">
+
+
+		<br />
+		<br />
+		<ui:repeat var="publicacion"
+			value="#{listadoBean.getListaPublicacionesUsuario(usuarioBean.usuario)}">
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
 						<h:form>
-							<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
-							 value="#{publicacion.usuario.nombreCompleto}" styleClass="h2"/>
+							<h:commandLink
+								action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+								value="#{publicacion.usuario.nombreCompleto}" styleClass="h2" />
 						</h:form>
 					</h2>
 
 					<div>
 						<div>
-							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
+							<on:graphicImage
+								value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}"
+								width="100%">
 							</on:graphicImage>
-							
+
 						</div>
-						
+
 						<div>
 
 							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
@@ -95,8 +105,8 @@
 								<h:form>
 									<h:commandButton
 										action="#{likeBean.darLike(publicacion.idPublicacion)}"
-										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}" style="width: 20px; height: 18px;"
-										align="left" />
+										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}"
+										style="width: 20px; height: 18px;" align="left" />
 								</h:form>
 							</div>
 
@@ -113,8 +123,9 @@
 				<div class="partedcha">
 					<div class="linkverpublicacion">
 						<h:form>
-							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
-							 value="Ver Publicación" />
+							<h:commandLink
+								action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
+								value="Ver Publicación" />
 						</h:form>
 					</div>
 					<br /> <br /> <br />
@@ -125,7 +136,7 @@
 			<br />
 			<br />
 		</ui:repeat>
-	
+
 	</ui:define>
-	</ui:composition>
+</ui:composition>
 </html>

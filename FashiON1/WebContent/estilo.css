@@ -1,32 +1,32 @@
 @CHARSET "UTF-8";
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-image {
-    image-align: center;
+<
+link rel ="stylesheet" href ="https: //www.w3schools.com /w3css/4/w3.css
+	"> <link rel ="stylesheet" href ="https: //www.w3schools.com
+	/lib/w3-theme-blue-grey.css "> <link rel ='stylesheet' href ='https:
+	//fonts.googleapis.com /css?family=Open+Sans '> <link rel ="stylesheet" href
+	="https: //cdnjs.cloudflare.com /ajax/libs/font-awesome/4.7.0
+	/css/font-awesome.min.css ">image {
+	image-align: center;
 }
 
 h1 {
-    text-align: center;
-    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-    color: #011F57;
-    font-weight: bold;
-    font-variant: small-caps;
+	text-align: center;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	color: #011F57;
+	font-weight: bold;
+	font-variant: small-caps;
 }
 
 h2 {
-    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-    color: #011F57;
-    font-weight: bold;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	color: #011F57;
+	font-weight: bold;
 }
 
 h3 {
-    font-weight: bold;
+	font-weight: bold;
 }
-
 
 /* table {
     width: 100%;
@@ -60,34 +60,32 @@ tr:nth-child(even) {background-color: #f2f2f2} */
 	overflow: visible;
 	visibility: visible;
 } */
-
 input[type=text], select {
-    padding: 4px 15px;
-    margin: 8px 0;
+	padding: 4px 15px;
+	margin: 8px 0;
 }
 
 input[type=secret] {
 	padding: 4px 15px;
-    margin: 8px 0;
+	margin: 8px 0;
 }
 
 input[type=submit] {
-    color: white;
-    padding: 2px 5px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+	color: white;
+	padding: 2px 5px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
 }
 
 input[type=submit]:hover {
-    background-color: #8D0002;
-    
+	background-color: #8D0002;
 }
 
 select {
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
+	border: none;
+	border-radius: 4px;
+	background-color: #f1f1f1;
 }
 
 .linkverpublicacion {
@@ -104,37 +102,36 @@ select {
 	float: right;
 }
 
-
 .publicacion1 {
-    width:800px;
-    display: flex;
-    border: 1px solid #ddd;
-   	border-collapse: collapse;
+	width: 800px;
+	display: flex;
+	border: 1px solid #ddd;
+	border-collapse: collapse;
 	border-color: #BFBFBF;
 	position: relative;
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
 .parteizq {
-	width:50%;
-    height: 100%;
-    padding: 10px;
+	width: 50%;
+	height: 100%;
+	padding: 10px;
 	position: relative;
 }
 
 .partedcha {
-	width:50%;
-    height: 100%;
-    padding: 10px;
+	width: 50%;
+	height: 100%;
+	padding: 10px;
 	position: relative;
 }
 
-.nvis{
+.nvis {
 	float: right;
 	color: #011F57;
 }
 
-.nlikes{
+.nlikes {
 	float: left;
 	color: #011F57;
 }
@@ -144,12 +141,12 @@ select {
 }
 
 .comentario {
-	width:100%;
-    border: 0px;
-    padding: 15px;
+	width: 100%;
+	border: 0px;
+	padding: 15px;
 }
 
-.arribadcha{
+.arribadcha {
 	float: right;
 }
 
@@ -158,23 +155,23 @@ select {
 }
 
 .perfil {
-	width:850px;
-    display: flex;
-    border: 0px solid #ddd;
+	width: 850px;
+	display: flex;
+	border: 0px solid #ddd;
 	position: relative;
 }
 
 .tablaperfil {
-    display: flex;
+	display: flex;
 }
 
 .cuadroperfil {
-	width:140px;
-    height: 60px;
-    border: 1px solid #011F57;	
-	color:  #011F57;
+	width: 140px;
+	height: 60px;
+	border: 1px solid #011F57;
+	color: #011F57;
 	text-align: center;
-	background-color: #e5e5e5;	
+	background-color: #e5e5e5;
 }
 
 .fotoperfil {
@@ -183,7 +180,7 @@ select {
 
 .valoracionesperfil {
 	padding: 20px;
-    color: #011F57;
+	color: #011F57;
 }
 
 .nval {
@@ -195,19 +192,19 @@ select {
 }
 
 .notificacion {
-	width:100%;
-    height: 70px;
-    display: flex;
-    border: 1px solid #ddd;
-   	border-collapse: collapse;
+	width: 100%;
+	height: 70px;
+	display: flex;
+	border: 1px solid #ddd;
+	border-collapse: collapse;
 	border-color: #BFBFBF;
 	position: center;
 }
 
 .fotonotificacion {
-	width:50px;
-    height: 100%;
-    padding: 10px;
+	width: 50px;
+	height: 100%;
+	padding: 10px;
 }
 
 .textonotificacion {
@@ -225,23 +222,23 @@ select {
 }
 
 .botonvalorar {
-	cursor:url(fotos/star.png);
+	cursor: url(fotos/star.png);
 }
 
 .usuariosBusqueda {
-	width:100%;
-    height: 120px;
-    display: flex;
-    border: 1px solid #ddd;
-   	border-collapse: collapse;
+	width: 100%;
+	height: 120px;
+	display: flex;
+	border: 1px solid #ddd;
+	border-collapse: collapse;
 	border-color: #BFBFBF;
 	position: center;
 }
 
 .fotoUsuarioBusqueda {
-	width:120px;
-    height: 100%;
-    padding: 10px;
+	width: 120px;
+	height: 100%;
+	padding: 10px;
 }
 
 .textoUsuarioBusqueda {
@@ -249,24 +246,22 @@ select {
 }
 
 .cuadrobusqueda {
-	width:50%;
-    height: 60px;
-    border: 1px solid #011F57;	
-	color:  #011F57;
+	width: 50%;
+	height: 60px;
+	border: 1px solid #011F57;
+	color: #011F57;
 	text-align: center;
-	background-color: #e5e5e5;	
+	background-color: #e5e5e5;
 	text-decoration: none;
 }
 
-.textoCuadroBusqueda{
+.textoCuadroBusqueda {
 	text-decoration: none;
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	color: #011F57;
-    font-weight: bold;
+	font-weight: bold;
 }
 
-
-html,body,h1,h2,h3,h4,h5 {font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;}
-
-
-
+html, body, h1, h2, h3, h4, h5 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}

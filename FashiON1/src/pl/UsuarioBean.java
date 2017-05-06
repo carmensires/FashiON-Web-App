@@ -15,25 +15,23 @@ import dl.Usuario;
 import dl.Valoracion;
 import bl.Ejb;
 
-
 @ManagedBean
 @SessionScoped
 public class UsuarioBean {
-	
+
 	@EJB
-	Ejb ejb=new Ejb();
-	
+	Ejb ejb = new Ejb();
+
 	private Usuario usuario = new Usuario();
 	private Usuario editado = new Usuario();
-	private int passwordOk=3;
-	private int libre=2;
+	private int passwordOk = 3;
+	private int libre = 2;
 	private boolean added;
 	private Part image;
 	private boolean hayFoto;
 	private boolean edited;
 	private String pass2;
 	private boolean passCoinciden;
-	
 
 	public boolean isPassCoinciden() {
 		return passCoinciden;
@@ -82,41 +80,37 @@ public class UsuarioBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	public String comprobarUsuario()
-	{
-		String url="";
-		passwordOk=ejb.comprobarUsuario(usuario.getUserName(), usuario.getPassword());
-		if (passwordOk==0)
-		{
-			usuario=ejb.getUsuario();
-			url="listaPublicaciones.xhtml";
-		}else
-			url="login.xhtml";
-			
+
+	public String comprobarUsuario() {
+		String url = "";
+		passwordOk = ejb.comprobarUsuario(usuario.getUserName(),
+				usuario.getPassword());
+		if (passwordOk == 0) {
+			usuario = ejb.getUsuario();
+			url = "listaPublicaciones.xhtml";
+		} else
+			url = "login.xhtml";
+
 		return url;
 	}
-	
-	public String getOkText()
-	{
+
+	public String getOkText() {
 		String okText;
-		if(passwordOk==0)
-			okText="Contraseña correcta";
-		else if(passwordOk==1)
-			okText="No existe el usuario introducido";
-		else if(passwordOk==2)
-			okText="Contraseña incorrecta";
+		if (passwordOk == 0)
+			okText = "Contraseña correcta";
+		else if (passwordOk == 1)
+			okText = "No existe el usuario introducido";
+		else if (passwordOk == 2)
+			okText = "Contraseña incorrecta";
 		else
-			okText="ERROR.";
+			okText = "ERROR.";
 		return okText;
 	}
-	
-	public String addUsuario()
-	{
-		added=false;
-		if(this.usuario.getPassword().equals(this.pass2))
-		{
-			this.passCoinciden=true;
+
+	public String addUsuario() {
+		added = false;
+		if (this.usuario.getPassword().equals(this.pass2)) {
+			this.passCoinciden = true;
 			if (hayFoto) {
 				byte[] buffer = new byte[4096000];
 				try {
@@ -128,7 +122,7 @@ public class UsuarioBean {
 							// TODO Auto-generated method stub
 						}
 					};
-					
+
 					int lenght;
 					while ((lenght = in.read(buffer)) > 0) {
 						out.write(buffer, 0, lenght);
@@ -141,76 +135,68 @@ public class UsuarioBean {
 					e.printStackTrace();
 				}
 			}
-			libre=ejb.addUsuario(usuario);
-			added=true;
-		}
-		else
-			passCoinciden=false;
-		
+			libre = ejb.addUsuario(usuario);
+			added = true;
+		} else
+			passCoinciden = false;
+
 		return getRegistradoText();
 	}
-	
-	public String getLibreText()
-	{
+
+	public String getLibreText() {
 		String libreText;
-		if(libre==0)
-			libreText="Usuario se ha añadido correctamente.";
-		else if(libre==1)
-			libreText="Nombre de usuario ya está cogido.";
-		else 
-			libreText="Ya existe un usuario con ese email.";
+		if (libre == 0)
+			libreText = "Usuario se ha añadido correctamente.";
+		else if (libre == 1)
+			libreText = "Nombre de usuario ya está cogido.";
+		else
+			libreText = "Ya existe un usuario con ese email.";
 		return libreText;
 	}
-	
-	public String getRegistradoText()
-	{
+
+	public String getRegistradoText() {
 		String registradoText;
-		if(added && libre==0)
-			registradoText="listaPublicaciones.xhtml";
-		else 
-			registradoText="";
+		if (added && libre == 0)
+			registradoText = "listaPublicaciones.xhtml";
+		else
+			registradoText = "";
 		return registradoText;
 	}
-	
-	public String getNSeguidores()
-	{
+
+	public String getNSeguidores() {
 		String nSeguidores;
-		int tam=this.getSeguidores().size();
-		nSeguidores=tam + " seguidores";
+		int tam = this.getSeguidores().size();
+		nSeguidores = tam + " seguidores";
 		return nSeguidores;
 	}
-	
-	public String getNSeguidos()
-	{
+
+	public String getNSeguidos() {
 		String nSeguidos;
-		int tam=this.getSeguidos().size();
-		nSeguidos=tam+" seguidos";
+		int tam = this.getSeguidos().size();
+		nSeguidos = tam + " seguidos";
 		return nSeguidos;
 	}
-	
-	public String getNPosts()
-	{
+
+	public String getNPosts() {
 		String nPosts;
-		int tam=this.getPublicacionesUsuario().size();
-		nPosts=tam+" posts";
+		int tam = this.getPublicacionesUsuario().size();
+		nPosts = tam + " posts";
 		return nPosts;
 	}
-	
-	public List<Usuario> getSeguidores()
-	{
-		List<Usuario> seguidores=ejb.getSeguidores(usuario.getIdUser());
+
+	public List<Usuario> getSeguidores() {
+		List<Usuario> seguidores = ejb.getSeguidores(usuario.getIdUser());
 		return seguidores;
 	}
-	
-	public List<Usuario> getSeguidos()
-	{
-		List<Usuario> seguidos=ejb.getSeguidos(usuario.getIdUser());
+
+	public List<Usuario> getSeguidos() {
+		List<Usuario> seguidos = ejb.getSeguidos(usuario.getIdUser());
 		return seguidos;
 	}
-	
-	public List<Publicacion> getPublicacionesUsuario()
-	{
-		List<Publicacion> publicacionesUsuario=ejb.getPublicacionesUsuario(usuario.getIdUser());
+
+	public List<Publicacion> getPublicacionesUsuario() {
+		List<Publicacion> publicacionesUsuario = ejb
+				.getPublicacionesUsuario(usuario.getIdUser());
 		return publicacionesUsuario;
 	}
 
@@ -221,12 +207,13 @@ public class UsuarioBean {
 	public void setEditado(Usuario editado) {
 		this.editado = editado;
 	}
-	
-	public String editPerfil(){
-		editado=usuario;
+
+	public String editPerfil() {
+		editado = usuario;
 		return "editarPerfil.xhtml";
 	}
-	public String  editarPerfil(){
+
+	public String editarPerfil() {
 		if (hayFoto) {
 			byte[] buffer = new byte[4096000];
 			try {
@@ -238,7 +225,7 @@ public class UsuarioBean {
 						// TODO Auto-generated method stub
 					}
 				};
-				
+
 				int lenght;
 				while ((lenght = in.read(buffer)) > 0) {
 					out.write(buffer, 0, lenght);
@@ -251,8 +238,8 @@ public class UsuarioBean {
 				e.printStackTrace();
 			}
 		}
-		edited=false;
-		edited=ejb.editarPerfil(editado);
+		edited = false;
+		edited = ejb.editarPerfil(editado);
 		return "perfil.xhtml";
 	}
 
@@ -279,70 +266,60 @@ public class UsuarioBean {
 	public void setEdited(boolean edited) {
 		this.edited = edited;
 	}
-	
-	public String cerrarSesion()
-	{
-		this.usuario=new Usuario();
-		this.editado=new Usuario();
+
+	public String cerrarSesion() {
+		this.usuario = new Usuario();
+		this.editado = new Usuario();
 		ejb.setUsuario(new Usuario());
-		this.added=false;
-		this.edited=false;
-		this.hayFoto=false;
-		this.libre=2;
-		this.passwordOk=3;
+		this.added = false;
+		this.edited = false;
+		this.hayFoto = false;
+		this.libre = 2;
+		this.passwordOk = 3;
 		return "login.xhtml";
 	}
-	
-	public int getNValoraciones()
-	{
-		this.usuario.setNValoraciones(ejb.getNValoracionesUsuario(this.usuario));
+
+	public int getNValoraciones() {
+		this.usuario
+				.setNValoraciones(ejb.getNValoracionesUsuario(this.usuario));
 		return this.usuario.getNValoraciones();
 	}
-	
-	public float getValoracionMedia()
-	{
-		List<Valoracion> listaValoraciones=ejb.getValoracionesUsuario(this.usuario);
-		int nVal=listaValoraciones.size();
-		int tot=0;
+
+	public float getValoracionMedia() {
+		List<Valoracion> listaValoraciones = ejb
+				.getValoracionesUsuario(this.usuario);
+		int nVal = listaValoraciones.size();
+		int tot = 0;
 		this.usuario.setValoracionMedia(0);
-		if(nVal!=0)
-		{
-			for(int i=0;i<nVal;i++)
-			{
-				tot+=listaValoraciones.get(i).getPuntuacion();
+		if (nVal != 0) {
+			for (int i = 0; i < nVal; i++) {
+				tot += listaValoraciones.get(i).getPuntuacion();
 			}
-			this.usuario.setValoracionMedia(tot/nVal);
+			this.usuario.setValoracionMedia(tot / nVal);
 		}
 		return this.usuario.getValoracionMedia();
 	}
-	
-	public String estrella(int n)
-	{
+
+	public String estrella(int n) {
 		String foto;
 		this.usuario.setValoracionMedia(this.getValoracionMedia());
-		if(this.usuario.getValoracionMedia()<n)
-		{
-			foto="fotos/starempty.png";
-		}
-		else
-			foto="fotos/star.png";
+		if (this.usuario.getValoracionMedia() < n) {
+			foto = "fotos/starempty.png";
+		} else
+			foto = "fotos/star.png";
 		return foto;
 	}
-	
-	public int getNValEspecifica(int n)
-	{
-		List<Valoracion> listaValoraciones=ejb.getValoracionesUsuario(this.usuario);
-		int nVal=listaValoraciones.size();
-		int tot=0;
-		for(int i=0;i<nVal;i++)
-		{
-			if(listaValoraciones.get(i).getPuntuacion()==n)
+
+	public int getNValEspecifica(int n) {
+		List<Valoracion> listaValoraciones = ejb
+				.getValoracionesUsuario(this.usuario);
+		int nVal = listaValoraciones.size();
+		int tot = 0;
+		for (int i = 0; i < nVal; i++) {
+			if (listaValoraciones.get(i).getPuntuacion() == n)
 				tot++;
 		}
 		return tot;
 	}
-	
-	
-	
-	
+
 }

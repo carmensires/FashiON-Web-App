@@ -3,68 +3,80 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:on="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:on="http://omnifaces.org/ui">
 
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
 
 
 		<h1>Notificaciones</h1>
-		
-		<ui:repeat var="notificacion" value="#{listadoBean.listaNotificaciones}" >
-		<div class="notificacion">
-			<div class="fotonotificacion">
-				<on:graphicImage value="#{imageBean.getProfileImage(notificacion.notificacion.usuario2.idUser)}" 
-					height="50" width="50" style="border-color: white; border-radius: 50%;">
-				</on:graphicImage>
-			</div>
-			<div class="textonotificacion">
-				<div class="textoespecificonotificacion">#{notificacion.fraseAnterior}</div>
-				<div>
-				<h3>
-					<h:form>
-						<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(notificacion.notificacion.usuario2)}"
-						 value="#{notificacion.notificacion.usuario2.nombreCompleto}" styleClass="h3"/>
-					</h:form>
-				</h3>
-				</div>
-				<div class="textoespecificonotificacion">#{notificacion.frasePosterior}</div>
-				
-			</div>
-			<div class="linknotificacion">
-					<h:form>
-						<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
-						 value="Ver Publicación" rendered="#{notificacion.pub}" 
-						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
-					</h:form>
-					<h:form>
-						<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.comentarioBean.publicacion)}"
-						 value="Ver Comentario" rendered="#{notificacion.com}" 
-						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
-					</h:form>
-					<h:form>
-						<h:commandLink action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
-						 value="#{valoracionBean.getStringValoracion(notificacion.notificacion.comentarioBean.idComentario,notificacion.notificacion.usuario2.idUser)}" 
-						 rendered="#{notificacion.val}" 
-						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
-					</h:form>
-					<h:form>
-						<h:commandButton  action="#{amigoBean.addAmigo(notificacion.notificacion.idNotificacion)}"
-						 value="Aceptar peticion" 
-						 rendered="#{notificacion.pet}"  type="submit"
-						 style="float:right; text-align: right; color: #011F57; font-size: 13px;" align="right"/>
-					</h:form>
-			</div>
-			
-		</div>
-		</ui:repeat>
-		
 
-	<br/>
-	<br/>
-	
-	
+		<ui:repeat var="notificacion"
+			value="#{listadoBean.listaNotificaciones}">
+			<div class="notificacion">
+				<div class="fotonotificacion">
+					<on:graphicImage
+						value="#{imageBean.getProfileImage(notificacion.notificacion.usuario2.idUser)}"
+						height="50" width="50"
+						style="border-color: white; border-radius: 50%;">
+					</on:graphicImage>
+				</div>
+				<div class="textonotificacion">
+					<div class="textoespecificonotificacion">#{notificacion.fraseAnterior}</div>
+					<div>
+						<h3>
+							<h:form>
+								<h:commandLink
+									action="#{usuarioVisitadoBean.entrarPerfil(notificacion.notificacion.usuario2)}"
+									value="#{notificacion.notificacion.usuario2.nombreCompleto}"
+									styleClass="h3" />
+							</h:form>
+						</h3>
+					</div>
+					<div class="textoespecificonotificacion">#{notificacion.frasePosterior}</div>
+
+				</div>
+				<div class="linknotificacion">
+					<h:form>
+						<h:commandLink
+							action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
+							value="Ver Publicación" rendered="#{notificacion.pub}"
+							style="float:right; text-align: right; color: #011F57; font-size: 13px;"
+							align="right" />
+					</h:form>
+					<h:form>
+						<h:commandLink
+							action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.comentarioBean.publicacion)}"
+							value="Ver Comentario" rendered="#{notificacion.com}"
+							style="float:right; text-align: right; color: #011F57; font-size: 13px;"
+							align="right" />
+					</h:form>
+					<h:form>
+						<h:commandLink
+							action="#{publicacionBean.entrarPublicacion(notificacion.notificacion.publicacionBean.idPublicacion)}"
+							value="#{valoracionBean.getStringValoracion(notificacion.notificacion.comentarioBean.idComentario,notificacion.notificacion.usuario2.idUser)}"
+							rendered="#{notificacion.val}"
+							style="float:right; text-align: right; color: #011F57; font-size: 13px;"
+							align="right" />
+					</h:form>
+					<h:form>
+						<h:commandButton
+							action="#{amigoBean.addAmigo(notificacion.notificacion.idNotificacion)}"
+							value="Aceptar peticion" rendered="#{notificacion.pet}"
+							type="submit"
+							style="float:right; text-align: right; color: #011F57; font-size: 13px;"
+							align="right" />
+					</h:form>
+				</div>
+
+			</div>
+		</ui:repeat>
+
+
+		<br />
+		<br />
+
+
 
 
 	</ui:define>

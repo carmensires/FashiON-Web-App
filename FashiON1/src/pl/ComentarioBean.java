@@ -12,8 +12,8 @@ import dl.Comentario;
 public class ComentarioBean {
 
 	@EJB
-	Ejb ejb=new Ejb();
-	
+	Ejb ejb = new Ejb();
+
 	private Comentario comentario = new Comentario();
 
 	public Comentario getComentario() {
@@ -23,16 +23,16 @@ public class ComentarioBean {
 	public void setComentario(Comentario comentario) {
 		this.comentario = comentario;
 	}
-	
-	public void addComentario(int idPublicacion){
-	
-		ejb.addComentario(comentario,idPublicacion);
+
+	public void addComentario(int idPublicacion) {
+
+		ejb.addComentario(comentario, idPublicacion);
 		ejb.addNotificacionComentario();
-		comentario=new Comentario();
+		comentario = new Comentario();
 
 	}
-	
-	public void removeComentario(int idComentario){
+
+	public void removeComentario(int idComentario) {
 		ejb.removeComentario(idComentario);
 	}
 }

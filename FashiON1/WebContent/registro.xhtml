@@ -16,42 +16,47 @@
 	<h:inputText id="idUserName" value="#{usuarioBean.usuario.userName}"
 				required="true"
 				requiredMessage="Es obligatorio introducir el nombre de usuario" />
-	<h:outputText value="#{usuarioBean.libreText}"
-		rendered="#{usuarioBean.added and usuarioBean.libre==1}" />
-	<br />
+			<h:outputText value="#{usuarioBean.libreText}"
+				rendered="#{usuarioBean.added and usuarioBean.libre==1}" />
+			<br />
 			<h:message for="idUserName" />
 			<br />
 	Nombre completo:
-	<h:inputText id="idNombreCompleto" value="#{usuarioBean.usuario.nombreCompleto}" required="true"
+	<h:inputText id="idNombreCompleto"
+				value="#{usuarioBean.usuario.nombreCompleto}" required="true"
 				requiredMessage="Es obligatorio introducir el nombre completo" />
 			<br />
 			<h:message for="idNombreCompleto" />
 			<br />
 	Breve biografía:
-	<h:inputText id="idDescripcion" value="#{usuarioBean.usuario.descripcion}" required="true"
+	<h:inputText id="idDescripcion"
+				value="#{usuarioBean.usuario.descripcion}" required="true"
 				requiredMessage="Es obligatorio introducir una descripcion" />
 			<br />
 			<h:message for="idDescripcion" />
 			<br />
 	email:
-	<h:inputText id="idEmail" value="#{usuarioBean.usuario.email}" required="true"
-				requiredMessage="Es obligatorio introducir el email" />
+	<h:inputText id="idEmail" value="#{usuarioBean.usuario.email}"
+				required="true" requiredMessage="Es obligatorio introducir el email" />
 			<br />
 			<h:message for="idEmail" />
 			<br />
 	Contraseña:
-	<h:inputSecret id="idPassword" value="#{usuarioBean.usuario.password}" required="true"
+	<h:inputSecret id="idPassword" value="#{usuarioBean.usuario.password}"
+				required="true"
 				requiredMessage="Es obligatorio introducir contraseña" />
 			<br />
 			<h:message for="idPassword" />
 			<br />
 	Repetir contraseña:
-	<h:inputSecret id="idPassword2" value="#{usuarioBean.pass2}" required="true"
+	<h:inputSecret id="idPassword2" value="#{usuarioBean.pass2}"
+				required="true"
 				requiredMessage="Es obligatorio repetir la contraseña contraseña" />
 			<br />
 			<h:message for="idPassword2" />
-			<br/>
-				<h:outputText value="Las contraseñas no coinciden" rendered="#{!usuarioBean.passCoinciden}" style="color: red;"/>
+			<br />
+			<h:outputText value="Las contraseñas no coinciden"
+				rendered="#{!usuarioBean.passCoinciden}" style="color: red;" />
 			<br />
 	Tipo de perfil:
 	<h:selectOneMenu value="#{usuarioBean.usuario.tipoPerfil}">
@@ -64,11 +69,13 @@
 			<h:selectOneMenu value="#{usuarioBean.hayFoto}">
 				<f:selectItem itemValue="false" itemLabel="No" />
 				<f:selectItem itemValue="true" itemLabel="Si" />
-			</h:selectOneMenu><br/>
+			</h:selectOneMenu>
+			<br />
 			
-	Subir foto de perfil:<br/>
-	<h:inputFile value="#{usuarioBean.image}"></h:inputFile><br/>
-	
+	Subir foto de perfil:<br />
+			<h:inputFile value="#{usuarioBean.image}"></h:inputFile>
+			<br />
+
 
 			<h:commandButton action="#{usuarioBean.addUsuario()}"
 				value="Registrarse" type="submit" />

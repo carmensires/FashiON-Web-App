@@ -3,12 +3,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:on="http://omnifaces.org/ui">
+	xmlns:on="http://omnifaces.org/ui" xmlns:p="http://primefaces.org/ui">
 
 
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
-
 
 		<h1>Editar Publicación</h1>
 		<br />
@@ -22,20 +21,12 @@
 		<h:inputText value="#{publicacionBean.publicacion.descripcion}" />
 			<br />
 		
-		Deseas adjuntar archivos multimedia?: <br />
-			<h:selectOneMenu value="#{publicacionBean.mm}">
-				<f:selectItem itemValue="false" itemLabel="No" />
-				<f:selectItem itemValue="true" itemLabel="Si" />
-			</h:selectOneMenu>
-			<br />
-			<h:inputFile value="#{publicacionBean.image}"></h:inputFile>
-			<br />
-		
 		Añadir etiqueta: <br />
 		Marca:
 		<h:selectOneMenu value="#{publicacionBean.publicacion.etMarca}">
 				<f:selectItem itemValue="" itemLabel="" />
-				<f:selectItem itemValue="abercrombieAndFitch" itemLabel="Abercrombie and Fitch" />
+				<f:selectItem itemValue="abercrombieAndFitch"
+					itemLabel="Abercrombie and Fitch" />
 				<f:selectItem itemValue="adidas" itemLabel="Adidas" />
 				<f:selectItem itemValue="amichi" itemLabel="Amichi" />
 				<f:selectItem itemValue="armani" itemLabel="Armani" />
@@ -182,6 +173,8 @@
 			<h:commandButton action="#{publicacionBean.editPublicacion()}"
 				value="Editar" />
 			<br />
+
+
 		</h:form>
 
 	</ui:define>

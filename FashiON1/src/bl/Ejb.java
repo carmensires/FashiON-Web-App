@@ -20,8 +20,8 @@ public class Ejb {
 	EntityManager em;
 
 	private Usuario usuario = new Usuario();
-	private Busqueda busqueda=new Busqueda();
-	private String busquedaUsuario="";
+	private Busqueda busqueda = new Busqueda();
+	private String busquedaUsuario = "";
 
 	// USUARIO HACE LOG IN
 	public Usuario getUsuario() {
@@ -33,24 +33,21 @@ public class Ejb {
 	}
 
 	public int comprobarUsuario(String userName, String password) {
-		int ok = 2; //contraseña incorrecta
-		Usuario user=new Usuario();
+		int ok = 2; // contraseña incorrecta
+		Usuario user = new Usuario();
 		try {
 			user = (Usuario) em.createNamedQuery("Usuario.find")
 					.setParameter("userName", userName).getSingleResult();
 		} catch (NoResultException e) {
-			ok = 1; //no existe usuario
+			ok = 1; // no existe usuario
 		}
-		if (ok!=1)
-		{
-			if (password.equals(user.getPassword()))
-			{
-				ok = 0; //contraseña ok
-				this.usuario=user;
-			}
-			else
-				ok=2;
-		}	
+		if (ok != 1) {
+			if (password.equals(user.getPassword())) {
+				ok = 0; // contraseña ok
+				this.usuario = user;
+			} else
+				ok = 2;
+		}
 		return ok;
 	}
 
@@ -101,46 +98,46 @@ public class Ejb {
 		return added;
 
 	}
-	
 
 	// OBTENER LISTA DE PUBLICACIONES
 
 	@SuppressWarnings("unchecked")
 	public List<Publicacion> getListaPublicaciones() {
-		
+
 		List<Publicacion> listaPublicaciones = (List<Publicacion>) em
 				.createNamedQuery("Publicacion.findAll").getResultList();
 		return listaPublicaciones;
 	}
-	
-	//OBTENER LAS PUBLICACIONES DE LOS USUARIOS SEGUIDOS
+
+	// OBTENER LAS PUBLICACIONES DE LOS USUARIOS SEGUIDOS
 	@SuppressWarnings("unchecked")
 	public List<Publicacion> getListaPublicacionesSeguidos() {
 		List<Publicacion> listaPublicacionesTotal = (List<Publicacion>) em
 				.createNamedQuery("Publicacion.findAll").getResultList();
-		List<Publicacion> listaPublicaciones=new ArrayList<Publicacion>();
-		for(int i=0;i<listaPublicacionesTotal.size();i++)
-		{
-			Publicacion publicacion=listaPublicacionesTotal.get(i);
-			if(this.getSeguido(this.usuario.getIdUser(), publicacion.getUsuario().getIdUser()) || publicacion.getUsuario().getIdUser()==this.usuario.getIdUser())
+		List<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
+		for (int i = 0; i < listaPublicacionesTotal.size(); i++) {
+			Publicacion publicacion = listaPublicacionesTotal.get(i);
+			if (this.getSeguido(this.usuario.getIdUser(), publicacion
+					.getUsuario().getIdUser())
+					|| publicacion.getUsuario().getIdUser() == this.usuario
+							.getIdUser())
 				listaPublicaciones.add(publicacion);
 		}
 		return listaPublicaciones;
 	}
-	
+
 	@SuppressWarnings("unused")
-	public boolean getSeguido(int seguidor, int seguido)
-	{
-		boolean sigue=true;
-		try{
-			Amigo a=(Amigo) em.createNamedQuery("Amigo.findSeguidor").setParameter("usuarioSigue", seguidor).setParameter("usuarioSeguido", seguido).getSingleResult();
-		}catch(NoResultException e)
-		{
-			sigue=false;
+	public boolean getSeguido(int seguidor, int seguido) {
+		boolean sigue = true;
+		try {
+			Amigo a = (Amigo) em.createNamedQuery("Amigo.findSeguidor")
+					.setParameter("usuarioSigue", seguidor)
+					.setParameter("usuarioSeguido", seguido).getSingleResult();
+		} catch (NoResultException e) {
+			sigue = false;
 		}
 		return sigue;
 	}
-	
 
 	// OBTENER LISTA DE USUARIOS
 
@@ -248,34 +245,35 @@ public class Ejb {
 
 	public void addAmigo(int idUser) {
 		Amigo a = new Amigo();
-		Usuario usuarioSeguido=em.find(Usuario.class, idUser);
+		Usuario usuarioSeguido = em.find(Usuario.class, idUser);
 		a.setUsuario1(em.find(Usuario.class, usuario.getIdUser()));
 		a.setUsuario2(usuarioSeguido);
-		if(usuarioSeguido.getTipoPerfil()==0){
+		if (usuarioSeguido.getTipoPerfil() == 0) {
 			em.persist(a);
 			addNotificacionSeguir(idUser);
-		}
-		else{
-			Notificacion notificacion=new Notificacion();
+		} else {
+			Notificacion notificacion = new Notificacion();
 			notificacion.setAccion("peticion");
 			notificacion.setUsuario1(usuarioSeguido);
-			notificacion.setUsuario2(em.find(Usuario.class, usuario.getIdUser()));
+			notificacion
+					.setUsuario2(em.find(Usuario.class, usuario.getIdUser()));
 			em.persist(notificacion);
 		}
 	}
-	
-	public void addAmigoNotificacion(int idNotificacion){
-		
-		Notificacion not=em.find(Notificacion.class, idNotificacion);
+
+	public void addAmigoNotificacion(int idNotificacion) {
+
+		Notificacion not = em.find(Notificacion.class, idNotificacion);
 		Amigo a = new Amigo();
-		Usuario usuarioSeguido=em.find(Usuario.class, usuario.getIdUser());
+		Usuario usuarioSeguido = em.find(Usuario.class, usuario.getIdUser());
 		a.setUsuario1(em.find(Usuario.class, not.getUsuario2().getIdUser()));
 		a.setUsuario2(usuarioSeguido);
 		em.persist(a);
-		Notificacion notificacion=new Notificacion();
+		Notificacion notificacion = new Notificacion();
 		notificacion.setAccion("seguir");
 		notificacion.setUsuario1(usuarioSeguido);
-		notificacion.setUsuario2(em.find(Usuario.class, not.getUsuario2().getIdUser()));
+		notificacion.setUsuario2(em.find(Usuario.class, not.getUsuario2()
+				.getIdUser()));
 		em.persist(notificacion);
 		em.remove(not);
 	}
@@ -315,7 +313,7 @@ public class Ejb {
 		usuario.setNombreCompleto(user.getNombreCompleto());
 		usuario.setPassword(user.getPassword());
 		usuario.setTipoPerfil(user.getTipoPerfil());
-		byte[]aux=user.getFoto();
+		byte[] aux = user.getFoto();
 		usuario.setFoto(aux);
 		em.persist(usuario);
 		return true;
@@ -393,27 +391,28 @@ public class Ejb {
 
 	@SuppressWarnings("unchecked")
 	public List<Notificacion> getListaNotificaciones() {
-		List<Notificacion> listaNotificaciones=(List<Notificacion>) em
-		.createNamedQuery("Notificacion.findUsuario")
-		.setParameter("idUser", getUsuario().getIdUser())
-		.getResultList();
-		 for(Notificacion n:listaNotificaciones){
-			 Notificacion not=em.find(Notificacion.class, n.getIdNotificacion());
-			 not.setLeido(1);
-			 em.persist(not);
-		 }
-		return listaNotificaciones;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public int getNotificacionesNuevas(){
-		int notificacionesNuevas=0;
-		List<Notificacion> listaNotificaciones=(List<Notificacion>) em
+		List<Notificacion> listaNotificaciones = (List<Notificacion>) em
 				.createNamedQuery("Notificacion.findUsuario")
 				.setParameter("idUser", getUsuario().getIdUser())
 				.getResultList();
-		for(Notificacion n:listaNotificaciones){
-			if(n.getLeido()==0)
+		for (Notificacion n : listaNotificaciones) {
+			Notificacion not = em.find(Notificacion.class,
+					n.getIdNotificacion());
+			not.setLeido(1);
+			em.persist(not);
+		}
+		return listaNotificaciones;
+	}
+
+	@SuppressWarnings("unchecked")
+	public int getNotificacionesNuevas() {
+		int notificacionesNuevas = 0;
+		List<Notificacion> listaNotificaciones = (List<Notificacion>) em
+				.createNamedQuery("Notificacion.findUsuario")
+				.setParameter("idUser", getUsuario().getIdUser())
+				.getResultList();
+		for (Notificacion n : listaNotificaciones) {
+			if (n.getLeido() == 0)
 				notificacionesNuevas++;
 		}
 		return notificacionesNuevas;
@@ -431,7 +430,7 @@ public class Ejb {
 	public void addComentario(Comentario comentario, int idPublicacion) {
 
 		comentario.setPublicacion(idPublicacion);
-		//comentario.setUsuarioComenta(usuario.getNombreCompleto());
+		// comentario.setUsuarioComenta(usuario.getNombreCompleto());
 		comentario.setUsuarioComenta(usuario.getUserName());
 		em.persist(comentario);
 
@@ -454,7 +453,7 @@ public class Ejb {
 		List<Comentario> listaCom = (List<Comentario>) em.createNamedQuery(
 				"Comentario.findAll").getResultList();
 
-		int idComentario = listaCom.get(listaCom.size()-1).getIdComentario();
+		int idComentario = listaCom.get(listaCom.size() - 1).getIdComentario();
 
 		Notificacion notificacion = new Notificacion();
 
@@ -485,111 +484,113 @@ public class Ejb {
 		Publicacion publicacion = em.find(Publicacion.class, idPublicacion);
 		return publicacion.getMultimedia();
 	}
-	
-	
-	//ESTABLECER LOS DATOS DE LA BÚSQUEDA
-	public void setBusqueda(Busqueda busqueda)
-	{
-		this.busqueda=busqueda;
+
+	// ESTABLECER LOS DATOS DE LA BÚSQUEDA
+	public void setBusqueda(Busqueda busqueda) {
+		this.busqueda = busqueda;
 	}
-	
-	public Busqueda getBusqueda()
-	{
+
+	public Busqueda getBusqueda() {
 		return this.busqueda;
 	}
 
-	
-	//AUMENTAR NUMERO DE VISUALIZACIONES
-	public void incrementarVisualizacion(int idPublicacion)
-	{
-		Publicacion publicacion=em.find(Publicacion.class, idPublicacion);
-		int n=publicacion.getNVisualizaciones();
+	// AUMENTAR NUMERO DE VISUALIZACIONES
+	public void incrementarVisualizacion(int idPublicacion) {
+		Publicacion publicacion = em.find(Publicacion.class, idPublicacion);
+		int n = publicacion.getNVisualizaciones();
 		n++;
 		publicacion.setNVisualizaciones(n);
 		em.persist(publicacion);
 	}
-	
-	//INICIALIZAR PUBLICACION
-	public Publicacion inicializarPublicacion()
-	{
+
+	// INICIALIZAR PUBLICACION
+	public Publicacion inicializarPublicacion() {
 		return new Publicacion();
 	}
-	
-	//OBTENER USUARIO POR EL NOMBRE DE USUARIO
-	public Usuario getUserByName(String username)
-	{
-		Usuario user=(Usuario) em.createNamedQuery("Usuario.find").setParameter("userName", username).getSingleResult();
+
+	// OBTENER USUARIO POR EL NOMBRE DE USUARIO
+	public Usuario getUserByName(String username) {
+		Usuario user = (Usuario) em.createNamedQuery("Usuario.find")
+				.setParameter("userName", username).getSingleResult();
 		return user;
 	}
-	
-	//VALORAR
-	public void valorar(Valoracion valoracion)
-	{
-		Valoracion valoracionAntigua=new Valoracion();
+
+	// VALORAR
+	public void valorar(Valoracion valoracion) {
+		Valoracion valoracionAntigua = new Valoracion();
 		valoracion.setUsuario(this.usuario);
-		if(this.getValoracion(valoracion.getComentarioBean())!=0)
-		{
-			valoracionAntigua=(Valoracion) em.createNamedQuery("Valoracion.findUsuarioComentario").setParameter("idUser",valoracion.getUsuario().getIdUser()).setParameter("idComentario", valoracion.getComentarioBean().getIdComentario()).getSingleResult();
+		if (this.getValoracion(valoracion.getComentarioBean()) != 0) {
+			valoracionAntigua = (Valoracion) em
+					.createNamedQuery("Valoracion.findUsuarioComentario")
+					.setParameter("idUser", valoracion.getUsuario().getIdUser())
+					.setParameter("idComentario",
+							valoracion.getComentarioBean().getIdComentario())
+					.getSingleResult();
 			valoracionAntigua.setPuntuacion(valoracion.getPuntuacion());
-		}else
-		{
+		} else {
 			valoracionAntigua.setComentarioBean(valoracion.getComentarioBean());
 			valoracionAntigua.setPuntuacion(valoracion.getPuntuacion());
 			valoracionAntigua.setUsuario(this.usuario);
 		}
 		em.persist(valoracionAntigua);
 	}
-	
-	//COMPROBAR SI UN USUARIO HA VALORADO
-	public int getValoracion(Comentario comentario)
-	{
+
+	// COMPROBAR SI UN USUARIO HA VALORADO
+	public int getValoracion(Comentario comentario) {
 		int puntuacion;
 		Valoracion valoracion;
-		try{
-			valoracion=(Valoracion) em.createNamedQuery("Valoracion.findUsuarioComentario").setParameter("idUser", this.usuario.getIdUser()).setParameter("idComentario", comentario.getIdComentario()).getSingleResult();
-			puntuacion=valoracion.getPuntuacion();
-		}catch(NoResultException e)
-		{
-			puntuacion=0;
+		try {
+			valoracion = (Valoracion) em
+					.createNamedQuery("Valoracion.findUsuarioComentario")
+					.setParameter("idUser", this.usuario.getIdUser())
+					.setParameter("idComentario", comentario.getIdComentario())
+					.getSingleResult();
+			puntuacion = valoracion.getPuntuacion();
+		} catch (NoResultException e) {
+			puntuacion = 0;
 		}
 		return puntuacion;
 	}
-	
-	//AÑADIR NOTIFICACION VALORACION
-	public void addNotificacionValoracion(Valoracion valoracion)
-	{
-		Notificacion notificacion =new Notificacion();
+
+	// AÑADIR NOTIFICACION VALORACION
+	public void addNotificacionValoracion(Valoracion valoracion) {
+		Notificacion notificacion = new Notificacion();
 		notificacion.setAccion("valoracion");
 		notificacion.setComentarioBean(valoracion.getComentarioBean());
-		Publicacion publicacion=em.find(Publicacion.class, valoracion.getComentarioBean().getPublicacion());
+		Publicacion publicacion = em.find(Publicacion.class, valoracion
+				.getComentarioBean().getPublicacion());
 		notificacion.setPublicacionBean(publicacion);
-		Usuario user1=(Usuario) em.createNamedQuery("Usuario.find").setParameter("userName", valoracion.getComentarioBean().getUsuarioComenta()).getSingleResult();
+		Usuario user1 = (Usuario) em
+				.createNamedQuery("Usuario.find")
+				.setParameter("userName",
+						valoracion.getComentarioBean().getUsuarioComenta())
+				.getSingleResult();
 		notificacion.setUsuario1(user1);
 		notificacion.setUsuario2(this.usuario);
 		em.persist(notificacion);
 	}
-	
-	//OBTENER PUNTUACION
-	public int getPuntuacion(int idComentario, int idUser)
-	{
-		Valoracion valoracion=(Valoracion) em.createNamedQuery("Valoracion.findUsuarioComentario").setParameter("idUser", idUser).setParameter("idComentario", idComentario).getSingleResult();
+
+	// OBTENER PUNTUACION
+	public int getPuntuacion(int idComentario, int idUser) {
+		Valoracion valoracion = (Valoracion) em
+				.createNamedQuery("Valoracion.findUsuarioComentario")
+				.setParameter("idUser", idUser)
+				.setParameter("idComentario", idComentario).getSingleResult();
 		return valoracion.getPuntuacion();
 	}
-	
-	//OBTENER VALORACIONES DE UN USUARIO
+
+	// OBTENER VALORACIONES DE UN USUARIO
 	@SuppressWarnings("unchecked")
-	public List<Valoracion> getValoracionesUsuario(Usuario user)
-	{
-		List<Valoracion> lista=em.createNamedQuery("Valoracion.findUsuario").setParameter("user", user.getUserName()).getResultList();
+	public List<Valoracion> getValoracionesUsuario(Usuario user) {
+		List<Valoracion> lista = em.createNamedQuery("Valoracion.findUsuario")
+				.setParameter("user", user.getUserName()).getResultList();
 		return lista;
 	}
-	
-	public int getNValoracionesUsuario(Usuario user)
-	{
+
+	public int getNValoracionesUsuario(Usuario user) {
 		return this.getValoracionesUsuario(user).size();
 	}
-	
-	
+
 	public String getBusquedaUsuario() {
 		return busquedaUsuario;
 	}
@@ -598,29 +599,4 @@ public class Ejb {
 		this.busquedaUsuario = busquedaUsuario;
 	}
 
-	/*@SuppressWarnings("unchecked")
-	public List<Usuario> getListaUsuariosBusquedaByUserName()
-	{
-		List<Usuario> listaUserName=new ArrayList<Usuario>();
-		if(busquedaUsuario!=null)
-			listaUserName=em.createNamedQuery("Usuario.findUserNameBusqueda").setParameter("busqueda", this.busquedaUsuario).getResultList();
-		else
-			listaUserName=null;
-		return listaUserName;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Usuario> getListaUsuariosBusquedaByNombreCompleto()
-	{
-		List<Usuario> listaNombreCompleto;
-		if(busquedaUsuario!=null)
-			listaNombreCompleto=em.createNamedQuery("Usuario.findNombreBusqueda").setParameter("busqueda", this.busquedaUsuario).getResultList();
-		else
-			listaNombreCompleto=null;
-		return listaNombreCompleto;
-	}*/
-	
-
-	
-	
 }

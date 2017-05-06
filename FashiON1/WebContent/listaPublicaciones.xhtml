@@ -3,8 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:on="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:on="http://omnifaces.org/ui">
 
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
@@ -13,22 +12,25 @@
 
 		<br />
 		<br />
-		<ui:repeat var="publicacion" value="#{listadoBean.listaPublicaciones}" >
+		<ui:repeat var="publicacion" value="#{listadoBean.listaPublicaciones}">
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
 						<h:form>
-							<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
-							 value="#{publicacion.usuario.nombreCompleto}" styleClass="h2"/>
+							<h:commandLink
+								action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+								value="#{publicacion.usuario.nombreCompleto}" styleClass="h2" />
 						</h:form>
 					</h2>
 					<div>
 						<div>
-							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
+							<on:graphicImage
+								value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}"
+								width="100%">
 							</on:graphicImage>
-							
+
 						</div>
-						
+
 						<div>
 
 							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
@@ -39,8 +41,8 @@
 								<h:form>
 									<h:commandButton
 										action="#{likeBean.darLike(publicacion.idPublicacion)}"
-										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}" style="width: 20px; height: 18px;"
-										align="left" />
+										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}"
+										style="width: 20px; height: 18px;" align="left" />
 								</h:form>
 							</div>
 
@@ -57,8 +59,9 @@
 				<div class="partedcha">
 					<div class="linkverpublicacion">
 						<h:form>
-							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
-							 value="Ver Publicación" />
+							<h:commandLink
+								action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
+								value="Ver Publicación" />
 						</h:form>
 					</div>
 					<br /> <br /> <br />

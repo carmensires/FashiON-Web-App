@@ -8,8 +8,8 @@
 <ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
 
-		
-		<ui:repeat var="publicacion" value="#{publicacionBean.publicacion}" >
+
+		<ui:repeat var="publicacion" value="#{publicacionBean.publicacion}">
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
@@ -19,11 +19,13 @@
 
 					<div>
 						<div>
-							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
+							<on:graphicImage
+								value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}"
+								width="100%">
 							</on:graphicImage>
-							
+
 						</div>
-						
+
 						<div>
 
 							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
@@ -34,8 +36,8 @@
 								<h:form>
 									<h:commandButton
 										action="#{likeBean.darLike(publicacion.idPublicacion)}"
-										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}" style="width: 20px; height: 18px;"
-										align="left" />
+										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}"
+										style="width: 20px; height: 18px;" align="left" />
 								</h:form>
 							</div>
 
@@ -51,11 +53,12 @@
 				</div>
 				<div class="partedcha">
 					<div class="arribadcha">
-					<h:form>
-						<h:commandButton
-							action="#{publicacionBean.editarPublicacion(publicacion)}"
-							image="fotos/edit.png" style="width: 35px; height: 35px;" rendered="#{publicacionBean.miPublicacion}" />
-					</h:form>
+						<h:form>
+							<h:commandButton
+								action="#{publicacionBean.editarPublicacion(publicacion)}"
+								image="fotos/edit.png" style="width: 35px; height: 35px;"
+								rendered="#{publicacionBean.miPublicacion}" />
+						</h:form>
 					</div>
 					<br /> <br /> <br />
 					<h3>#{publicacion.titulo}</h3>
@@ -64,9 +67,9 @@
 						value="#{listadoBean.getListaComentariosPublicacion(publicacion.idPublicacion)}">
 						<div class="comentario">
 							<!-- <b>#{comentario.usuarioComenta}</b>-->
-							<a href="#{usuarioVisitadoBean.entrarPerfil(comentario.usuarioComenta)}"
-								class="h3">#{comentario.usuarioComenta}</a>
-							<br />
+							<a
+								href="#{usuarioVisitadoBean.entrarPerfil(comentario.usuarioComenta)}"
+								class="h3">#{comentario.usuarioComenta}</a> <br />
 							#{comentario.textoComentario}
 							<h:form>
 								<h:commandButton
@@ -75,51 +78,51 @@
 									rendered="#{usuarioBean.usuario.userName eq comentario.usuarioComenta}" />
 							</h:form>
 							<h:form>
-							<div class="valoracion">
-								<h:commandButton
+								<div class="valoracion">
+									<h:commandButton
 										action="#{valoracionBean.valorar(1,comentario)}"
-										image="#{valoracionBean.estrella(1,comentario)}" style="width: 20px; height: 20px;" 
-										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
-										/>
-								<h:commandButton
+										image="#{valoracionBean.estrella(1,comentario)}"
+										style="width: 20px; height: 20px;"
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}" />
+									<h:commandButton
 										action="#{valoracionBean.valorar(2,comentario)}"
-										image="#{valoracionBean.estrella(2,comentario)}" style="width: 20px; height: 20px;" 
-										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
-										/>
-								<h:commandButton
+										image="#{valoracionBean.estrella(2,comentario)}"
+										style="width: 20px; height: 20px;"
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}" />
+									<h:commandButton
 										action="#{valoracionBean.valorar(3,comentario)}"
-										image="#{valoracionBean.estrella(3,comentario)}" style="width: 20px; height: 20px;" 
-										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
-										/>
-								<h:commandButton
+										image="#{valoracionBean.estrella(3,comentario)}"
+										style="width: 20px; height: 20px;"
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}" />
+									<h:commandButton
 										action="#{valoracionBean.valorar(4,comentario)}"
-										image="#{valoracionBean.estrella(4,comentario)}" style="width: 20px; height: 20px;" 
-										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
-										/>
-								<h:commandButton 
+										image="#{valoracionBean.estrella(4,comentario)}"
+										style="width: 20px; height: 20px;"
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}" />
+									<h:commandButton
 										action="#{valoracionBean.valorar(5,comentario)}"
-										image="#{valoracionBean.estrella(5,comentario)}" style="width: 20px; height: 20px;" 
-										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}"
-										/>
-							</div>
+										image="#{valoracionBean.estrella(5,comentario)}"
+										style="width: 20px; height: 20px;"
+										rendered="#{!(usuarioBean.usuario.userName eq comentario.usuarioComenta)}" />
+								</div>
 							</h:form>
-							
+
 
 						</div>
 					</ui:repeat>
 				</div>
 			</div>
-			
+
 		</ui:repeat>
 
-					<h:form>
-						<h:inputText value="#{comentarioBean.comentario.textoComentario}" />
+		<h:form>
+			<h:inputText value="#{comentarioBean.comentario.textoComentario}" />
 
-						<br />
-						<h:commandButton
-							action="#{comentarioBean.addComentario(publicacionBean.publicacion.idPublicacion)}"
-							value="Comentar" type="submit" />
-					</h:form>
+			<br />
+			<h:commandButton
+				action="#{comentarioBean.addComentario(publicacionBean.publicacion.idPublicacion)}"
+				value="Comentar" type="submit" />
+		</h:form>
 
 	</ui:define>
 </ui:composition>

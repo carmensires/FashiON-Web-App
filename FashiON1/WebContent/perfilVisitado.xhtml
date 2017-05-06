@@ -1,94 +1,108 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:on="http://omnifaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:on="http://omnifaces.org/ui">
 
-	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
-	
-	<div class="perfil" >
-	
-		<div class="fotoperfil" >
-			<on:graphicImage value="#{imageBean.getProfileImage(usuarioVisitadoBean.usuario.idUser)}" height="230" width="230" style="border-color: white; border-radius: 50%;">
-			</on:graphicImage>
-		</div>
-		<div>
+
+		<div class="perfil">
+
+			<div class="fotoperfil">
+				<on:graphicImage
+					value="#{imageBean.getProfileImage(usuarioVisitadoBean.usuario.idUser)}"
+					height="230" width="230"
+					style="border-color: white; border-radius: 50%;">
+				</on:graphicImage>
+			</div>
 			<div>
-				<h2>#{usuarioVisitadoBean.usuario.nombreCompleto}</h2>
-				<h3>#{usuarioVisitadoBean.usuario.userName}</h3>
-				<h4>#{usuarioVisitadoBean.usuario.descripcion}</h4>
+				<div>
+					<h2>#{usuarioVisitadoBean.usuario.nombreCompleto}</h2>
+					<h3>#{usuarioVisitadoBean.usuario.userName}</h3>
+					<h4>#{usuarioVisitadoBean.usuario.descripcion}</h4>
+				</div>
+				<div class="tablaperfil">
+					<div class="cuadroperfil">
+						<br /> #{usuarioVisitadoBean.NPosts}
+					</div>
+					<div class="cuadroperfil">
+						<br /> #{usuarioVisitadoBean.NSeguidores}
+					</div>
+					<div class="cuadroperfil">
+						<br /> #{usuarioVisitadoBean.NSeguidos}
+					</div>
+				</div>
+				<div style="width: 420px; height: 50px;">
+					<br />
+					<h:form>
+						<h:commandButton
+							action="#{usuarioVisitadoBean.seguirUsuario(usuarioVisitadoBean.usuario.idUser)}"
+							value="Seguir"
+							rendered="#{usuarioVisitadoBean.usuarioNoSeguido()}" />
+
+						<h:commandButton
+							action="#{usuarioVisitadoBean.dejarDeSeguirUsuario(usuarioVisitadoBean.usuario.idUser)}"
+							value="Dejar de Seguir"
+							rendered="#{usuarioVisitadoBean.usuarioSeguido() }" />
+					</h:form>
+				</div>
 			</div>
-			<div class="tablaperfil">	
-				<div class="cuadroperfil">
-				<br/>
-					#{usuarioVisitadoBean.NPosts}
+			<div class="valoracionesperfil">
+				<br />
+				<div class="estrellasvaloraciones">
+					<img src="#{usuarioVisitadoBean.estrella(1)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioVisitadoBean.estrella(2)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioVisitadoBean.estrella(3)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioVisitadoBean.estrella(4)}"
+						style="width: 20px; height: 20px;" /> <img
+						src="#{usuarioVisitadoBean.estrella(5)}"
+						style="width: 20px; height: 20px;" />
+					<div class="nval">#{usuarioVisitadoBean.NValoraciones}</div>
 				</div>
-				<div class="cuadroperfil">
-				<br/>
-					#{usuarioVisitadoBean.NSeguidores}
-				</div>
-				<div class="cuadroperfil">
-				<br/>
-					#{usuarioVisitadoBean.NSeguidos}
-				</div>
-			</div>
-			<div style="{width: 420px; height: 50px;}">
-				<br/>
-				<h:form>
-					<h:commandButton action="#{usuarioVisitadoBean.seguirUsuario(usuarioVisitadoBean.usuario.idUser)}"
-						value="Seguir" rendered="#{usuarioVisitadoBean.usuarioNoSeguido()}"/>
-						
-					<h:commandButton action="#{usuarioVisitadoBean.dejarDeSeguirUsuario(usuarioVisitadoBean.usuario.idUser)}"
-						value="Dejar de Seguir" rendered="#{usuarioVisitadoBean.usuarioSeguido() }"/>
-				</h:form>
+				<br /> 5 estrellas: #{usuarioVisitadoBean.getNValEspecifica(5)} <br />
+				4 estrellas: #{usuarioVisitadoBean.getNValEspecifica(4)} <br /> 3
+				estrellas: #{usuarioVisitadoBean.getNValEspecifica(3)} <br /> 2
+				estrellas: #{usuarioVisitadoBean.getNValEspecifica(2)} <br /> 1
+				estrellas: #{usuarioVisitadoBean.getNValEspecifica(1)} <br />
 			</div>
 		</div>
-		<div class="valoracionesperfil" >
-			<br/>
-		<div class="estrellasvaloraciones">
-			<img src="#{usuarioVisitadoBean.estrella(1)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioVisitadoBean.estrella(2)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioVisitadoBean.estrella(3)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioVisitadoBean.estrella(4)}" style="width: 20px; height: 20px;"/>
-			<img src="#{usuarioVisitadoBean.estrella(5)}" style="width: 20px; height: 20px;"/> 
-			<div class="nval">#{usuarioVisitadoBean.NValoraciones}</div></div>
-			<br/>
-			5 estrellas: #{usuarioVisitadoBean.getNValEspecifica(5)} <br/>
-			4 estrellas: #{usuarioVisitadoBean.getNValEspecifica(4)} <br/>
-			3 estrellas: #{usuarioVisitadoBean.getNValEspecifica(3)} <br/>
-			2 estrellas: #{usuarioVisitadoBean.getNValEspecifica(2)} <br/>
-			1 estrellas: #{usuarioVisitadoBean.getNValEspecifica(1)} <br/>
-		</div>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<br/>	
-	
-	<br /> <br/>
-		<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesUsuario(usuarioVisitadoBean.usuario)}">
+
+
+
+
+
+
+
+		<br />
+
+		<br />
+		<br />
+		<ui:repeat var="publicacion"
+			value="#{listadoBean.getListaPublicacionesUsuario(usuarioVisitadoBean.usuario)}">
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
 						<h:form>
-							<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
-							 value="#{publicacion.usuario.nombreCompleto}" styleClass="h2"/>
+							<h:commandLink
+								action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+								value="#{publicacion.usuario.nombreCompleto}" styleClass="h2" />
 						</h:form>
 					</h2>
 
 					<div>
 						<div>
-							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
+							<on:graphicImage
+								value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}"
+								width="100%">
 							</on:graphicImage>
-							
+
 						</div>
-						
+
 						<div>
 
 							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
@@ -99,8 +113,8 @@
 								<h:form>
 									<h:commandButton
 										action="#{likeBean.darLike(publicacion.idPublicacion)}"
-										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}" style="width: 20px; height: 18px;"
-										align="left" />
+										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}"
+										style="width: 20px; height: 18px;" align="left" />
 								</h:form>
 							</div>
 
@@ -117,8 +131,9 @@
 				<div class="partedcha">
 					<div class="linkverpublicacion">
 						<h:form>
-							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
-							 value="Ver Publicación" />
+							<h:commandLink
+								action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
+								value="Ver Publicación" />
 						</h:form>
 					</div>
 					<br /> <br /> <br />
@@ -130,5 +145,5 @@
 			<br />
 		</ui:repeat>
 	</ui:define>
-	</ui:composition>
+</ui:composition>
 </html>

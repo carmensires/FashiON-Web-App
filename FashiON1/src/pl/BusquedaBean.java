@@ -7,15 +7,14 @@ import javax.faces.bean.RequestScoped;
 import dl.Busqueda;
 import bl.Ejb;
 
-
 @ManagedBean
 @RequestScoped
 public class BusquedaBean {
-	
+
 	@EJB
-	Ejb ejb=new Ejb();
-	
-	Busqueda busqueda=new Busqueda();
+	Ejb ejb = new Ejb();
+
+	Busqueda busqueda = new Busqueda();
 	String busquedaUsuario;
 
 	public Busqueda getBusqueda() {
@@ -25,8 +24,7 @@ public class BusquedaBean {
 	public void setBusqueda(Busqueda busqueda) {
 		this.busqueda = busqueda;
 	}
-	
-	
+
 	public String getBusquedaUsuario() {
 		return busquedaUsuario;
 	}
@@ -35,15 +33,12 @@ public class BusquedaBean {
 		this.busquedaUsuario = busquedaUsuario;
 	}
 
-	public void setBusquedaEjb()
-	{
+	public void setBusquedaEjb() {
 		ejb.setBusqueda(this.busqueda);
 	}
-	
-	public void setBusquedaUsuariosEjb()
-	{
+
+	public void setBusquedaUsuariosEjb() {
 		ejb.setBusquedaUsuario(busquedaUsuario);
 	}
-	
 
 }

@@ -5,8 +5,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
 import dl.Publicacion;
@@ -31,10 +33,11 @@ public class PublicacionBean {
 	}
 
 	public void setMiPublicacion() {
-		if(this.publicacion.getUsuario().getIdUser()==ejb.getUsuario().getIdUser())
-			this.miPublicacion=true;
+		if (this.publicacion.getUsuario().getIdUser() == ejb.getUsuario()
+				.getIdUser())
+			this.miPublicacion = true;
 		else {
-			this.miPublicacion=false;
+			this.miPublicacion = false;
 		}
 	}
 
@@ -66,7 +69,7 @@ public class PublicacionBean {
 						// TODO Auto-generated method stub
 					}
 				};
-				
+
 				int lenght;
 				while ((lenght = in.read(buffer)) > 0) {
 					out.write(buffer, 0, lenght);
@@ -117,19 +120,17 @@ public class PublicacionBean {
 		ejb.incrementarVisualizacion(idPublicacion);
 		return "publicacion.xhtml";
 	}
-	
-	public String subirPublicacion(){
-		this.publicacion=ejb.inicializarPublicacion();
+
+	public String subirPublicacion() {
+		this.publicacion = ejb.inicializarPublicacion();
 		return "subirpublicacion.xhtml";
 	}
-	
-	public String getFotoLike(int idPublicacion)
-	{
-		String fotoLike="fotos/like1.png";
-		if(ejb.getLiked(idPublicacion))
-			fotoLike="fotos/like.png";
+
+	public String getFotoLike(int idPublicacion) {
+		String fotoLike = "fotos/like1.png";
+		if (ejb.getLiked(idPublicacion))
+			fotoLike = "fotos/like.png";
 		return fotoLike;
 	}
-
 
 }

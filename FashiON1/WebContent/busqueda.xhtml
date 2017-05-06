@@ -1,38 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:on="http://omnifaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:on="http://omnifaces.org/ui">
 
-	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
 	<ui:define name="Contenido">
-	
-	<div class="tablaperfil">	
-		<div class="cuadrobusqueda">
-		<br/>
-		<h:form>
-			<h:commandLink action="busqueda.xhtml" value="Buscar publicaciones" styleClass="textoCuadroBusqueda"/>
-		</h:form>
+
+		<div class="tablaperfil">
+			<div class="cuadrobusqueda">
+				<br />
+				<h:form>
+					<h:commandLink action="busqueda.xhtml" value="Buscar publicaciones"
+						styleClass="textoCuadroBusqueda" />
+				</h:form>
+			</div>
+			<div class="cuadrobusqueda">
+				<br />
+				<h:form>
+					<h:commandLink action="busquedaUsuarios.xhtml"
+						value="Buscar usuarios" styleClass="textoCuadroBusqueda" />
+				</h:form>
+			</div>
 		</div>
-		<div class="cuadrobusqueda">
-		<br/>
+		<br />
+		<h1>Buscar publicaciones</h1>
+		<br />
 		<h:form>
-			<h:commandLink action="busquedaUsuarios.xhtml" value="Buscar usuarios" styleClass="textoCuadroBusqueda"/>
-		</h:form>
-		</div>
-	</div>
-	<br/>
-	<h1>Buscar publicaciones</h1><br/>
-	<h:form>
 	Buscar: 
-	<h:inputText value="#{busquedaBean.busqueda.des}" size="20"/>
-			
-	 <br/>
+	<h:inputText value="#{busquedaBean.busqueda.des}" size="20" />
+
+			<br />
 	Marca:
 		<h:selectOneMenu value="#{busquedaBean.busqueda.marca}">
 				<f:selectItem itemValue="" itemLabel="" />
-				<f:selectItem itemValue="abercrombieAndFitch" itemLabel="Abercrombie and Fitch" />
+				<f:selectItem itemValue="abercrombieAndFitch"
+					itemLabel="Abercrombie and Fitch" />
 				<f:selectItem itemValue="adidas" itemLabel="Adidas" />
 				<f:selectItem itemValue="amichi" itemLabel="Amichi" />
 				<f:selectItem itemValue="armani" itemLabel="Armani" />
@@ -172,31 +176,36 @@
 				<f:selectItem itemValue="verano" itemLabel="Verano" />
 			</h:selectOneMenu>
 			<br />
-			
+
 			<h:commandButton actionListener="#{busquedaBean.setBusquedaEjb()}"
 				value="Buscar">
 			</h:commandButton>
-			
-	</h:form>
-	<br/><br/>
-	
-	<ui:repeat var="publicacion" value="#{listadoBean.getListaPublicacionesFiltros()}">
+
+		</h:form>
+		<br />
+		<br />
+
+		<ui:repeat var="publicacion"
+			value="#{listadoBean.getListaPublicacionesFiltros()}">
 			<div class="publicacion1">
 				<div class="parteizq">
 					<h2>
 						<h:form>
-							<h:commandLink action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
-							 value="#{publicacion.usuario.nombreCompleto}" styleClass="h2"/>
+							<h:commandLink
+								action="#{usuarioVisitadoBean.entrarPerfil(publicacion.usuario)}"
+								value="#{publicacion.usuario.nombreCompleto}" styleClass="h2" />
 						</h:form>
 					</h2>
 
 					<div>
 						<div>
-							<on:graphicImage value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}" width="100%">
+							<on:graphicImage
+								value="#{imageBean.getPublicacionImage(publicacion.idPublicacion)}"
+								width="100%">
 							</on:graphicImage>
-							
+
 						</div>
-						
+
 						<div>
 
 							<div class="nlikes">#{likeBean.getLikes(publicacion.idPublicacion)}</div>
@@ -207,8 +216,8 @@
 								<h:form>
 									<h:commandButton
 										action="#{likeBean.darLike(publicacion.idPublicacion)}"
-										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}" style="width: 20px; height: 18px;"
-										align="left" />
+										image="#{publicacionBean.getFotoLike(publicacion.idPublicacion)}"
+										style="width: 20px; height: 18px;" align="left" />
 								</h:form>
 							</div>
 
@@ -225,8 +234,9 @@
 				<div class="partedcha">
 					<div class="linkverpublicacion">
 						<h:form>
-							<h:commandLink action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
-							 value="Ver Publicación" />
+							<h:commandLink
+								action="#{publicacionBean.entrarPublicacion(publicacion.idPublicacion)}"
+								value="Ver Publicación" />
 						</h:form>
 					</div>
 					<br /> <br /> <br />
@@ -237,7 +247,7 @@
 			<br />
 			<br />
 		</ui:repeat>
-	
+
 	</ui:define>
-	</ui:composition>
+</ui:composition>
 </html>
