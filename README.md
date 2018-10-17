@@ -1,2 +1,2 @@
 # FashiON-Web-App
-FashiON Web App code
+This is a project for university consisting on a Fashion social network called FashiON. It uses Model-View-Controller Architecture. It is programmed using Java and xhtml. The database is MySQL. It is divided into 3 layers: data layer, business layer and presentation layer. The data layer takes data from the database, using SQL Queries. The presentation layer sends  information to the xhtml pages. The processing is made in the business layer. 
